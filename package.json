@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Snugug/gulp-armadillo/issues"
   },
-  "homepage": "https://github.com/Snugug/gulp-armadillo#readme"
+  "homepage": "https://github.com/Snugug/gulp-armadillo#readme",
+  "dependencies": {
+    "chalk": "^1.1.0"
+  }
 }
