@@ -1,14 +1,77 @@
 'use strict';
 
-var chalk = require('chalk');
+module.exports = function (gulp) {
+  //////////////////////////////
+  // Sass Tasks
+  //////////////////////////////
+  require('./tasks/sass')(gulp);
 
-var welcome =
-  chalk.red('\n               ,.-----__') +
-  chalk.red('\n            ,:::://///,:::-.') +
-  chalk.red('\n          /:\'\'/////// ``:::`;/|/') + chalk.magenta('     .------------.') +
-  chalk.red('\n         /\'   ||||||     :://\'`\\') + chalk.magenta('     | ') + chalk.yellow.bold('Let\'s Roll') + chalk.magenta(' |') +
-  chalk.red('\n        .\' ,   ||||||     `/(  ') + chalk.white('e') + chalk.red(' \\') + chalk.magenta('   \/------------\'') +
-  chalk.red('\n  -===~__-\'\\__X_`````\\_____/~`-._ `.') + chalk.magenta('  ') +
-  chalk.red('\n              ~~        ~~       `~-\'') + '\n';
 
-console.log(welcome);
+  //////////////////////////////
+  // Deploy Tasks
+  //////////////////////////////
+  require('./tasks/deploy')(gulp);
+
+
+  //////////////////////////////
+  // ESLint Tasks
+  //////////////////////////////
+  require('./tasks/eslint')(gulp);
+
+  //////////////////////////////
+  // Browser Sync Tasks
+  //////////////////////////////
+  require('./tasks/browser-sync')(gulp);
+
+
+  //////////////////////////////
+  // Imagemin Tasks
+  //////////////////////////////
+  require('./tasks/imagemin')(gulp);
+
+
+  //////////////////////////////
+  // Copy Tasks
+  //////////////////////////////
+  require('./tasks/copy')(gulp);
+
+
+  //////////////////////////////
+  // Clean Tasks
+  //////////////////////////////
+  require('./tasks/clean')(gulp);
+
+
+  //////////////////////////////
+  // Build Tasks
+  //////////////////////////////
+  require('./tasks/build')(gulp);
+
+
+  //////////////////////////////
+  // Watch Tasks
+  //////////////////////////////
+  require('./tasks/watch')(gulp);
+
+
+  //////////////////////////////
+  // Serve Tasks
+  //////////////////////////////
+  require('./tasks/serve')(gulp);
+
+  //////////////////////////////
+  // Default Task
+  //////////////////////////////
+  gulp.task('default', ['serve']);
+
+
+  //////////////////////////////
+  // Usemin Tasks
+  //////////////////////////////
+  require('./tasks/usemin')(gulp);
+
+  //////////////////////////////
+  // Markdown Tasks
+  //////////////////////////////
+  require('./tasks/markdown')(gulp);
+}
