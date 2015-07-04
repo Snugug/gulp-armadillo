@@ -64,14 +64,13 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('default', ['serve']);
 
-
   //////////////////////////////
   // Usemin Tasks
   //////////////////////////////
   require('./tasks/usemin')(gulp);
 
   //////////////////////////////
-  // Markdown Tasks
+  // Pages Tasks
   //////////////////////////////
-  require('./tasks/markdown')(gulp);
+  require('./tasks/pages')(gulp);
 }

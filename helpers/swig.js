@@ -1,8 +1,8 @@
 //////////////////////////////
-// mark
+// Swig
 //  - A Gulp Plugin
 //
-// Converts Markdown to HTML
+// Builds Swig to HTML
 //////////////////////////////
 'use strict';
 
@@ -11,10 +11,16 @@
 //////////////////////////////
 var through = require('through2'),
     gutil = require('gulp-util'),
-    path = require('path'),
-    markdown = require('./markdown'),
+    swig = require('swig'),
     PluginError = gutil.PluginError,
-    PLUGIN_NAME = 'mark';
+    PLUGIN_NAME = 'swig';
+
+//////////////////////////////
+// Set Swig stuff
+//////////////////////////////
+swig.setDefaults({
+  'loader': swig.loaders.fs(process.cwd() + '/templates')
+});
 
 //////////////////////////////
 // Export
@@ -37,8 +43,6 @@ module.exports = function (options) {
   // Through Object
   //////////////////////////////
   var compile = through.obj(function (file, encoding, cb) {
-    var ext = path.extname(file.path),
-        content;
     /////////////////////////////
     // Default plugin issues
     //////////////////////////////
@@ -53,9 +57,23 @@ module.exports = function (options) {
     //////////////////////////////
     // Manipulate Files
     //////////////////////////////
-    if (ext === '.md' || ext === '.markdown') {
-      file.contents = new Buffer(markdown(file.contents.toString()));
-      file.path = gutil.replaceExtension(file.path, '.html');
+    console.log(file.meta);
+    if (file.meta) {
+      file.meta.filename = file.path;
+
+      if (file.meta.template) {
+        file.contents = new Buffer(swig.render(
+          '{% extends "' + file.meta.template + '" %}' +
+          '{% block title %}' + file.meta.title + '{% endblock %}' +
+          '{% block content %}' + file.contents.toString() + '{% endblock %}'
+          , file.meta)
+        );
+      }
+      else {
+        file.contents = new Buffer(swig.render(file.contents.toString(), file.meta));
+      }
+
+
     }
 
     //////////////////////////////

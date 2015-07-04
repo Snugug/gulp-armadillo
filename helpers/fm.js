@@ -1,8 +1,8 @@
 //////////////////////////////
-// mark
+// FM
 //  - A Gulp Plugin
 //
-// Converts Markdown to HTML
+// Extracts Frontmatter
 //////////////////////////////
 'use strict';
 
@@ -11,10 +11,9 @@
 //////////////////////////////
 var through = require('through2'),
     gutil = require('gulp-util'),
-    path = require('path'),
-    markdown = require('./markdown'),
+    fm = require('front-matter'),
     PluginError = gutil.PluginError,
-    PLUGIN_NAME = 'mark';
+    PLUGIN_NAME = 'fm';
 
 //////////////////////////////
 // Export
@@ -37,8 +36,7 @@ module.exports = function (options) {
   // Through Object
   //////////////////////////////
   var compile = through.obj(function (file, encoding, cb) {
-    var ext = path.extname(file.path),
-        content;
+    var content;
     /////////////////////////////
     // Default plugin issues
     //////////////////////////////
@@ -53,10 +51,16 @@ module.exports = function (options) {
     //////////////////////////////
     // Manipulate Files
     //////////////////////////////
-    if (ext === '.md' || ext === '.markdown') {
-      file.contents = new Buffer(markdown(file.contents.toString()));
-      file.path = gutil.replaceExtension(file.path, '.html');
+    content = fm(file.contents.toString());
+
+    if (!file.meta) {
+      file.meta = content.attributes;
     }
+    else {
+      file.meta = {};
+    }
+
+    file.contents = new Buffer(content.body);
 
     //////////////////////////////
     // Push the file back to the stream!

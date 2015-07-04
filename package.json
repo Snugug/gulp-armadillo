@@ -28,6 +28,7 @@
     "chalk": "^1.1.0",
     "del": "^1.2.0",
     "eslint-plugin-nodeca": "^1.0.3",
+    "front-matter": "^1.0.0",
     "fs-extra": "^0.20.1",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-eslint": "^0.14.0",
@@ -45,6 +46,7 @@
     "marked": "^0.3.3",
     "node-sass-import-once": "^1.2.0",
     "run-sequence": "^1.1.1",
+    "swig": "^1.4.2",
     "through2": "^2.0.0"
   },
   "devDependencies": {

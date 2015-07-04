@@ -4,30 +4,35 @@
 // Requires
 //////////////////////////////
 var gutil = require('gulp-util'),
-    mark = require('../helpers/mark.js'),
+    fm = require('../helpers/fm'),
+    mark = require('../helpers/mark'),
+    swig = require('../helpers/swig'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload;
 
 //////////////////////////////
 // Internal Vars
 //////////////////////////////
-var toMarkdown = [
-  'pages/**/*.md'
+var toPages = [
+  'pages/**/*.md',
+  'pages/**/*.html'
 ];
 
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, MarkdownPaths) {
+module.exports = function (gulp, PagesPaths) {
   // Set value of paths to either the default or user entered
-  MarkdownPaths = MarkdownPaths || toMarkdown;
+  PagesPaths = PagesPaths || toPages;
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
-  var MarkdownTask = function (path) {
-    return gulp.src(MarkdownPaths)
+  var PagesTask = function (path) {
+    return gulp.src(PagesPaths)
+      .pipe(fm())
       .pipe(mark())
+      .pipe(swig())
       .pipe(gulp.dest('dist/'))
       .pipe(reload({stream: true}));
   }
@@ -35,15 +40,15 @@ module.exports = function (gulp, MarkdownPaths) {
   //////////////////////////////
   // Core Task
   //////////////////////////////
-  gulp.task('markdown', function () {
-    return MarkdownTask(MarkdownPaths);
+  gulp.task('pages', function () {
+    return PagesTask(PagesPaths);
   });
 
   //////////////////////////////
   // Watch Task
   //////////////////////////////
-  gulp.task('markdown:watch', function () {
-    return gulp.watch(MarkdownPaths)
+  gulp.task('pages:watch', function () {
+    return gulp.watch(PagesPaths)
       .on('change', function (event) {
         // Add absolute and relative (to Gulpfile) paths
         event.path = {
@@ -55,7 +60,7 @@ module.exports = function (gulp, MarkdownPaths) {
         gutil.log('File ' + gutil.colors.magenta(event.path.relative) + ' was ' + event.type);
 
         // Call the task
-        return MarkdownTask(event.path.absolute);
+        return PagesTask(event.path.absolute);
       });
   });
 }
