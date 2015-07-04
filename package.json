@@ -1,0 +1,25 @@
+{
+  "name": "gulp-armadillo",
+  "version": "1.0.0",
+  "description": "Statis site generator put together with Gulp plugins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snugug/gulp-armadillo.git"
+  },
+  "keywords": [
+    "gulp",
+    "armadillo",
+    "static-site",
+    "rwd"
+  ],
+  "author": "Sam Richard <sam@snug.ug>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Snugug/gulp-armadillo/issues"
+  },
+  "homepage": "https://github.com/Snugug/gulp-armadillo#readme"
+}
