@@ -11,22 +11,28 @@
 //////////////////////////////
 var through = require('through2'),
     gutil = require('gulp-util'),
-    swig = require('swig'),
+    path = require('path'),
     PluginError = gutil.PluginError,
-    PLUGIN_NAME = 'swig';
+    PLUGIN_NAME = 'swig',
+    gulpSwig;
 
 //////////////////////////////
 // Set Swig stuff
 //////////////////////////////
-swig.setDefaults({
-  'loader': swig.loaders.fs(process.cwd() + '/templates')
-});
+
 
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (options) {
+gulpSwig = function (options) {
   options = options || {};
+
+  var swig = gulpSwig.compiler;
+
+  swig.setDefaults({
+    'loader': swig.loaders.fs(process.cwd() + '/templates'),
+    'cache': false
+  });
 
   //////////////////////////////
   // Command line arguments for each option
@@ -43,6 +49,9 @@ module.exports = function (options) {
   // Through Object
   //////////////////////////////
   var compile = through.obj(function (file, encoding, cb) {
+    var ext = path.extname(file.path),
+        context = {};
+
     /////////////////////////////
     // Default plugin issues
     //////////////////////////////
@@ -57,23 +66,24 @@ module.exports = function (options) {
     //////////////////////////////
     // Manipulate Files
     //////////////////////////////
-    console.log(file.meta);
-    if (file.meta) {
-      file.meta.filename = file.path;
+    if (ext === '.html') {
+      if (file.meta) {
+        context.locals = file.meta;
+        context.filename = file.path;
 
-      if (file.meta.template) {
-        file.contents = new Buffer(swig.render(
-          '{% extends "' + file.meta.template + '" %}' +
-          '{% block title %}' + file.meta.title + '{% endblock %}' +
-          '{% block content %}' + file.contents.toString() + '{% endblock %}'
-          , file.meta)
-        );
+        // If a template exists in the meta info, build a content block and extend for it
+        if (file.meta.template) {
+          file.contents = new Buffer(swig.render(
+            '{% extends "' + file.meta.template + '" %}' +
+            '{% block content %}' + file.contents.toString() + '{% endblock %}'
+            , context)
+          );
+        }
+        // Otherwise, just render it!
+        else {
+          file.contents = new Buffer(swig.render(file.contents.toString(), context));
+        }
       }
-      else {
-        file.contents = new Buffer(swig.render(file.contents.toString(), file.meta));
-      }
-
-
     }
 
     //////////////////////////////
@@ -89,3 +99,7 @@ module.exports = function (options) {
 
   return compile;
 }
+
+gulpSwig.compiler = require('swig');
+
+module.exports = gulpSwig;
