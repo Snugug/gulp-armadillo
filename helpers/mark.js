@@ -39,6 +39,7 @@ module.exports = function (options) {
   var compile = through.obj(function (file, encoding, cb) {
     var ext = path.extname(file.path),
         content;
+
     /////////////////////////////
     // Default plugin issues
     //////////////////////////////
