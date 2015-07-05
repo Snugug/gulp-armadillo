@@ -73,4 +73,14 @@ module.exports = function (gulp) {
   // Pages Tasks
   //////////////////////////////
   require('./tasks/pages')(gulp);
+
+  //////////////////////////////
+  // Critical Tasks
+  //////////////////////////////
+  require('./tasks/critical')(gulp);
+
+  //////////////////////////////
+  // Dist Tasks
+  //////////////////////////////
+  require('./tasks/dist')(gulp);
 }
