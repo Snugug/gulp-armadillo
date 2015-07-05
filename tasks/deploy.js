@@ -4,6 +4,7 @@
 // Requires
 //////////////////////////////
 var sequence = require('run-sequence'),
+    armadillo = require('../helpers/armadillo'),
     ghPages = require('gulp-gh-pages');
 
 //////////////////////////////

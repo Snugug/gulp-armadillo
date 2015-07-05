@@ -10,12 +10,11 @@ var armadillo = require('../helpers/armadillo'),
 // Export
 //////////////////////////////
 module.exports = function (gulp) {
-  armadillo('Let\'s Build');
-
   //////////////////////////////
   // Core Task
   //////////////////////////////
   gulp.task('build', function (cb) {
+    armadillo('Building');
     return sequence(
       // Clean everything
       'clean',
