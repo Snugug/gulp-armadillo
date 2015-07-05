@@ -3,9 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- build:css css/style.css -->
+  <!-- Put CSS in here -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="bower_components/prism/themes/prism.css">
+  <!-- endbuild -->
 </head>
 <body>
   <h1>{{ title }}</h1>
-  {% block content %}{% endblock %}
+
+  <main class="base--STYLED">
+    {% block content %}{% endblock %}
+  </main>
+
+
+  <!-- build:js js/app.js -->
+  <!-- Put JS in here -->
+  <script src="js/app.js"></script>
+  <script src="bower_components/prism/prism.js"></script>
+  <!-- endbuild -->
 </body>
 </html>
