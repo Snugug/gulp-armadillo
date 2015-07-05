@@ -33,7 +33,7 @@ module.exports = function (gulp, PagesPaths) {
       .pipe(fm())
       .pipe(mark())
       .pipe(swig())
-      .pipe(gulp.dest('dist/'))
+      .pipe(gulp.dest('.www/'))
       .pipe(reload({stream: true}));
   }
 
@@ -42,6 +42,10 @@ module.exports = function (gulp, PagesPaths) {
   //////////////////////////////
   gulp.task('pages', function () {
     return PagesTask(PagesPaths);
+  });
+
+  gulp.task('pages:templates', function () {
+    return gulp.watch('templates/**/*', ['pages']);
   });
 
   //////////////////////////////

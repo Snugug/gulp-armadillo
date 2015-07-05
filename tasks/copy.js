@@ -11,12 +11,6 @@ var gutil = require('gulp-util'),
 // Internal Vars
 //////////////////////////////
 var toCopy = {
-  'html': [
-    '**/*.html',
-    '!.www/**/*',
-    '!bower_components/**/*.html',
-    '!node_modules/**'
-  ],
   'fonts': [
     'fonts/**/*'
   ],
@@ -25,6 +19,15 @@ var toCopy = {
   ],
   'videos': [
     'videos/**/*'
+  ],
+  'bower_components': [
+    'bower_components/**/*'
+  ],
+  'dist': [
+    '.dist/**/*',
+    '!.dist/bower_components/**/*',
+    '!.dist/css/**/*',
+    '!.dist/js/**/*'
   ]
 }
 
@@ -63,26 +66,28 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('copy:watch', function () {
     Object.keys(toCopy).forEach(function (key) {
-      gulp.watch(toCopy[key])
-        .on('change', function (event) {
-          // Add absolute and relative (to Gulpfile) paths
-          event.path = {
-            absolute: event.path,
-            relative: event.path.replace(__dirname.replace('/tasks', '') + '/', '')
-          }
+      if (key !== 'dist') {
+        gulp.watch(toCopy[key])
+          .on('change', function (event) {
+            // Add absolute and relative (to Gulpfile) paths
+            event.path = {
+              absolute: event.path,
+              relative: event.path.replace(__dirname.replace('/tasks', '') + '/', '')
+            }
 
-          // Notify user of the change
-          gutil.log('File ' + gutil.colors.magenta(event.path.relative) + ' was ' + event.type);
+            // Notify user of the change
+            gutil.log('File ' + gutil.colors.magenta(event.path.relative) + ' was ' + event.type);
 
 
-          if (event.type === 'deleted') {
-            fs.removeSync('.www/' + event.path.relative);
-            return;
-          }
+            if (event.type === 'deleted') {
+              fs.removeSync('.www/' + event.path.relative);
+              return;
+            }
 
-          // Call the task
-          return CopyTask(event.path.absolute, key === 'html' ? '.' : key);
-        });
+            // Call the task
+            return CopyTask(event.path.absolute, key === 'html' ? '.' : key);
+          });
+      }
     });
   });
 }

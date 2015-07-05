@@ -17,4 +17,10 @@ module.exports = function (gulp) {
       '.www/**/*'
     ], cb);
   });
+
+  gulp.task('clean:dist', function (cb) {
+    return clean([
+      '.dist/**/*'
+    ], cb);
+  });
 }

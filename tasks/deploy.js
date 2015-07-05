@@ -11,7 +11,7 @@ var sequence = require('run-sequence'),
 // Internal Vars
 //////////////////////////////
 var toDeploy = [
-  '.www/**/*'
+  '.dist/**/*'
 ];
 
 //////////////////////////////
@@ -32,12 +32,10 @@ module.exports = function (gulp, DeployPaths) {
   });
 
   gulp.task('deploy', function (cb) {
+    armadillo('Deploying');
     return sequence(
-      // Build Everything
-      'build',
-
-      // Minify Everything
-      'usemin',
+      // Dist Everything
+      'dist',
 
       // Deploy Everything
       'gh-pages',

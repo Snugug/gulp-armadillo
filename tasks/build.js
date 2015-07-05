@@ -23,7 +23,7 @@ module.exports = function (gulp) {
       ['eslint'],
 
       // Build stuff
-      ['copy', 'sass', 'imagemin'],
+      ['copy', 'sass', 'imagemin', 'pages'],
 
       // Callback
       cb
