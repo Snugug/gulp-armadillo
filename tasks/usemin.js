@@ -3,17 +3,18 @@
 //////////////////////////////
 // Requires
 //////////////////////////////
-var usemin = require('gulp-usemin'),
+var useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
     minifyCSS = require('gulp-minify-css'),
-    rev = require('gulp-rev');
+    gulpif = require('gulp-if');
 
 //////////////////////////////
 // Internal Vars
 //////////////////////////////
 var toUsemin = [
-  '.www/**/*.html'
+  '.www/**/*.html',
+  '!.www/bower_components/**/*'
 ];
 
 //////////////////////////////
@@ -27,29 +28,15 @@ module.exports = function (gulp, UseminPaths) {
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var UseminTask = function (path) {
-    return gulp.src(UseminPaths)
-      .pipe(usemin({
-        'css': [
-          minifyCSS(),
-          'concat'
-        ],
-        'html': [
-          minifyHTML({
-            'empty': true
-          })
-        ],
-        'js': [
-          uglify()
-        ],
-        'inlinejs': [
-          uglify()
-        ],
-        'inlinecss': [
-          minifyCSS(),
-          'concat'
-        ]
-      }))
-      .pipe(gulp.dest('.www/'));
+    var assets = useref.assets();
+
+    return gulp.src(path)
+      .pipe(assets)
+      .pipe(gulpif('*.js', uglify()))
+      .pipe(gulpif('*.css', minifyCSS()))
+      .pipe(assets.restore())
+      .pipe(useref())
+      .pipe(gulp.dest('.dist/'));
   }
 
   //////////////////////////////
