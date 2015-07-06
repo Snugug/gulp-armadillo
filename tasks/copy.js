@@ -22,12 +22,6 @@ var toCopy = {
   ],
   'bower_components': [
     'bower_components/**/*'
-  ],
-  'dist': [
-    '.dist/**/*',
-    '!.dist/bower_components/**/*',
-    '!.dist/css/**/*',
-    '!.dist/js/**/*'
   ]
 }
 
@@ -55,6 +49,22 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('copy', copyTasks);
 
+  //////////////////////////////
+  // Dist Task
+  //////////////////////////////
+  gulp.task('copy:dist', function () {
+    return gulp.src([
+        '.www/**/*',
+        '!.www/bower_components/**/*',
+        '!.www/css/**/*',
+        '!.www/js/**/*'
+      ])
+      .pipe(gulp.dest('.dist/'));
+  });
+
+  //////////////////////////////
+  // All Tasks
+  //////////////////////////////
   Object.keys(toCopy).forEach(function (key) {
     gulp.task('copy:' + key, function () {
       return CopyTask(toCopy[key], key === 'html' ? '.' : key);
