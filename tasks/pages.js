@@ -36,7 +36,8 @@ module.exports = function (gulp, PagesPaths, options) {
     return gulp.src(PagesPaths)
       .pipe(walk({
         'dir': 'pages',
-        'transformURL': transform
+        'transformURL': transform,
+        'sort': options.sort
       }))
       .pipe(fm())
       .pipe(mark())
