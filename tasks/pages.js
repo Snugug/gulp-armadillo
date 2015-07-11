@@ -4,9 +4,12 @@
 // Requires
 //////////////////////////////
 var gutil = require('gulp-util'),
+    gulpif = require('gulp-if'),
     fm = require('../helpers/fm'),
     mark = require('../helpers/mark'),
     swig = require('../helpers/swig'),
+    walk = require('../helpers/walk'),
+    bt = require('../helpers/blog-transform'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload;
 
@@ -21,7 +24,7 @@ var toPages = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, PagesPaths) {
+module.exports = function (gulp, PagesPaths, options) {
   // Set value of paths to either the default or user entered
   PagesPaths = PagesPaths || toPages;
 
@@ -29,10 +32,16 @@ module.exports = function (gulp, PagesPaths) {
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var PagesTask = function (path) {
+    var transform = options.transformURL ? true : false;
     return gulp.src(PagesPaths)
+      .pipe(walk({
+        'dir': 'pages',
+        'transformURL': transform
+      }))
       .pipe(fm())
       .pipe(mark())
       .pipe(swig())
+      .pipe(gulpif(transform, bt()))
       .pipe(gulp.dest('.www/'))
       .pipe(reload({stream: true}));
   }
