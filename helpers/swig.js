@@ -12,6 +12,8 @@
 var through = require('through2'),
     gutil = require('gulp-util'),
     path = require('path'),
+    fs = require('fs-extra'),
+    fm = require('front-matter'),
     PluginError = gutil.PluginError,
     PLUGIN_NAME = 'swig',
     gulpSwig;
@@ -32,6 +34,30 @@ gulpSwig = function (options) {
   swig.setDefaults({
     'loader': swig.loaders.fs(process.cwd() + '/templates'),
     'cache': false
+  });
+
+  //////////////////////////////
+  // Swig Filters
+  //////////////////////////////
+  swig.setFilter('attributes', function (file, attribute) {
+    var content;
+    file = fs.readFileSync(process.cwd() + '/' + file);
+
+    content = fm(file.toString());
+
+    if (content.attributes) {
+      if (attribute) {
+        return content.attributes[attribute];
+      }
+      else {
+        return content.attributes;
+      }
+    }
+    else {
+      return {};
+    }
+
+    return file;
   });
 
   //////////////////////////////
@@ -69,6 +95,7 @@ gulpSwig = function (options) {
     if (ext === '.html') {
       if (file.meta) {
         context.locals = file.meta;
+        context.locals._pages = file.dirmap;
         context.filename = file.path;
 
         // If a template exists in the meta info, build a content block and extend for it
