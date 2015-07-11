@@ -28,7 +28,7 @@ var imageminSettings = {
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, ImageminPaths) {
+module.exports = function (gulp, ImageminPaths, options) {
   // Set value of paths to either the default or user entered
   ImageminPaths = ImageminPaths || toImagemin;
 

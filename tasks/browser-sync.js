@@ -17,7 +17,7 @@ var toServer = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, ServerPaths) {
+module.exports = function (gulp, ServerPaths, options) {
   // Set value of paths to either the default or user entered
   ServerPaths = ServerPaths || toServer;
 

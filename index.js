@@ -1,63 +1,97 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, options) {
+  if (!options) {
+    options = {};
+  }
+
   //////////////////////////////
   // Sass Tasks
   //////////////////////////////
-  require('./tasks/sass')(gulp);
+  if (!options.sass) {
+    options.sass = {};
+  }
+  require('./tasks/sass')(gulp, null, options.sass);
 
 
   //////////////////////////////
   // Deploy Tasks
   //////////////////////////////
-  require('./tasks/deploy')(gulp);
+  if (!options.deploy) {
+    options.deploy = {};
+  }
+  require('./tasks/deploy')(gulp, null, options.deploy);
 
 
   //////////////////////////////
   // ESLint Tasks
   //////////////////////////////
-  require('./tasks/eslint')(gulp);
+  if (!options.eslint) {
+    options.eslint = {};
+  }
+  require('./tasks/eslint')(gulp, null, options.eslint);
 
   //////////////////////////////
   // Browser Sync Tasks
   //////////////////////////////
-  require('./tasks/browser-sync')(gulp);
+  if (!options.browserSync) {
+    options.browserSync = {};
+  }
+  require('./tasks/browser-sync')(gulp, null, options.browserSync);
 
 
   //////////////////////////////
   // Imagemin Tasks
   //////////////////////////////
-  require('./tasks/imagemin')(gulp);
+  if (!options.imagemin) {
+    options.imagemin = {};
+  }
+  require('./tasks/imagemin')(gulp, null, options.imagemin);
 
 
   //////////////////////////////
   // Copy Tasks
   //////////////////////////////
-  require('./tasks/copy')(gulp);
+  if (!options.copy) {
+    options.copy = {};
+  }
+  require('./tasks/copy')(gulp, null, options.copy);
 
 
   //////////////////////////////
   // Clean Tasks
   //////////////////////////////
-  require('./tasks/clean')(gulp);
+  if (!options.clean) {
+    options.clean = {};
+  }
+  require('./tasks/clean')(gulp, null, options.clean);
 
 
   //////////////////////////////
   // Build Tasks
   //////////////////////////////
-  require('./tasks/build')(gulp);
+  if (!options.build) {
+    options.build = {};
+  }
+  require('./tasks/build')(gulp, null, options.build);
 
 
   //////////////////////////////
   // Watch Tasks
   //////////////////////////////
-  require('./tasks/watch')(gulp);
+  if (!options.watch) {
+    options.watch = {};
+  }
+  require('./tasks/watch')(gulp, null, options.watch);
 
 
   //////////////////////////////
   // Serve Tasks
   //////////////////////////////
-  require('./tasks/serve')(gulp);
+  if (!options.serve) {
+    options.serve = {};
+  }
+  require('./tasks/serve')(gulp, null, options.serve);
 
   //////////////////////////////
   // Default Task
@@ -67,20 +101,32 @@ module.exports = function (gulp) {
   //////////////////////////////
   // Usemin Tasks
   //////////////////////////////
-  require('./tasks/usemin')(gulp);
+  if (!options.usemin) {
+    options.usemin = {};
+  }
+  require('./tasks/usemin')(gulp, null, options.usemin);
 
   //////////////////////////////
   // Pages Tasks
   //////////////////////////////
-  require('./tasks/pages')(gulp);
+  if (!options.pages) {
+    options.pages = {};
+  }
+  require('./tasks/pages')(gulp, null, options.pages);
 
   //////////////////////////////
   // Critical Tasks
   //////////////////////////////
-  require('./tasks/critical')(gulp);
+  if (!options.critical) {
+    options.critical = {};
+  }
+  require('./tasks/critical')(gulp, null, options.critical);
 
   //////////////////////////////
   // Dist Tasks
   //////////////////////////////
-  require('./tasks/dist')(gulp);
+  if (!options.dist) {
+    options.dist = {};
+  }
+  require('./tasks/dist')(gulp, null, options.dist);
 }

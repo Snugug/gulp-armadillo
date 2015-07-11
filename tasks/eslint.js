@@ -19,7 +19,7 @@ var toEslint = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, EslintPaths) {
+module.exports = function (gulp, EslintPaths, options) {
   // Set value of paths to either the default or user entered
   EslintPaths = EslintPaths || toEslint;
 

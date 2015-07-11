@@ -20,7 +20,7 @@ var toUsemin = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, UseminPaths) {
+module.exports = function (gulp, UseminPaths, options) {
   // Set value of paths to either the default or user entered
   UseminPaths = UseminPaths || toUsemin;
 

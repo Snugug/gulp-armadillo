@@ -17,7 +17,7 @@ var toCritical = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, CriticalPaths) {
+module.exports = function (gulp, CriticalPaths, options) {
   // Set value of paths to either the default or user entered
   CriticalPaths = CriticalPaths || toCritical;
 

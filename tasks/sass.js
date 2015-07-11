@@ -30,7 +30,7 @@ var sassSettings = {
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, SassPaths) {
+module.exports = function (gulp, SassPaths, options) {
   // Set value of paths to either the default or user entered
   SassPaths = SassPaths || toSass;
 

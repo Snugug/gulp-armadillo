@@ -17,7 +17,7 @@ var toDeploy = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, DeployPaths) {
+module.exports = function (gulp, DeployPaths, options) {
   // Set value of paths to either the default or user entered
   DeployPaths = DeployPaths || toDeploy;
 
