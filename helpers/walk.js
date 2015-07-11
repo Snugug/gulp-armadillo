@@ -80,6 +80,7 @@ module.exports = function (options) {
       var results = [],
           pth,
           pTransform,
+          ext,
           stat;
       fs.readdir(dir, function(err, list) {
         if (err) return done(err);
@@ -99,15 +100,21 @@ module.exports = function (options) {
             } else {
               stat = fs.statSync(file);
               pth = file.split('/');
+              pth.shift();
               if (options.transformURL) {
-                if (pth[pth.length - 1] !== 'index.html') {
+                if (pth[pth.length - 1] !== 'index.html' && pth[pth.length - 1] !== '404.html') {
                   pTransform = pth.pop();
+                  ext = path.extname(file);
                   pth.push(pTransform.replace(ext, ''));
                   pth.push('index.html');
                 }
               }
+              else {
+                pth[pth.length - 1] = pth[pth.length - 1].replace(ext, '.html');
+              }
               pth = pth.join('/');
               stat['path'] = pth;
+              stat['file'] = file;
               end.push(stat);
               stat = {};
               results.push(file);
