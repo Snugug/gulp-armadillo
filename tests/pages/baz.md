@@ -4,4 +4,4 @@ template: layout.html
 ---
 # This is a call
 
-A tribute to Foo Fighters
+A tribute to Foo Fighters!
