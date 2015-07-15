@@ -95,8 +95,14 @@ gulpSwig = function (options) {
     if (ext === '.html') {
       if (file.meta) {
         context.locals = file.meta;
-        context.locals._pages = file.dirmap;
         context.filename = file.path;
+
+        if (!file.meta.published) {
+          context.locals.published = file.stat.birthtime;
+        }
+        if (!file.meta.updated) {
+          context.locals.updated = file.stat.mtime;
+        }
 
         // If a template exists in the meta info, build a content block and extend for it
         if (file.meta.template) {
