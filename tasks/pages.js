@@ -32,17 +32,12 @@ module.exports = function (gulp, PagesPaths, options) {
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var PagesTask = function (path) {
-    var transform = options.transformURL ? true : false;
     return gulp.src(PagesPaths)
-      .pipe(walk({
-        'dir': 'pages',
-        'transformURL': transform,
-        'sort': options.sort
-      }))
       .pipe(fm())
+      .pipe(walk(options))
       .pipe(mark())
       .pipe(swig())
-      .pipe(gulpif(transform, bt()))
+      .pipe(gulpif(options.transformURL, bt()))
       .pipe(gulp.dest('.www/'))
       .pipe(reload({stream: true}));
   }

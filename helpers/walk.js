@@ -13,6 +13,7 @@ var through = require('through2'),
     gutil = require('gulp-util'),
     fs = require('fs-extra'),
     path = require('path'),
+    fm = require('front-matter'),
     PluginError = gutil.PluginError,
     PLUGIN_NAME = 'walk';
 
@@ -81,6 +82,7 @@ module.exports = function (options) {
           pth,
           pTransform,
           ext,
+          content,
           stat;
       fs.readdir(dir, function(err, list) {
         if (err) return done(err);
@@ -115,6 +117,8 @@ module.exports = function (options) {
               pth = pth.join('/');
               stat['path'] = pth;
               stat['file'] = file;
+              content = fm(fs.readFileSync(file, 'utf-8'));
+              stat['meta'] = content.attributes;
               end.push(stat);
               stat = {};
               results.push(file);
@@ -125,7 +129,7 @@ module.exports = function (options) {
       });
     };
 
-    if (options.dir) {
+    if (options.dir && file.meta.listing) {
       walk(options.dir, function (err, results) {
         if (err) {
           _this.emit('error', new PluginError(PLUGIN_NAME, err));
@@ -142,7 +146,7 @@ module.exports = function (options) {
           end = end.reverse();
         }
 
-        file.dirmap = end;
+        file.meta.listing = end;
 
         //////////////////////////////
         // Push the file back to the stream!
