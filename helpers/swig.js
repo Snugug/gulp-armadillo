@@ -14,6 +14,7 @@ var through = require('through2'),
     path = require('path'),
     fs = require('fs-extra'),
     fm = require('front-matter'),
+    marked = require('./markdown'),
     PluginError = gutil.PluginError,
     PLUGIN_NAME = 'swig',
     gulpSwig;
@@ -60,6 +61,10 @@ gulpSwig = function (options) {
     return file;
   });
 
+  swig.setFilter('markdown', function (content) {
+    return marked(content);
+  });
+
   //////////////////////////////
   // Command line arguments for each option
   //////////////////////////////
@@ -103,6 +108,8 @@ gulpSwig = function (options) {
         if (!file.meta.updated) {
           context.locals.updated = file.stat.mtime;
         }
+
+        context.locals.stats = file.stat;
 
         // If a template exists in the meta info, build a content block and extend for it
         if (file.meta.template) {
