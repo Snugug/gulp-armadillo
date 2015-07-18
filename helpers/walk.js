@@ -119,6 +119,21 @@ module.exports = function (options) {
               stat['file'] = file;
               content = fm(fs.readFileSync(file, 'utf-8'));
               stat['meta'] = content.attributes;
+
+              if (!content.attributes.published) {
+                stat.published = stat.birthtime;
+              }
+              else {
+                stat.published = content.attributes.published;
+              }
+
+              if (!content.attributes.updated) {
+                stat.updated = stat.mtime;
+              }
+              else {
+                stat.updated = content.attributes.updated;
+              }
+
               end.push(stat);
               stat = {};
               results.push(file);
