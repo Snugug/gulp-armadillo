@@ -4,6 +4,7 @@
 // Requires
 //////////////////////////////
 var critical = require('critical').stream,
+    minifyInline = require('gulp-minify-inline'),
     minifyHTML = require('gulp-minify-html');
 
 
@@ -30,6 +31,7 @@ module.exports = function (gulp, CriticalPaths, options) {
         base: '.dist/',
         inline: true
       }))
+      .pipe(minifyInline())
       .pipe(minifyHTML({
         'empty': true,
         'quotes': true,

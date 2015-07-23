@@ -55,6 +55,7 @@ module.exports = function (gulp) {
   gulp.task('copy:dist', function () {
     return gulp.src([
         '.www/**/*',
+        '!.www/**/*.html',
         '!.www/bower_components/**/*',
         '!.www/css/**/*',
         '!.www/js/**/*'
