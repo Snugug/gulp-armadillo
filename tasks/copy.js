@@ -25,10 +25,21 @@ var toCopy = {
   ]
 }
 
+var toDist = [
+  '.www/**/*',
+  '!.www/**/*.html',
+  '!.www/bower_components/**/*',
+  '!.www/css/**/*',
+  '!.www/js/**/*'
+];
+
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp) {
+module.exports = function (gulp, paths, options) {
+  options = options ? options : {};
+
+  options.dist = options.dist ? options.dist : toDist;
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
@@ -44,6 +55,8 @@ module.exports = function (gulp) {
     copyTasks.push('copy:' + key);
   });
 
+
+
   //////////////////////////////
   // Core Task
   //////////////////////////////
@@ -53,13 +66,7 @@ module.exports = function (gulp) {
   // Dist Task
   //////////////////////////////
   gulp.task('copy:dist', function () {
-    return gulp.src([
-        '.www/**/*',
-        '!.www/**/*.html',
-        '!.www/bower_components/**/*',
-        '!.www/css/**/*',
-        '!.www/js/**/*'
-      ])
+    return gulp.src(options.dist)
       .pipe(gulp.dest('.dist/'));
   });
 
