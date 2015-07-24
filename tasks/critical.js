@@ -27,10 +27,10 @@ module.exports = function (gulp, CriticalPaths, options) {
   //////////////////////////////
   gulp.task('critical', function () {
     return gulp.src('.dist/**/*.html')
-      .pipe(critical({
-        base: '.dist/',
-        inline: true
-      }))
+      // .pipe(critical({
+      //   base: '.dist/',
+      //   inline: true
+      // }))
       .pipe(minifyInline())
       .pipe(minifyHTML({
         'empty': true,
