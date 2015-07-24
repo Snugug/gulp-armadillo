@@ -37,6 +37,27 @@ var modTime = function modTime(a,b) {
   return 0;
 }
 
+var pubTime = function modTime(a,b) {
+  if (Date.parse(a.meta.published) < Date.parse(b.meta.published)) {
+    return -1;
+  }
+  if (Date.parse(a.meta.published) > Date.parse(b.meta.published)) {
+    return 1;
+  }
+  return 0;
+}
+
+
+var updTime = function modTime(a,b) {
+  if (Date.parse(a.meta.updated) < Date.parse(b.updated)) {
+    return -1;
+  }
+  if (Date.parse(a.meta.updated) > Date.parse(b.updated)) {
+    return 1;
+  }
+  return 0;
+}
+
 //////////////////////////////
 // Export
 //////////////////////////////
@@ -155,6 +176,12 @@ module.exports = function (options) {
         }
         else if (options.sort === 'modified') {
           end = end.sort(modTime);
+        }
+        else if (options.sort === 'published') {
+          end = end.sort(pubTime);
+        }
+        else if (options.sort === 'updated') {
+          end = end.sort(updTime);
         }
 
         if (options.reverse) {
