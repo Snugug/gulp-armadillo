@@ -3,7 +3,7 @@
 var marked = require('marked'),
     fs = require('fs'),
     path = require('path'),
-    URI = require('URIjs'),
+    URI = require('urijs'),
     renderer = new marked.Renderer();
 
 renderer.image = function (href, title, text) {
