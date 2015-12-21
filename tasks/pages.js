@@ -7,7 +7,7 @@ var gutil = require('gulp-util'),
     gulpif = require('gulp-if'),
     fm = require('../helpers/fm'),
     mark = require('../helpers/mark'),
-    swig = require('../helpers/swig'),
+    nunjucks = require('../helpers/nunjucks'),
     walk = require('../helpers/walk'),
     bt = require('../helpers/blog-transform'),
     browserSync = require('browser-sync'),
@@ -36,7 +36,7 @@ module.exports = function (gulp, PagesPaths, options) {
       .pipe(fm())
       .pipe(walk(options))
       .pipe(mark())
-      .pipe(swig())
+      .pipe(nunjucks())
       .pipe(gulpif(options.transformURL, bt()))
       .pipe(gulp.dest('.www/'))
       .pipe(reload({stream: true}));

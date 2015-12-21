@@ -48,8 +48,8 @@
     "imagemin-pngquant": "^4.2.0",
     "marked": "^0.3.5",
     "node-sass-import-once": "^1.2.0",
+    "nunjucks": "^2.2.0",
     "run-sequence": "^1.1.4",
-    "swig": "^1.4.2",
     "through2": "^2.0.0",
     "urijs": "^1.17.0"
   },

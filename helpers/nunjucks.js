@@ -1,8 +1,8 @@
 //////////////////////////////
-// Swig
+// Nunjucks
 //  - A Gulp Plugin
 //
-// Builds Swig to HTML
+// Builds Nunjucks to HTML
 //////////////////////////////
 'use strict';
 
@@ -16,31 +16,34 @@ var through = require('through2'),
     fm = require('front-matter'),
     marked = require('./markdown'),
     PluginError = gutil.PluginError,
-    PLUGIN_NAME = 'swig',
-    gulpSwig;
+    PLUGIN_NAME = 'nunjucks',
+    gulpNunjucks;
 
 //////////////////////////////
-// Set Swig stuff
+// Set Nunjucks stuff
 //////////////////////////////
 
 
 //////////////////////////////
 // Export
 //////////////////////////////
-gulpSwig = function (options) {
+gulpNunjucks = function (options) {
   options = options || {};
 
-  var swig = gulpSwig.compiler;
+  var nunjucks = gulpNunjucks.compiler;
+  var nunjucksPaths = gulpNunjucks.paths;
+  var nunjucksEnv;
 
-  swig.setDefaults({
-    'loader': swig.loaders.fs(process.cwd() + '/templates'),
-    'cache': false
+  nunjucksPaths.push(path.join(process.cwd(), 'templates'));
+
+  nunjucksEnv = nunjucks.configure(nunjucksPaths, {
+    'noCache': true
   });
 
   //////////////////////////////
-  // Swig Filters
+  // Nunjucks Filters and Tags
   //////////////////////////////
-  swig.setFilter('attributes', function (file, attribute) {
+  nunjucksEnv.addFilter('attributes', function (file, attribute) {
     var content;
     file = fs.readFileSync(process.cwd() + '/' + file);
 
@@ -61,8 +64,18 @@ gulpSwig = function (options) {
     return file;
   });
 
-  swig.setFilter('markdown', function (content) {
+  nunjucksEnv.addFilter('markdown', function (content) {
     return marked(content);
+  });
+
+  // Iterate over all custom defined filters and add them
+  Object.keys(gulpNunjucks.filters).forEach(function (filter) {
+    nunjucksEnv.addFilter(filter, gulpNunjucks.filters[filter]);
+  });
+
+  // Iterate over all custom defined tags and add them
+  Object.keys(gulpNunjucks.tags).forEach(function (tag) {
+    nunjucksEnv.addExtension(tag, gulpNunjucks.tags[tag]);
   });
 
   //////////////////////////////
@@ -113,7 +126,7 @@ gulpSwig = function (options) {
 
         // If a template exists in the meta info, build a content block and extend for it
         if (file.meta.template) {
-          file.contents = new Buffer(swig.render(
+          file.contents = new Buffer(nunjucksEnv.renderString(
             '{% extends "' + file.meta.template + '" %}' +
             '{% block content %}' + file.contents.toString() + '{% endblock %}'
             , context)
@@ -121,7 +134,7 @@ gulpSwig = function (options) {
         }
         // Otherwise, just render it!
         else {
-          file.contents = new Buffer(swig.render(file.contents.toString(), context));
+          file.contents = new Buffer(nunjucksEnv.renderString(file.contents.toString(), context));
         }
       }
     }
@@ -140,6 +153,10 @@ gulpSwig = function (options) {
   return compile;
 }
 
-gulpSwig.compiler = require('swig');
+gulpNunjucks.compiler = require('nunjucks');
 
-module.exports = gulpSwig;
+gulpNunjucks.filters = {};
+gulpNunjucks.tags = {};
+gulpNunjucks.paths = [];
+
+module.exports = gulpNunjucks;

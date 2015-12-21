@@ -1,7 +1,11 @@
-<h1>All of my awesome posts!</h1>
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>All of my awesome posts!!</h1>
 
 <ul>
   {% for page in _pages %}
   <li><a href="{{page.path}}">{{ page.file|attributes('title') }}</a></li>
   {% endfor %}
 </ul>
+{% endblock %}
