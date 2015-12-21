@@ -28,14 +28,12 @@ module.exports = function (gulp, UseminPaths, options) {
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var UseminTask = function (path) {
-    var assets = useref.assets();
-
     return gulp.src(path)
-      .pipe(assets)
+      .pipe(useref({
+        'searchPath': '.www'
+      }))
       .pipe(gulpif('*.js', uglify()))
       .pipe(gulpif('*.css', minifyCSS()))
-      .pipe(assets.restore())
-      .pipe(useref())
       .pipe(gulp.dest('.dist/'));
   }
 
