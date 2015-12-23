@@ -9,7 +9,7 @@ var sequence = require('run-sequence'),
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp) {
+module.exports = function (gulp, config) {
 
   //////////////////////////////
   // Core Task
@@ -17,11 +17,11 @@ module.exports = function (gulp) {
   gulp.task('serve', function (cb) {
     armadillo('Serving');
     return sequence(
-      // Clean everything
-      'build',
+      // Build everything
+      config.tasks.serve.build,
 
-      // Lint everything
-      ['browser-sync', 'watch'],
+      // Serve everything
+      config.tasks.serve.serve,
 
       // Callback
       cb

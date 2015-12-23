@@ -3,17 +3,10 @@
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp) {
+module.exports = function (gulp, config) {
 
   //////////////////////////////
   // Core Task
   //////////////////////////////
-  gulp.task('watch',[
-    'eslint:watch',
-    'copy:watch',
-    'sass:watch',
-    'imagemin:watch',
-    'pages:watch',
-    'pages:templates'
-  ]);
+  gulp.task('watch', config.tasks.watch);
 }

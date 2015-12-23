@@ -14,19 +14,14 @@ var gutil = require('gulp-util'),
     reload = browserSync.reload;
 
 //////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toPages = [
-  'pages/**/*.md',
-  'pages/**/*.html'
-];
-
-//////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, PagesPaths, options) {
+module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  PagesPaths = PagesPaths || toPages;
+  var PagesPaths = [
+    config.folders.pages + '/**/*.md',
+    config.folders.pages + '/**/*.html'
+  ]
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
@@ -34,11 +29,11 @@ module.exports = function (gulp, PagesPaths, options) {
   var PagesTask = function (path) {
     return gulp.src(PagesPaths)
       .pipe(fm())
-      .pipe(walk(options))
+      .pipe(walk())
       .pipe(mark())
       .pipe(nunjucks())
-      .pipe(gulpif(options.transformURL, bt()))
-      .pipe(gulp.dest('.www/'))
+      .pipe(gulpif(config.settings.transformURL, bt()))
+      .pipe(gulp.dest(config.folders.server + '/'))
       .pipe(reload({stream: true}));
   }
 
@@ -50,7 +45,7 @@ module.exports = function (gulp, PagesPaths, options) {
   });
 
   gulp.task('pages:templates', function () {
-    return gulp.watch('templates/**/*', ['pages']);
+    return gulp.watch(config.folders.templates + '/**/*', ['pages']);
   });
 
   //////////////////////////////

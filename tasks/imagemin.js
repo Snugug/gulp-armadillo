@@ -5,32 +5,17 @@
 //////////////////////////////
 var gutil = require('gulp-util'),
     imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant'),
     browserSync = require('browser-sync');
-
-//////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toImagemin = [
-  'images/**/*'
-];
-
-var imageminSettings = {
-  progressive: true,
-  svgoPlugins:[
-    { 'removeViewBox': false },
-    { 'removeUselessDefs': false },
-    { 'convertTransform': false }
-  ],
-  use: [pngquant()]
-};
 
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, ImageminPaths, options) {
+module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  ImageminPaths = ImageminPaths || toImagemin;
+  var ImageminPaths = [
+    config.folders.images + '/**/*'
+  ];
+  var imageminSettings = config.options.imagemin;
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
@@ -38,7 +23,7 @@ module.exports = function (gulp, ImageminPaths, options) {
   var ImageminTask = function (path) {
     return gulp.src(ImageminPaths)
       .pipe(imagemin(imageminSettings))
-      .pipe(gulp.dest('.www/images/'))
+      .pipe(gulp.dest(config.folders.server + '/' + config.folders.images + '/'))
       .pipe(browserSync.stream());
   }
 

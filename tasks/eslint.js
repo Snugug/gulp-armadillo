@@ -9,19 +9,14 @@ var gutil = require('gulp-util'),
     browserSync = require('browser-sync');
 
 //////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toEslint = [
-  'js/**/*.js',
-  '!js/**/*.min.js'
-];
-
-//////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, EslintPaths, options) {
+module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  EslintPaths = EslintPaths || toEslint;
+  var EslintPaths = [
+    config.folders.javascript + '/**/*.js',
+    '!' + config.folders.javascript + '/**/*.min.js'
+  ];
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
@@ -31,7 +26,7 @@ module.exports = function (gulp, EslintPaths, options) {
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(ifElse(fail === true, eslint.failOnError))
-      .pipe(gulp.dest('.www/js/'))
+      .pipe(gulp.dest(config.folders.server + '/' + config.folders.javascript + '/'))
       .pipe(browserSync.stream());
   }
 

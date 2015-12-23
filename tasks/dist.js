@@ -9,7 +9,7 @@ var armadillo = require('../helpers/armadillo'),
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp) {
+module.exports = function (gulp, config) {
   //////////////////////////////
   // Core Task
   //////////////////////////////
@@ -17,13 +17,13 @@ module.exports = function (gulp) {
     armadillo('Dist-readying');
     return sequence(
       // Clean Dist, Build everything
-      ['build', 'clean:dist'],
+      config.tasks.dist.build,
 
       // Move convent over
-      ['copy:dist', 'usemin'],
+      config.tasks.dist.copy,
 
       // Generate critical stuff
-      ['critical'],
+      config.tasks.dist.optimize,
 
       // Callback
       cb

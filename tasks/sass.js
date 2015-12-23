@@ -7,32 +7,18 @@ var gutil = require('gulp-util'),
     sass = require('gulp-sass'),
     ifElse = require('gulp-if-else'),
     autoprefixer = require('gulp-autoprefixer'),
-    importOnce = require('node-sass-import-once'),
     browserSync = require('browser-sync');
-
-//////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toSass = [
-  'sass/**/*.scss'
-];
-
-var sassSettings = {
-  'outputStyle': 'expanded',
-  'importer': importOnce,
-  'importOnce': {
-    'index': true,
-    'css': false,
-    'bower': true
-  }
-};
 
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, SassPaths, options) {
+module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  SassPaths = SassPaths || toSass;
+  var SassPaths = [
+    config.folders.sass + '/**/*.sass',
+    config.folders.sass + '/**/*.scss'
+  ];
+  var sassSettings = config.options.sass;
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
@@ -47,7 +33,7 @@ module.exports = function (gulp, SassPaths, options) {
       .pipe(autoprefixer({
         cascade: false
       }))
-      .pipe(gulp.dest('./.www/css/'))
+      .pipe(gulp.dest(config.folders.server + '/' + config.folders.css + '/'))
       .pipe(browserSync.stream());
   }
 

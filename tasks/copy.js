@@ -5,48 +5,40 @@
 //////////////////////////////
 var gutil = require('gulp-util'),
     fs = require('fs-extra'),
+    bowerDirectory = require('bower-directory'),
+    path = require('path'),
     browserSync = require('browser-sync');
-
-//////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toCopy = {
-  'fonts': [
-    'fonts/**/*'
-  ],
-  'audio': [
-    'audio/**/*'
-  ],
-  'videos': [
-    'videos/**/*'
-  ],
-  'bower_components': [
-    'bower_components/**/*'
-  ]
-}
-
-var toDist = [
-  '.www/**/*',
-  '!.www/**/*.html',
-  '!.www/bower_components/**/*',
-  '!.www/css/**/*',
-  '!.www/js/**/*'
-];
 
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, paths, options) {
-  options = options ? options : {};
+module.exports = function (gulp, config) {
+  var toCopy = {};
+  var toDist;
 
-  options.dist = options.dist ? options.dist : toDist;
+  var bower = path.relative(process.cwd(), bowerDirectory.sync());
+
+  config.assets.forEach(function (asset) {
+    toCopy[asset] = [];
+    toCopy[asset].push(config.folders[asset] + '/**/*');
+  });
+
+  toDist = [
+    config.folders.server + '/**/*',
+    '!' + config.folders.server + '/**/*.html',
+    '!' + config.folders.server + '/' + config.folders[bower] + '/**/*',
+    '!' + config.folders.server + '/' + config.folders.css + '/**/*',
+    '!' + config.folders.server + '/' + config.folders.javascript + '/**/*'
+  ];
+
+  toDist = toDist.concat(config.options.copy);
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var CopyTask = function (path, folder) {
     return gulp.src(path)
-      .pipe(gulp.dest('.www/' + folder + '/'))
+      .pipe(gulp.dest(config.folders.server + '/' + folder + '/'))
       .pipe(browserSync.stream());
   }
 
@@ -54,7 +46,6 @@ module.exports = function (gulp, paths, options) {
   Object.keys(toCopy).forEach(function (key) {
     copyTasks.push('copy:' + key);
   });
-
 
 
   //////////////////////////////
@@ -66,8 +57,8 @@ module.exports = function (gulp, paths, options) {
   // Dist Task
   //////////////////////////////
   gulp.task('copy:dist', function () {
-    return gulp.src(options.dist)
-      .pipe(gulp.dest('.dist/'));
+    return gulp.src(toDist)
+      .pipe(gulp.dest(config.folders.output + '/'));
   });
 
   //////////////////////////////
@@ -98,7 +89,7 @@ module.exports = function (gulp, paths, options) {
 
 
             if (event.type === 'deleted') {
-              fs.removeSync('.www/' + event.path.relative);
+              fs.removeSync(config.folders.server + '/' + event.path.relative);
               return;
             }
 

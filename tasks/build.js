@@ -9,7 +9,7 @@ var armadillo = require('../helpers/armadillo'),
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp) {
+module.exports = function (gulp, config) {
   //////////////////////////////
   // Core Task
   //////////////////////////////
@@ -17,13 +17,13 @@ module.exports = function (gulp) {
     armadillo('Building');
     return sequence(
       // Clean everything
-      'clean',
+      config.tasks.build.clean,
 
       // Lint everything
-      ['eslint'],
+      config.tasks.build.lint,
 
       // Build stuff
-      ['copy', 'sass', 'imagemin', 'pages'],
+      config.tasks.build.build,
 
       // Callback
       cb
