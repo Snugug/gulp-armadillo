@@ -27,6 +27,24 @@ module.exports = function (gulp, config) {
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var PagesTask = function (path) {
+    //////////////////////////////
+    // Nunjucks Config
+    //////////////////////////////
+    if (config.options && config.options.nunjucks) {
+      if (config.options.nunjucks.compiler) {
+        nunjucks.compiler = config.options.nunjucks.compiler;
+      }
+      if (config.options.nunjucks.paths) {
+        nunjucks.paths = config.options.nunjucks.paths;
+      }
+      if (config.options.nunjucks.filters) {
+        nunjucks.filters = config.options.nunjucks.filters;
+      }
+      if (config.options.nunjucks.tags) {
+        nunjucks.tags = config.options.nunjucks.tags;
+      }
+    }
+
     return gulp.src(PagesPaths)
       .pipe(fm())
       .pipe(walk(config))
