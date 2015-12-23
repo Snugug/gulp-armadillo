@@ -77,4 +77,9 @@ module.exports = function (gulp, options) {
   // Dist Tasks
   //////////////////////////////
   require('./tasks/dist')(gulp, config);
+
+  //////////////////////////////
+  // Create Config Tasks
+  //////////////////////////////
+  require('./tasks/create-config')(gulp, config);
 }
