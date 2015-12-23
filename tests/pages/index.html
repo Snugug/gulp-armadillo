@@ -11,8 +11,13 @@ listing:
 <h1>All of my awesome posts!!</h1>
 
 <ul>
-  {% for group, listings in listing %}
-  {{group}}
+  {% for key, value in listing %}
+  <p>{{key}}</p>
+  <ul>
+    {% for file in value %}
+    <li><a href="{{file.path|replace('/index.html', '')}}">{{file.meta.title}}</a></li>
+    {% endfor %}
+  </ul>
   {% endfor %}
 </ul>
 {% endblock %}
