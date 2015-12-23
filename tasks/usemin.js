@@ -21,8 +21,6 @@ module.exports = function (gulp, config) {
     '!' + config.folders.server + '/' + config.folders[bower] + '/**/*'
   ];
 
-  console.log(UseminPaths);
-
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
