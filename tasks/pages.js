@@ -29,7 +29,7 @@ module.exports = function (gulp, config) {
   var PagesTask = function (path) {
     return gulp.src(PagesPaths)
       .pipe(fm())
-      .pipe(walk())
+      .pipe(walk(config))
       .pipe(mark())
       .pipe(nunjucks())
       .pipe(gulpif(config.settings.transformURL, bt()))

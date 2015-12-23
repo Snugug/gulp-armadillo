@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Snugug/gulp-armadillo#readme",
   "dependencies": {
+    "bluebird": "^3.1.1",
     "bower-directory": "^1.0.0",
     "browser-sync": "^2.10.0",
     "chalk": "^1.1.1",

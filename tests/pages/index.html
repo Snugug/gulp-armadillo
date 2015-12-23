@@ -1,11 +1,18 @@
+---
+listing:
+  folders:
+    - bar
+  sort: published
+  reverse: true
+---
 {% extends 'layout.html' %}
 
 {% block content %}
 <h1>All of my awesome posts!!</h1>
 
 <ul>
-  {% for page in _pages %}
-  <li><a href="{{page.path}}">{{ page.file|attributes('title') }}</a></li>
+  {% for group, listings in listing %}
+  {{group}}
   {% endfor %}
 </ul>
 {% endblock %}
