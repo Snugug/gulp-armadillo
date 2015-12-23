@@ -112,17 +112,17 @@ gulpNunjucks = function (options) {
     //////////////////////////////
     if (ext === '.html') {
       if (file.meta) {
-        context.locals = file.meta;
+        context = file.meta;
         context.filename = file.path;
 
         if (!file.meta.published) {
-          context.locals.published = file.stat.birthtime;
+          context.published = file.stat.birthtime;
         }
         if (!file.meta.updated) {
-          context.locals.updated = file.stat.mtime;
+          context.updated = file.stat.mtime;
         }
 
-        context.locals.stats = file.stat;
+        context.stats = file.stat;
 
         // If a template exists in the meta info, build a content block and extend for it
         if (file.meta.template) {
