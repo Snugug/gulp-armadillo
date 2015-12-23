@@ -187,6 +187,7 @@ module.exports = function (config) {
       Promise.map(file.meta.listing.folders, function (folder) {
         return walker(folder, config).then(function (results) {
           var base = path.basename(folder);
+          var result = {};
 
           if (file.meta.listing.sort === 'created') {
             results = results.sort(birthTime);
@@ -205,9 +206,9 @@ module.exports = function (config) {
             results = results.reverse();
           }
 
-          return {
-            base: results
-          };
+          result[base] = results;
+
+          return result;
         });
       }).then(function (results) {
         var listings = {};
