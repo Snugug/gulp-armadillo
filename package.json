@@ -27,7 +27,7 @@
     "bower-directory": "^1.0.0",
     "browser-sync": "^2.10.0",
     "chalk": "^1.1.1",
-    "critical": "^0.6.0",
+    "critical": "^0.7.0",
     "del": "^2.1.0",
     "eslint-plugin-nodeca": "^1.0.3",
     "front-matter": "^2.0.0",
