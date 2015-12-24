@@ -19,7 +19,6 @@ var settings = {
     'documents': 'documents'
   },
   'assets': [
-    'images',
     'videos',
     'audio',
     'fonts',
@@ -87,6 +86,7 @@ var settings = {
       ],
       'copy': [
         'copy:dist',
+        'imagemin:dist',
         'usemin'
       ],
       'optimize': [

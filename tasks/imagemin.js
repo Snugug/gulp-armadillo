@@ -22,7 +22,6 @@ module.exports = function (gulp, config) {
   //////////////////////////////
   var ImageminTask = function (path) {
     return gulp.src(ImageminPaths)
-      .pipe(imagemin(imageminSettings))
       .pipe(gulp.dest(config.folders.server + '/' + config.folders.images + '/'))
       .pipe(browserSync.stream());
   }
@@ -32,6 +31,15 @@ module.exports = function (gulp, config) {
   //////////////////////////////
   gulp.task('imagemin', function () {
     return ImageminTask(ImageminPaths);
+  });
+
+  //////////////////////////////
+  // Dist Task
+  //////////////////////////////
+  gulp.task('imagemin:dist', function () {
+    return gulp.src(ImageminPaths)
+      .pipe(imagemin(imageminSettings))
+      .pipe(gulp.dest(config.folders.output + '/' + config.folders.images + '/'));
   });
 
   //////////////////////////////
