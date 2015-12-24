@@ -1,7 +1,24 @@
-<h1>All of my awesome posts!</h1>
+---
+listing:
+  folders:
+    - bar
+    - baz
+  sort: published
+  reverse: true
+---
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>All of my awesome posts!!</h1>
 
 <ul>
-  {% for page in _pages %}
-  <li><a href="{{page.path}}">{{ page.file|attributes('title') }}</a></li>
+  {% for key, value in listing %}
+  <p>{{key}}</p>
+  <ul>
+    {% for file in value %}
+    <li><a href="{{file.path|replace('/index.html', '')}}">{{file.meta.title}}</a></li>
+    {% endfor %}
+  </ul>
   {% endfor %}
 </ul>
+{% endblock %}

@@ -7,19 +7,15 @@ var sequence = require('run-sequence'),
     armadillo = require('../helpers/armadillo'),
     ghPages = require('gulp-gh-pages');
 
-//////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toDeploy = [
-  '.dist/**/*'
-];
 
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, DeployPaths, options) {
+module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  DeployPaths = DeployPaths || toDeploy;
+  var DeployPaths = [
+    config.folders.output + '/**/*'
+  ];
 
   //////////////////////////////
   // Core Task
@@ -27,7 +23,7 @@ module.exports = function (gulp, DeployPaths, options) {
   gulp.task('gh-pages', function () {
     return gulp.src(DeployPaths)
       .pipe(ghPages({
-        'message': ':shipit: Update ' + new Date().toISOString()
+        'message': config.options.deployCommitMessage
       }));
   });
 
@@ -35,10 +31,10 @@ module.exports = function (gulp, DeployPaths, options) {
     armadillo('Deploying');
     return sequence(
       // Dist Everything
-      'dist',
+      config.tasks.deploy.build,
 
       // Deploy Everything
-      'gh-pages',
+      config.tasks.deploy.deploy,
 
       // Callback
       cb

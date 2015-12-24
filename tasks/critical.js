@@ -9,34 +9,25 @@ var critical = require('critical').stream,
 
 
 //////////////////////////////
-// Internal Vars
-//////////////////////////////
-var toCritical = [
-  '.dist/**/*.html'
-];
-
-//////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, CriticalPaths, options) {
+module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  CriticalPaths = CriticalPaths || toCritical;
+  var CriticalPaths = [
+    config.folders.output + '/**/*.html'
+  ];
 
   //////////////////////////////
   // Core Task
   //////////////////////////////
   gulp.task('critical', function () {
-    return gulp.src('.dist/**/*.html')
+    return gulp.src(config.folders.output + '/**/*.html')
       .pipe(critical({
-        base: '.dist/',
+        base: config.folders.output + '/',
         inline: true
       }))
       .pipe(minifyInline())
-      .pipe(minifyHTML({
-        'empty': true,
-        'quotes': true,
-        'loose': true
-      }))
-      .pipe(gulp.dest('.dist/'));
+      .pipe(minifyHTML(config.options.minifyHTML))
+      .pipe(gulp.dest(config.folders.output + '/'));
   });
 }

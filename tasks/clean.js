@@ -8,19 +8,19 @@ var clean = require('del');
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp) {
+module.exports = function (gulp, config) {
   //////////////////////////////
   // Clean Server
   //////////////////////////////
   gulp.task('clean', function (cb) {
     return clean([
-      '.www/**/*'
+      config.folders.server + '/**/*'
     ], cb);
   });
 
   gulp.task('clean:dist', function (cb) {
     return clean([
-      '.dist/**/*'
+      config.folders.output + '/**/*'
     ], cb);
   });
 }

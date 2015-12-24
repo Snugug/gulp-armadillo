@@ -14,6 +14,7 @@ var through = require('through2'),
     fs = require('fs-extra'),
     path = require('path'),
     fm = require('front-matter'),
+    Promise = require('bluebird'),
     PluginError = gutil.PluginError,
     PLUGIN_NAME = 'walk';
 
@@ -58,11 +59,95 @@ var updTime = function modTime(a,b) {
   return 0;
 }
 
+var walker = function (dir, config, cb) {
+  var end = [];
+
+  var walk = function(dir, done) {
+    var results = [],
+        pth,
+        pTransform,
+        ext,
+        content,
+        stat;
+    fs.readdir(dir, function(err, list) {
+      if (err) return done(err);
+      var i = 0;
+      (function next() {
+        var file = list[i++];
+
+        if (!file) return done(null, results);
+
+        file = dir + '/' + file;
+        fs.stat(file, function(err, stat) {
+          if (stat && stat.isDirectory()) {
+            walk(file, function(err, res) {
+              results = results.concat(res);
+              next();
+            });
+          } else {
+            stat = fs.statSync(file);
+            pth = file.split('/');
+            pth.shift();
+            if (config.settings.transformURL) {
+              if (pth[pth.length - 1] !== 'index.html' && pth[pth.length - 1] !== '404.html') {
+                pTransform = pth.pop();
+                ext = path.extname(file);
+                pth.push(pTransform.replace(ext, ''));
+                pth.push('index.html');
+              }
+            }
+            else {
+              pth[pth.length - 1] = pth[pth.length - 1].replace(ext, '.html');
+            }
+            pth = pth.join('/');
+            stat['path'] = pth;
+            stat['file'] = file;
+            content = fm(fs.readFileSync(file, 'utf-8'));
+            stat['meta'] = content.attributes;
+
+            if (!content.attributes.published) {
+              stat.published = stat.birthtime;
+            }
+            else {
+              stat.published = content.attributes.published;
+            }
+
+            if (!content.attributes.updated) {
+              stat.updated = stat.mtime;
+            }
+            else {
+              stat.updated = content.attributes.updated;
+            }
+
+            end.push(stat);
+            stat = {};
+            results.push(file);
+            next();
+          }
+        });
+      })();
+    });
+  };
+
+  dir = path.join(config.folders.pages, dir);
+
+  return new Promise(function (resolve, reject) {
+    walk(dir, function (err, result) {
+      if (err) {
+        reject(err);
+      }
+      else {
+        resolve(end);
+      }
+    });
+  });
+};
+
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (options) {
-  options = options || {};
+module.exports = function (config) {
+  var options = options || {};
 
   //////////////////////////////
   // Command line arguments for each option
@@ -79,8 +164,7 @@ module.exports = function (options) {
   // Through Object
   //////////////////////////////
   var compile = through.obj(function (file, encoding, cb) {
-    var walk,
-        end = [],
+    var walkAsync,
         _this = this;
     /////////////////////////////
     // Default plugin issues
@@ -93,102 +177,48 @@ module.exports = function (options) {
       return cb();
     }
 
-
-
     //////////////////////////////
     // Manipulate Files
     //////////////////////////////
-    walk = function(dir, done) {
-      var results = [],
-          pth,
-          pTransform,
-          ext,
-          content,
-          stat;
-      fs.readdir(dir, function(err, list) {
-        if (err) return done(err);
-        var i = 0;
-        (function next() {
-          var file = list[i++];
 
-          if (!file) return done(null, results);
+    walkAsync = Promise.promisify(walker);
 
-          file = dir + '/' + file;
-          fs.stat(file, function(err, stat) {
-            if (stat && stat.isDirectory()) {
-              walk(file, function(err, res) {
-                results = results.concat(res);
-                next();
-              });
-            } else {
-              stat = fs.statSync(file);
-              pth = file.split('/');
-              pth.shift();
-              if (options.transformURL) {
-                if (pth[pth.length - 1] !== 'index.html' && pth[pth.length - 1] !== '404.html') {
-                  pTransform = pth.pop();
-                  ext = path.extname(file);
-                  pth.push(pTransform.replace(ext, ''));
-                  pth.push('index.html');
-                }
-              }
-              else {
-                pth[pth.length - 1] = pth[pth.length - 1].replace(ext, '.html');
-              }
-              pth = pth.join('/');
-              stat['path'] = pth;
-              stat['file'] = file;
-              content = fm(fs.readFileSync(file, 'utf-8'));
-              stat['meta'] = content.attributes;
+    if (file.meta.listing) {
+      Promise.map(file.meta.listing.folders, function (folder) {
+        return walker(folder, config).then(function (results) {
+          var base = path.basename(folder);
+          var result = {};
 
-              if (!content.attributes.published) {
-                stat.published = stat.birthtime;
-              }
-              else {
-                stat.published = content.attributes.published;
-              }
+          if (file.meta.listing.sort === 'created') {
+            results = results.sort(birthTime);
+          }
+          else if (file.meta.listing.sort === 'modified') {
+            results = results.sort(modTime);
+          }
+          else if (file.meta.listing.sort === 'published') {
+            results = results.sort(pubTime);
+          }
+          else if (file.meta.listing.sort === 'updated') {
+            results = results.sort(updTime);
+          }
 
-              if (!content.attributes.updated) {
-                stat.updated = stat.mtime;
-              }
-              else {
-                stat.updated = content.attributes.updated;
-              }
+          if (file.meta.listing.reverse) {
+            results = results.reverse();
+          }
 
-              end.push(stat);
-              stat = {};
-              results.push(file);
-              next();
-            }
-          });
-        })();
-      });
-    };
+          result[base] = results;
 
-    if (options.dir && file.meta.listing) {
-      walk(options.dir, function (err, results) {
-        if (err) {
-          _this.emit('error', new PluginError(PLUGIN_NAME, err));
-        }
+          return result;
+        });
+      }).then(function (results) {
+        var listings = {};
 
-        if (options.sort === 'created') {
-          end = end.sort(birthTime);
-        }
-        else if (options.sort === 'modified') {
-          end = end.sort(modTime);
-        }
-        else if (options.sort === 'published') {
-          end = end.sort(pubTime);
-        }
-        else if (options.sort === 'updated') {
-          end = end.sort(updTime);
-        }
+        results.forEach(function (result) {
+          var key = Object.keys(result);
+          listings[key] = result[key];
+        });
 
-        if (options.reverse) {
-          end = end.reverse();
-        }
-
-        file.meta.listing = end;
+        file.meta.listing = listings;
 
         //////////////////////////////
         // Push the file back to the stream!

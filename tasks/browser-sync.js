@@ -17,17 +17,14 @@ var toServer = [
 //////////////////////////////
 // Export
 //////////////////////////////
-module.exports = function (gulp, ServerPaths, options) {
-  // Set value of paths to either the default or user entered
-  ServerPaths = ServerPaths || toServer;
-
+module.exports = function (gulp, config) {
   //////////////////////////////
   // Core Task
   //////////////////////////////
   gulp.task('browser-sync', function () {
     browserSync.init({
       'server': {
-        'baseDir' : ServerPaths
+        'baseDir' : config.folders.server
       }
     })
   });
