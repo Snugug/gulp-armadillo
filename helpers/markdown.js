@@ -58,8 +58,8 @@ renderer.image = function (href, title, text) {
     }
     out += '>';
 
-    var webm = fs.statSync('./guides' + file);
-    var mp4 = fs.statSync('./guides' + file.replace('.' + getFileExtension(file), '.mp4'));
+    var webm = fs.statSync(file);
+    var mp4 = fs.statSync(file.replace('.' + getFileExtension(file), '.mp4'));
 
     if (webm.size < mp4.size) {
       return 'webm';
