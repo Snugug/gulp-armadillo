@@ -8,7 +8,7 @@ var settings = {
     'server': '.www',
     'output': '.dist',
     'pages': 'pages',
-    'templates': 'templates',
+    'templates': ['templates'],
     'sass': 'sass',
     'css': 'css',
     'javascript': 'js',

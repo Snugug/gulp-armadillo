@@ -31,10 +31,8 @@ gulpNunjucks = function (options) {
   options = options || {};
 
   var nunjucks = gulpNunjucks.compiler;
-  var nunjucksPaths = gulpNunjucks.paths;
+  var nunjucksPaths = options.paths;
   var nunjucksEnv;
-
-  nunjucksPaths.push(path.join(process.cwd(), 'templates'));
 
   nunjucksEnv = nunjucks.configure(nunjucksPaths, {
     'noCache': true
@@ -69,13 +67,13 @@ gulpNunjucks = function (options) {
   });
 
   // Iterate over all custom defined filters and add them
-  Object.keys(gulpNunjucks.filters).forEach(function (filter) {
-    nunjucksEnv.addFilter(filter, gulpNunjucks.filters[filter]);
+  Object.keys(options.filters).forEach(function (filter) {
+    nunjucksEnv.addFilter(filter, options.filters[filter]);
   });
 
   // Iterate over all custom defined tags and add them
-  Object.keys(gulpNunjucks.tags).forEach(function (tag) {
-    nunjucksEnv.addExtension(tag, gulpNunjucks.tags[tag]);
+  Object.keys(options.tags).forEach(function (tag) {
+    nunjucksEnv.addExtension(tag, options.tags[tag]);
   });
 
   //////////////////////////////

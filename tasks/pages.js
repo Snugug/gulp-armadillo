@@ -23,6 +23,12 @@ module.exports = function (gulp, config) {
     config.folders.pages + '/**/*.html'
   ]
 
+  var templatesPaths = [];
+
+  config.folders.templates.forEach(function (folder) {
+    templatesPaths.push(folder + '/**/*');
+  });
+
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
@@ -30,26 +36,19 @@ module.exports = function (gulp, config) {
     //////////////////////////////
     // Nunjucks Config
     //////////////////////////////
-    if (config.options && config.options.nunjucks) {
-      if (config.options.nunjucks.compiler) {
-        nunjucks.compiler = config.options.nunjucks.compiler;
-      }
-      if (config.options.nunjucks.paths) {
-        nunjucks.paths = config.options.nunjucks.paths;
-      }
-      if (config.options.nunjucks.filters) {
-        nunjucks.filters = config.options.nunjucks.filters;
-      }
-      if (config.options.nunjucks.tags) {
-        nunjucks.tags = config.options.nunjucks.tags;
-      }
+    if (config.options && !config.options.nunjucks) {
+      config.options.nunjucks = {};
     }
 
     return gulp.src(PagesPaths)
       .pipe(fm())
       .pipe(walk(config))
       .pipe(mark())
-      .pipe(nunjucks())
+      .pipe(nunjucks({
+        'paths': config.folders.templates,
+        'filters': config.options.nunjucks.filters ? config.options.nunjucks.filters : {},
+        'tags': config.options.nunjucks.tags ? config.options.nunjucks.tags :  {}
+      }))
       .pipe(gulpif(config.settings.transformURL, bt()))
       .pipe(gulp.dest(config.folders.server + '/'))
       .pipe(reload({stream: true}));
@@ -63,7 +62,7 @@ module.exports = function (gulp, config) {
   });
 
   gulp.task('pages:templates', function () {
-    return gulp.watch(config.folders.templates + '/**/*', ['pages']);
+    return gulp.watch(templatesPaths, ['pages']);
   });
 
   //////////////////////////////
