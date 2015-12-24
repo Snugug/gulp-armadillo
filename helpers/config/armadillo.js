@@ -40,7 +40,6 @@ var settings = {
         'bower': true
       }
     },
-    'copy': [],
     'imagemin': {
       'progressive': true,
       'svgoPlugins': [

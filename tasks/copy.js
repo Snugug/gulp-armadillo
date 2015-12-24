@@ -31,7 +31,10 @@ module.exports = function (gulp, config) {
     '!' + config.folders.server + '/' + config.folders.javascript + '/**/*'
   ];
 
-  toDist = toDist.concat(config.options.copy);
+
+  if (config.options.copy) {
+    toDist = toDist.concat(config.options.copy);
+  }
 
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
