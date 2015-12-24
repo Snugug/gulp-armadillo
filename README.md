@@ -16,6 +16,8 @@ Armadillo is a cute little thing that drinks from your [Gulp](http://gulpjs.com/
 
 Follow our [Developing with the Armadillo](https://github.com/Snugug/gulp-armadillo/wiki/Developing-with-the-Armadillo) instructions to get set up and start working.
 
+Armadillo also provides some [additions to standard rendering](https://github.com/Snugug/gulp-armadillo/wiki/Armadillo-Additions) you may be use to to make your life a little happier when using it.
+
 ## Basic Armadillo Commands
 
 There are four basic commands that your armadillo knows that you're likely to run:
