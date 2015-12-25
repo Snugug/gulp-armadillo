@@ -16,7 +16,10 @@
     "static-site",
     "rwd"
   ],
-  "author": "Sam Richard <sam@snug.ug>",
+  "author": {
+    "name": "Sam Richard",
+    "email": "sam@snug.ug"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Snugug/gulp-armadillo/issues"
@@ -28,6 +31,7 @@
     "browser-sync": "^2.10.0",
     "chalk": "^1.1.1",
     "critical": "^0.7.0",
+    "dateformat": "^1.0.12",
     "del": "^2.1.0",
     "eslint-plugin-nodeca": "^1.0.3",
     "front-matter": "^2.0.0",

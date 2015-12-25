@@ -13,6 +13,7 @@ var through = require('through2'),
     gutil = require('gulp-util'),
     path = require('path'),
     fs = require('fs-extra'),
+    dateformat = require('dateformat'),
     fm = require('front-matter'),
     marked = require('./markdown'),
     PluginError = gutil.PluginError,
@@ -64,6 +65,10 @@ gulpNunjucks = function (options) {
 
   nunjucksEnv.addFilter('markdown', function (content) {
     return marked(content);
+  });
+
+  nunjucksEnv.addFilter('date', function (content, format) {
+    return dateformat(content, format);
   });
 
   // Iterate over all custom defined filters and add them

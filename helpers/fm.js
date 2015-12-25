@@ -60,6 +60,8 @@ module.exports = function (options) {
       file.meta = {};
     }
 
+    file.meta.today = Date.now();
+
     file.contents = new Buffer(content.body);
 
     //////////////////////////////
