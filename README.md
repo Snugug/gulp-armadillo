@@ -1,4 +1,4 @@
-# Armadillo
+# Armadillo [![npm version](https://badge.fury.io/js/gulp-armadillo.svg)](https://badge.fury.io/js/gulp-armadillo) [![Dependency Status](https://david-dm.org/snugug/gulp-armadillo.svg)](https://david-dm.org/snugug/gulp-armadillo)
 
 ```
                ,.-----__
