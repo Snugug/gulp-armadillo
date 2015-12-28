@@ -44,7 +44,7 @@ gulpNunjucks = function (options) {
   //////////////////////////////
   nunjucksEnv.addFilter('attributes', function (file, attribute) {
     var content;
-    file = fs.readFileSync(process.cwd() + '/' + file);
+    file = fs.readFileSync(path.join(process.cwd(), file));
 
     content = fm(file.toString());
 
