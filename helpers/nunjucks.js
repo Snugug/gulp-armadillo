@@ -64,10 +64,9 @@ gulpNunjucks = function (options) {
   });
 
   nunjucksEnv.addFilter('render', function (file) {
-    var content;
-    content = fs.readFileSync(path.join(process.cwd(), file));
+    var content = fs.readFileSync(path.join(process.cwd(), file));
 
-    content = fm(file.toString()).body;
+    content = fm(content.toString()).body;
 
     if (path.extname(file) === '.html') {
       return content;
