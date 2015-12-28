@@ -16,9 +16,13 @@ listing:
   <p>{{key}}</p>
   <ul>
     {% for file in value %}
-    <li><a href="{{file.path|replace('/index.html', '')}}">{{file.meta.title}}</a></li>
+    {% set path = file.path|replace('/index.html', '') %}
+    <li><a href="{{path}}">{{file.meta.title}}</a></li>
     {% endfor %}
   </ul>
   {% endfor %}
+
+  {{ 'pages/hello.md'|render|safe }}
+  {{ 'pages/quz.html'|render|safe }}
 </ul>
 {% endblock %}
