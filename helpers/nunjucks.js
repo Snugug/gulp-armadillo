@@ -63,6 +63,12 @@ gulpNunjucks = function (options) {
     return file;
   });
 
+  nunjucksEnv.addFilter('body', function (file, attribute) {
+    var content;
+    file = fs.readFileSync(path.join(process.cwd(), file));
+
+    return content = fm(file.toString()).body;
+  });
   nunjucksEnv.addFilter('render', function (file) {
     var content = fs.readFileSync(path.join(process.cwd(), file));
 
