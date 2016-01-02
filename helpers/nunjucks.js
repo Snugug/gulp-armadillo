@@ -69,18 +69,18 @@ gulpNunjucks = function (options) {
 
     return content = fm(file.toString()).body;
   });
+
   nunjucksEnv.addFilter('render', function (file) {
-    var content = fs.readFileSync(path.join(process.cwd(), file));
+    var content = fs.readFileSync(path.join(process.cwd(), file)),
+        matter = fm(content.toString());
 
-    content = fm(content.toString()).body;
+    content = matter.body;
 
-    if (path.extname(file) === '.html') {
-      return content;
-    }
-    else {
-      return marked(content);
+    if (path.extname(file) !== '.html') {
+      content = marked(content);
     }
 
+    return nunjucksEnv.renderString(content, matter.attributes);
 
   });
 
