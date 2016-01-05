@@ -29,7 +29,7 @@ var settings = {
     'mergeDefaultConfig': true
   },
   'options': {
-    'deployCommitMessage': ':shipit Update ' + new Date().toISOString(),
+    'deployCommitMessage': ':shipit: Update ' + new Date().toISOString(),
     'sass': {
       'outputStyle': 'expanded',
       'importer': importOnce,
