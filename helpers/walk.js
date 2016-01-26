@@ -124,7 +124,10 @@ var walker = function (dir, config, cb) {
             if (config.walker.ignore) {
               config.walker.ignore.forEach(function (ignored) {
                 if (stat.meta.hasOwnProperty(ignored.attribute)) {
-                  if (ignored.operator === 'is') {
+                  if (ignored.operator === 'has') {
+                    ignore = true;
+                  }
+                  else if (ignored.operator === 'is') {
                     ignore = stat.meta[ignored.attribute] === ignored.value;
                   }
                   else if (ignored.operator === 'is not') {
@@ -142,6 +145,8 @@ var walker = function (dir, config, cb) {
                   else if (ignored.operator === 'lte') {
                     ignore = stat.meta[ignored.attribute] <= ignored.value;
                   }
+                } else if (ignored.operator === 'missing') {
+                  ignore = true;
                 }
               });
             }
