@@ -79,6 +79,8 @@ var walker = function (dir, config, cb) {
 
         file = dir + '/' + file;
         fs.stat(file, function(err, stat) {
+          var ignore = false;
+
           if (stat && stat.isDirectory()) {
             walk(file, function(err, res) {
               results = results.concat(res);
@@ -119,9 +121,37 @@ var walker = function (dir, config, cb) {
               stat.updated = content.attributes.updated;
             }
 
-            end.push(stat);
+            if (config.walker.ignore) {
+              config.walker.ignore.forEach(function (ignored) {
+                if (stat.meta.hasOwnProperty(ignored.attribute)) {
+                  if (ignored.operator === 'is') {
+                    ignore = stat.meta[ignored.attribute] === ignored.value;
+                  }
+                  else if (ignored.operator === 'is not') {
+                    ignore = stat.meta[ignored.attribute] !== ignored.value;
+                  }
+                  else if (ignored.operator === 'gt') {
+                    ignore = stat.meta[ignored.attribute] > ignored.value;
+                  }
+                  else if (ignored.operator === 'lt') {
+                    ignore = stat.meta[ignored.attribute] < ignored.value;
+                  }
+                  else if (ignored.operator === 'gte') {
+                    ignore = stat.meta[ignored.attribute] >= ignored.value;
+                  }
+                  else if (ignored.operator === 'lte') {
+                    ignore = stat.meta[ignored.attribute] <= ignored.value;
+                  }
+                }
+              });
+            }
+
+            if (!ignore) {
+              end.push(stat);
+              results.push(file);
+            }
+
             stat = {};
-            results.push(file);
             next();
           }
         });
@@ -184,6 +214,8 @@ module.exports = function (config) {
     walkAsync = Promise.promisify(walker);
 
     if (file.meta.listing) {
+      config.walker = file.meta.listing;
+
       Promise.map(file.meta.listing.folders, function (folder) {
         return walker(folder, config).then(function (results) {
           var base = path.basename(folder);
