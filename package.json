@@ -62,6 +62,6 @@
     "urijs": "^1.17.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.1"
   }
 }
