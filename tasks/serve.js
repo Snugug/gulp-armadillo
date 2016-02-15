@@ -3,7 +3,7 @@
 //////////////////////////////
 // Requires
 //////////////////////////////
-var sequence = require('run-sequence'),
+var sequence = require('../helpers/sequence'),
     armadillo = require('../helpers/armadillo');
 
 //////////////////////////////
@@ -16,15 +16,6 @@ module.exports = function (gulp, config) {
   //////////////////////////////
   gulp.task('serve', function (cb) {
     armadillo('Serving');
-    return sequence(
-      // Build everything
-      config.tasks.serve.build,
-
-      // Serve everything
-      config.tasks.serve.serve,
-
-      // Callback
-      cb
-    );
+    return sequence(config.tasks.serve, cb);
   });
 }

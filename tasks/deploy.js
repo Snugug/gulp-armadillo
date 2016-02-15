@@ -3,7 +3,7 @@
 //////////////////////////////
 // Requires
 //////////////////////////////
-var sequence = require('run-sequence'),
+var sequence = require('../helpers/sequence'),
     armadillo = require('../helpers/armadillo'),
     ghPages = require('gulp-gh-pages');
 
@@ -29,15 +29,6 @@ module.exports = function (gulp, config) {
 
   gulp.task('deploy', function (cb) {
     armadillo('Deploying');
-    return sequence(
-      // Dist Everything
-      config.tasks.deploy.build,
-
-      // Deploy Everything
-      config.tasks.deploy.deploy,
-
-      // Callback
-      cb
-    );
+    return sequence(config.tasks.deploy, cb);
   });
 }
