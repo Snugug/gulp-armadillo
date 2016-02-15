@@ -1,6 +1,6 @@
 {
   "name": "gulp-armadillo",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Statis site generator put together with Gulp plugins",
   "main": "index.js",
   "scripts": {
