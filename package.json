@@ -59,7 +59,8 @@
     "nunjucks": "^2.2.0",
     "run-sequence": "^1.1.4",
     "through2": "^2.0.0",
-    "urijs": "^1.17.0"
+    "urijs": "^1.17.0",
+    "yargs": "^3.32.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0"

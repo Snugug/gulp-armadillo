@@ -1,7 +1,14 @@
 'use strict';
 
 var importOnce = require('node-sass-import-once'),
-    pngquant = require('imagemin-pngquant');
+    pngquant = require('imagemin-pngquant'),
+    argv = require('yargs').argv;
+
+Object.keys(argv).forEach(function (arg) {
+  if (arg !== '_' && arg !== '$0') {
+    process.env[arg] = argv[arg];
+  }
+});
 
 var settings = {
   'folders': {
@@ -27,6 +34,9 @@ var settings = {
   'settings': {
     'transformURL': true,
     'mergeDefaultConfig': true
+  },
+  'variables': {
+    'env': process.env
   },
   'options': {
     'deployCommitMessage': ':shipit: Update ' + new Date().toISOString(),

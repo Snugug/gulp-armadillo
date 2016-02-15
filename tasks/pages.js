@@ -47,7 +47,8 @@ module.exports = function (gulp, config) {
       .pipe(nunjucks({
         'paths': config.folders.templates,
         'filters': config.options.nunjucks.filters ? config.options.nunjucks.filters : {},
-        'tags': config.options.nunjucks.tags ? config.options.nunjucks.tags :  {}
+        'tags': config.options.nunjucks.tags ? config.options.nunjucks.tags :  {},
+        'variables': config.variables
       }))
       .pipe(gulpif(config.settings.transformURL, bt()))
       .pipe(gulp.dest(config.folders.server + '/'))

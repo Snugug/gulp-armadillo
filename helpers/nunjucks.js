@@ -147,6 +147,7 @@ gulpNunjucks = function (options) {
         }
 
         context.stats = file.stat;
+        context.global = options.variables;
 
         // If a template exists in the meta info, build a content block and extend for it
         if (file.meta.template) {
