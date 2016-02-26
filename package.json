@@ -30,7 +30,7 @@
     "bower-directory": "^1.0.0",
     "browser-sync": "^2.11.1",
     "chalk": "^1.1.1",
-    "critical": "^0.7.0",
+    "critical": "^0.7.1",
     "dateformat": "^1.0.12",
     "del": "^2.1.0",
     "eslint-plugin-nodeca": "^1.0.3",
