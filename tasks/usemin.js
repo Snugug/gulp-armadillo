@@ -6,7 +6,7 @@
 var useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
     minifyCSS = require('gulp-minify-css'),
-    bowerDirectory = require('bower-directory'),
+    bowerDirectory = require('../helpers/bower-directory'),
     path = require('path'),
     gulpif = require('gulp-if');
 
@@ -15,7 +15,7 @@ var useref = require('gulp-useref'),
 //////////////////////////////
 module.exports = function (gulp, config) {
   // Set value of paths to either the default or user entered
-  var bower = path.relative(process.cwd(), bowerDirectory.sync());
+  var bower = path.relative(process.cwd(), bowerDirectory());
   var UseminPaths = [
     config.folders.server + '/**/*.html',
     '!' + config.folders.server + '/' + config.folders[bower] + '/**/*'

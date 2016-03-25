@@ -5,7 +5,7 @@
 //////////////////////////////
 var gutil = require('gulp-util'),
     fs = require('fs-extra'),
-    bowerDirectory = require('bower-directory'),
+    bowerDirectory = require('../helpers/bower-directory'),
     path = require('path'),
     browserSync = require('browser-sync');
 
@@ -16,7 +16,7 @@ module.exports = function (gulp, config) {
   var toCopy = {};
   var toDist;
 
-  var bower = path.relative(process.cwd(), bowerDirectory.sync());
+  var bower = path.relative(process.cwd(), bowerDirectory());
 
   config.assets.forEach(function (asset) {
     toCopy[asset] = [];
