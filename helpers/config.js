@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs'),
-    bowerDirectory = require('bower-directory'),
+    bowerDirectory = require('./bower-directory'),
     path = require('path'),
     merge = require('merge');
 
@@ -40,7 +40,7 @@ module.exports = function (options, configPath) {
       config = {},
       finalConfig = {};
 
-  var bower = path.relative(process.cwd(), bowerDirectory.sync());
+  var bower = path.relative(process.cwd(), bowerDirectory());
 
   // ensure our inline options and rules are not undefined
   options = options ? options : {};
