@@ -5,7 +5,7 @@
 //////////////////////////////
 var useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
-    minifyCSS = require('gulp-minify-css'),
+    minifyCSS = require('gulp-clean-css'),
     bowerDirectory = require('../helpers/bower-directory'),
     path = require('path'),
     gulpif = require('gulp-if');
