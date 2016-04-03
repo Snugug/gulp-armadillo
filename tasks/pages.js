@@ -37,15 +37,10 @@ module.exports = function (gulp, config) {
     //////////////////////////////
     // Nunjucks Error
     //////////////////////////////
-    var PagsError = function (error) {
+    var PagesError = function (error) {
       gutil.log(
         error.toString()
       );
-
-      if (fail) {
-        this.emit('error');
-        process.exit(1);
-      }
     };
 
     //////////////////////////////
@@ -57,7 +52,7 @@ module.exports = function (gulp, config) {
 
     return gulp.src(PagesPaths)
       .pipe(plumber({
-        errorHandler: PagsError
+        errorHandler: PagesError
       }))
       .pipe(fm())
       .pipe(walk(config))

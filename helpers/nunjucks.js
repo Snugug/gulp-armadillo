@@ -35,6 +35,13 @@ gulpNunjucks = function (options) {
   var nunjucksPaths = options.paths;
   var nunjucksEnv;
 
+  var _this  = this;
+
+  var filterError = function (e) {
+    var message = new gutil.PluginError(PLUGIN_NAME, e.message);
+    _this.emit('error', message);
+  };
+
   nunjucksEnv = nunjucks.configure(nunjucksPaths, {
     'noCache': true
   });
@@ -43,53 +50,77 @@ gulpNunjucks = function (options) {
   // Nunjucks Filters and Tags
   //////////////////////////////
   nunjucksEnv.addFilter('attributes', function (file, attribute) {
-    var content;
-    file = fs.readFileSync(path.join(process.cwd(), file));
+    try {
+      var content;
+      file = fs.readFileSync(path.join(process.cwd(), file));
 
-    content = fm(file.toString());
+      content = fm(file.toString());
 
-    if (content.attributes) {
-      if (attribute) {
-        return content.attributes[attribute];
+      if (content.attributes) {
+        if (attribute) {
+          return content.attributes[attribute];
+        }
+        else {
+          return content.attributes;
+        }
       }
       else {
-        return content.attributes;
+        return {};
       }
-    }
-    else {
-      return {};
-    }
 
-    return file;
+      return file;
+    }
+    catch (e) {
+      filterError(e);
+    }
   });
 
   nunjucksEnv.addFilter('body', function (file, attribute) {
-    var content;
-    file = fs.readFileSync(path.join(process.cwd(), file));
+    try {
+      var content;
+      file = fs.readFileSync(path.join(process.cwd(), file));
 
-    return content = fm(file.toString()).body;
+      return content = fm(file.toString()).body;
+    }
+    catch (e) {
+      filterError(e);
+    }
   });
 
   nunjucksEnv.addFilter('render', function (file) {
-    var content = fs.readFileSync(path.join(process.cwd(), file)),
+    try {
+      var content = fs.readFileSync(path.join(process.cwd(), file)),
         matter = fm(content.toString());
 
-    content = matter.body;
+      content = matter.body;
 
-    if (path.extname(file) !== '.html') {
-      content = marked(content);
+      if (path.extname(file) !== '.html') {
+        content = marked(content);
+      }
+
+      return nunjucksEnv.renderString(content, matter.attributes);
     }
-
-    return nunjucksEnv.renderString(content, matter.attributes);
-
+    catch (e) {
+      filterError(e);
+    }
   });
 
   nunjucksEnv.addFilter('markdown', function (content) {
-    return marked(content);
+    try {
+      return marked(content);
+    }
+    catch (e) {
+      filterError(e);
+    }
   });
 
   nunjucksEnv.addFilter('date', function (content, format) {
-    return dateformat(content, format);
+    try {
+      return dateformat(content, format);
+    }
+    catch (e) {
+      filterError(e);
+    }
   });
 
   // Iterate over all custom defined filters and add them
@@ -119,6 +150,8 @@ gulpNunjucks = function (options) {
   var compile = through.obj(function (file, encoding, cb) {
     var ext = path.extname(file.path),
         context = {};
+
+    _this = this;
 
     /////////////////////////////
     // Default plugin issues
