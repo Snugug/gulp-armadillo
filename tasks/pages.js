@@ -11,6 +11,7 @@ var gutil = require('gulp-util'),
     walk = require('../helpers/walk'),
     bt = require('../helpers/blog-transform'),
     browserSync = require('browser-sync'),
+    plumber = require('gulp-plumber'),
     reload = browserSync.reload;
 
 //////////////////////////////
@@ -32,7 +33,21 @@ module.exports = function (gulp, config) {
   //////////////////////////////
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
-  var PagesTask = function (path) {
+  var PagesTask = function (path, fail) {
+    //////////////////////////////
+    // Nunjucks Error
+    //////////////////////////////
+    var PagsError = function (error) {
+      gutil.log(
+        error.toString()
+      );
+
+      if (fail) {
+        this.emit('error');
+        process.exit(1);
+      }
+    };
+
     //////////////////////////////
     // Nunjucks Config
     //////////////////////////////
@@ -41,6 +56,9 @@ module.exports = function (gulp, config) {
     }
 
     return gulp.src(PagesPaths)
+      .pipe(plumber({
+        errorHandler: PagsError
+      }))
       .pipe(fm())
       .pipe(walk(config))
       .pipe(mark())
@@ -59,7 +77,7 @@ module.exports = function (gulp, config) {
   // Core Task
   //////////////////////////////
   gulp.task('pages', function () {
-    return PagesTask(PagesPaths);
+    return PagesTask(PagesPaths, true);
   });
 
   gulp.task('pages:templates', function () {
@@ -82,7 +100,7 @@ module.exports = function (gulp, config) {
         gutil.log('File ' + gutil.colors.magenta(event.path.relative) + ' was ' + event.type);
 
         // Call the task
-        return PagesTask(event.path.absolute);
+        return PagesTask(event.path.absolute, false);
       });
   });
 }
