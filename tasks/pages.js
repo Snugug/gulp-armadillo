@@ -12,6 +12,7 @@ var gutil = require('gulp-util'),
     bt = require('../helpers/blog-transform'),
     browserSync = require('browser-sync'),
     plumber = require('gulp-plumber'),
+    through = require('through2'),
     reload = browserSync.reload;
 
 //////////////////////////////
@@ -34,6 +35,7 @@ module.exports = function (gulp, config) {
   // Encapsulate task in function to choose path to work on
   //////////////////////////////
   var PagesTask = function (path, fail) {
+    var failure = false;
     //////////////////////////////
     // Nunjucks Error
     //////////////////////////////
@@ -41,7 +43,22 @@ module.exports = function (gulp, config) {
       gutil.log(
         error.toString()
       );
+
+      if (fail) {
+        failure = true;
+      }
     };
+
+    var ErrorExit = function (options) {
+      return through.obj(function (file, encoding, cb) {
+        if (failure) {
+          process.exitCode = 1;
+        }
+        else {
+          cb();
+        }
+      });
+    }
 
     //////////////////////////////
     // Nunjucks Config
@@ -65,6 +82,7 @@ module.exports = function (gulp, config) {
       }))
       .pipe(gulpif(config.settings.transformURL, bt()))
       .pipe(gulp.dest(config.folders.server + '/'))
+      .pipe(ErrorExit())
       .pipe(reload({stream: true}));
   }
 
