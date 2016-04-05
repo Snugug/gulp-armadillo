@@ -183,16 +183,21 @@ gulpNunjucks = function (options) {
         context.global = options.variables;
 
         // If a template exists in the meta info, build a content block and extend for it
-        if (file.meta.template) {
-          file.contents = new Buffer(nunjucksEnv.renderString(
-            '{% extends "' + file.meta.template + '" %}' +
-            '{% block content %}' + file.contents.toString() + '{% endblock %}'
-            , context)
-          );
+        try {
+          if (file.meta.template) {
+            file.contents = new Buffer(nunjucksEnv.renderString(
+              '{% extends "' + file.meta.template + '" %}' +
+              '{% block content %}' + file.contents.toString() + '{% endblock %}'
+              , context)
+            );
+          }
+          // Otherwise, just render it!
+          else {
+            file.contents = new Buffer(nunjucksEnv.renderString(file.contents.toString(), context));
+          }
         }
-        // Otherwise, just render it!
-        else {
-          file.contents = new Buffer(nunjucksEnv.renderString(file.contents.toString(), context));
+        catch (e) {
+          filterError(e);
         }
       }
     }
