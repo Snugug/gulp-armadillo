@@ -60,7 +60,7 @@
     "run-sequence": "^1.1.4",
     "through2": "^2.0.1",
     "urijs": "^1.17.0",
-    "yargs": "^3.32.0"
+    "yargs": "^4.6.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
