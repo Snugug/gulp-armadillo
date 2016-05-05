@@ -39,7 +39,7 @@
     "gulp-clean-css": "^2.0.4",
     "gulp-eslint": "^1.1.1",
     "gulp-gh-pages": "^0.5.4",
-    "gulp-if": "^2.0.0",
+    "gulp-if": "^2.0.1",
     "gulp-if-else": "^1.0.3",
     "gulp-imagemin": "^2.4.0",
     "gulp-minify-html": "^1.0.4",
