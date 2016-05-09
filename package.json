@@ -43,7 +43,7 @@
     "gulp-if-else": "^1.0.3",
     "gulp-imagemin": "^2.4.0",
     "gulp-minify-html": "^1.0.4",
-    "gulp-minify-inline": "^0.2.0",
+    "gulp-minify-inline": "^0.2.1",
     "gulp-open": "^1.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
