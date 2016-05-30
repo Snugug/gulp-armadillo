@@ -82,8 +82,8 @@ module.exports = function (gulp, config) {
       }))
       .pipe(gulpif(config.settings.transformURL, bt()))
       .pipe(gulp.dest(config.folders.server + '/'))
-      .pipe(ErrorExit())
-      .pipe(reload({stream: true}));
+      .pipe(reload({stream: true}))
+      .pipe(ErrorExit());
   }
 
   //////////////////////////////
