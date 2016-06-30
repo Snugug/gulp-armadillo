@@ -4,7 +4,9 @@
   "description": "Statis site generator put together with Gulp plugins",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -60,9 +62,11 @@
     "run-sequence": "^1.1.4",
     "through2": "^2.0.1",
     "urijs": "^1.17.0",
-    "yargs": "^3.32.0"
+    "yargs": "^3.32.0",
+    "snyk": "1.16.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
-  }
+  },
+  "snyk": true
 }
