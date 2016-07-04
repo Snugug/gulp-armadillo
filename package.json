@@ -37,7 +37,7 @@
     "fs-extra": "^0.26.5",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-clean-css": "^2.0.4",
-    "gulp-eslint": "^1.1.1",
+    "gulp-eslint": "^3.0.1",
     "gulp-gh-pages": "^0.5.4",
     "gulp-if": "^2.0.0",
     "gulp-if-else": "^1.0.3",
