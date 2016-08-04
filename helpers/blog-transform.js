@@ -54,14 +54,14 @@ module.exports = function (options) {
     //////////////////////////////
     // Manipulate Files
     //////////////////////////////
-    pth = pth.split('/');
+    pth = pth.split(path.sep);
     if (pth[pth.length - 1] !== 'index.html') {
       pTransform = pth.pop();
       pth.push(pTransform.replace(ext, ''));
       pth.push('index.html');
     }
 
-    pth = pth.join('/');
+    pth = pth.join(path.sep);
 
     file.path = pth;
 
