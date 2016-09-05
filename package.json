@@ -27,7 +27,7 @@
   "homepage": "https://github.com/Snugug/gulp-armadillo#readme",
   "dependencies": {
     "bluebird": "^3.3.1",
-    "browser-sync": "^2.11.1",
+    "browser-sync": "^2.15.0",
     "chalk": "^1.1.1",
     "critical": "^0.7.0",
     "dateformat": "^1.0.12",
