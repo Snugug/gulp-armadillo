@@ -38,7 +38,19 @@ module.exports = {
     js: 'js/**/*.js',
   },
   dest: {
+    server: '.www',
+    dist: '.dist',
     sass: 'css',
     js: 'js',
   },
+  tasks: {
+    watch: [
+      'sass:watch',
+      'js:watch',
+    ],
+    serve: [
+      'server',
+      'watch',
+    ],
+  }
 };
