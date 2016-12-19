@@ -37,6 +37,9 @@ module.exports = {
     sass: 'sass/**/*.scss',
     js: 'js/**/*.js',
   },
+  sass: {
+    outputStyle: 'compressed',
+  },
   dest: {
     server: '.www',
     dist: '.dist',
