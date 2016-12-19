@@ -2,30 +2,34 @@
 
 const config = require('config');
 
+const failure = require('../lib/helpers/failure');
 const task = require('../lib/helpers/task');
 const sass = require('../lib/tasks/sass');
+const lint = require('gulp-sass-lint');
 const sync = require('browser-sync');
 
 module.exports = gulp => {
   //////////////////////////////
   // Lint all Sass files
   //////////////////////////////
-  task('sass:lint', [
-    gulp.src(config.watch.sass),
-    sass.lint(),
-  ], gulp);
+  gulp.task('sass:lint', () => {
+    return gulp.src(config.watch.sass)
+      .pipe(sass.lint())
+        .on('error', failure('sass-lint'))
+  });
 
   //////////////////////////////
   // Compile all Sass files
   //////////////////////////////
-  task('sass', [
-    gulp.src(config.watch.sass),
-    sass.compile(),
-    gulp.dest(task.dest(config.dest.sass)),
-    sync.stream({
-      match: '**/*.css'
-    })
-  ], gulp);
+  gulp.task('sass', ['sass:lint'], () => {
+    return gulp.src(config.watch.sass)
+      .pipe(sass.compile())
+        .on('error', failure('sass'))
+      .pipe(gulp.dest(task.dest(config.dest.sass)))
+      .pipe(sync.stream({
+        match: '**/*.css'
+      }))
+  });
 
 
   //////////////////////////////
