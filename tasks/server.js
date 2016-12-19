@@ -3,7 +3,7 @@
 const config = require('config');
 
 const sequence = require('../lib/helpers/sequence');
-const browserSync = require('browser-sync').create('armadillo');
+const browserSync = require('browser-sync');
 
 module.exports = gulp => {
   gulp.task('server', () => {
