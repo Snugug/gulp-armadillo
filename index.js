@@ -1,85 +1,14 @@
-'use strict';
+process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
+const config = require('config');
+const defaultConfig = require('./config/default');
 
-module.exports = function (gulp, options) {
-  var config = require('./helpers/config')(options);
+const sass = require('./tasks/sass');
+const scripts = require('./tasks/scripts');
 
-  //////////////////////////////
-  // Sass Tasks
-  //////////////////////////////
-  require('./tasks/sass')(gulp, config);
+module.exports = (gulp, options) => {
+  config.util.extendDeep(defaultConfig, options);
+  config.util.setModuleDefaults('armadillo', defaultConfig);
 
-  //////////////////////////////
-  // Deploy Tasks
-  //////////////////////////////
-  require('./tasks/deploy')(gulp, config);
-
-  //////////////////////////////
-  // ESLint Tasks
-  //////////////////////////////
-  require('./tasks/eslint')(gulp, config);
-
-  //////////////////////////////
-  // Browser Sync Tasks
-  //////////////////////////////
-  require('./tasks/browser-sync')(gulp, config);
-
-  //////////////////////////////
-  // Imagemin Tasks
-  //////////////////////////////
-  require('./tasks/imagemin')(gulp, config);
-
-  //////////////////////////////
-  // Copy Tasks
-  //////////////////////////////
-  require('./tasks/copy')(gulp, config);
-
-  //////////////////////////////
-  // Clean Tasks
-  //////////////////////////////
-  require('./tasks/clean')(gulp, config);
-
-  //////////////////////////////
-  // Build Tasks
-  //////////////////////////////
-  require('./tasks/build')(gulp, config);
-
-  //////////////////////////////
-  // Watch Tasks
-  //////////////////////////////
-  require('./tasks/watch')(gulp, config);
-
-  //////////////////////////////
-  // Serve Tasks
-  //////////////////////////////
-  require('./tasks/serve')(gulp, config);
-
-  //////////////////////////////
-  // Default Task
-  //////////////////////////////
-  gulp.task('default', ['serve']);
-
-  //////////////////////////////
-  // Usemin Tasks
-  //////////////////////////////
-  require('./tasks/usemin')(gulp, config);
-
-  //////////////////////////////
-  // Pages Tasks
-  //////////////////////////////
-  require('./tasks/pages')(gulp, config);
-
-  //////////////////////////////
-  // Critical Tasks
-  //////////////////////////////
-  require('./tasks/critical')(gulp, config);
-
-  //////////////////////////////
-  // Dist Tasks
-  //////////////////////////////
-  require('./tasks/dist')(gulp, config);
-
-  //////////////////////////////
-  // Create Config Tasks
-  //////////////////////////////
-  require('./tasks/create-config')(gulp, config);
-}
+  sass(gulp);
+  scripts(gulp);
+};
