@@ -10,7 +10,7 @@ module.exports = gulp => {
   });
 
   gulp.task('js', ['js:lint'], () => {
-    return scripts.rollup()
+    return scripts.compile()
       .pipe(gulp.dest(config.dest.js));
   });
 
