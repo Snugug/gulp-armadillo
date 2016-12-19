@@ -2,8 +2,9 @@
 
 const config = require('config');
 
-const task = require('../lib/task');
+const task = require('../lib/helpers/task');
 const sass = require('../lib/tasks/sass');
+const sync = require('browser-sync');
 
 module.exports = gulp => {
   //////////////////////////////
@@ -20,8 +21,11 @@ module.exports = gulp => {
   task('sass', [
     gulp.src(config.watch.sass),
     sass.compile(),
-    gulp.dest(config.dest.sass)
-  ], gulp, ['sass:lint']);
+    gulp.dest(task.dest(config.dest.sass)),
+    sync.stream({
+      match: '**/*.css'
+    })
+  ], gulp);
 
 
   //////////////////////////////
