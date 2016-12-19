@@ -1,21 +1,31 @@
 'use strict';
 
-const sass = require('../lib/tasks/sass');
 const config = require('config');
 
+const task = require('../lib/task');
+const sass = require('../lib/tasks/sass');
+
 module.exports = gulp => {
-  gulp.task('sass:lint', () => {
-    return gulp.src(config.watch.sass)
-      .pipe(sass.lint());
-  });
+  //////////////////////////////
+  // Lint all Sass files
+  //////////////////////////////
+  task('sass:lint', [
+    gulp.src(config.watch.sass),
+    sass.lint(),
+  ], gulp);
 
-  gulp.task('sass', ['sass:lint'], () => {
-    return gulp.src(config.watch.sass)
-      .pipe(sass.compile())
-      .pipe(gulp.dest(config.dest.sass));
-  });
+  //////////////////////////////
+  // Compile all Sass files
+  //////////////////////////////
+  task('sass', [
+    gulp.src(config.watch.sass),
+    sass.compile(),
+    gulp.dest(config.dest.sass)
+  ], gulp, ['sass:lint']);
 
-  gulp.task('sass:watch', ['sass'], () => {
-    return gulp.watch(config.watch.sass, ['sass']);
-  });
+
+  //////////////////////////////
+  // Watch for changes in all Sass files and recompile them
+  //////////////////////////////
+  task.watch('sass:watch', config.watch.sass, 'sass', gulp);
 };

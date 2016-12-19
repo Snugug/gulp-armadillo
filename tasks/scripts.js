@@ -1,20 +1,20 @@
 'use strict';
 
-const scripts = require('../lib/tasks/scripts');
 const config = require('config');
 
+const task = require('../lib/task');
+const scripts = require('../lib/tasks/scripts');
+
 module.exports = gulp => {
-  gulp.task('js:lint', () => {
-    return gulp.src(config.watch.js)
-      .pipe(scripts.lint());
-  });
+  task('js:lint', [
+    gulp.src(config.watch.js),
+    scripts.lint(),
+  ], gulp);
 
-  gulp.task('js', ['js:lint'], () => {
-    return scripts.compile()
-      .pipe(gulp.dest(config.dest.js));
-  });
+  task('js', [
+    scripts.compile(),
+    gulp.dest(config.dest.js)
+  ], gulp, ['js:lint']);
 
-  gulp.task('js:watch', ['js'], () => {
-    return gulp.watch(config.watch.js, ['js']);
-  });
+  task.watch('js:watch', config.watch.js, 'js', gulp);
 }
