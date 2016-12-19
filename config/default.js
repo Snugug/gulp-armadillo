@@ -36,5 +36,9 @@ module.exports = {
   watch: {
     sass: 'sass/**/*.scss',
     js: 'js/**/*.js',
-  }
+  },
+  dest: {
+    sass: 'css',
+    js: 'js',
+  },
 };
