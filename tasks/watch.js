@@ -1,5 +1,7 @@
 'use strict';
 
+const config = require('config');
+
 module.exports = gulp => {
-  gulp.task('watch', ['sass:watch', 'js:watch']);
+  gulp.task('watch', config.tasks.watch);
 }
