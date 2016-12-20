@@ -3,8 +3,18 @@
   "version": "2.6.4",
   "description": "Statis site generator put together with Gulp plugins",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "config",
+    "lib",
+    "tasks",
+    "Readme.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "ava",
+    "test": "nyc ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "reparo": "reparo -b master",
     "gulp": "gulp"
   },
   "repository": {
@@ -15,11 +25,17 @@
     "gulp",
     "armadillo",
     "static-site",
+    "markdown",
+    "frontmatter",
+    "jekyll",
     "rwd"
   ],
   "author": {
     "name": "Sam Richard",
     "email": "sam@snug.ug"
+  },
+  "engines": {
+    "node": "^6"
   },
   "license": "MIT",
   "bugs": {
@@ -59,10 +75,20 @@
   "devDependencies": {
     "ava": "^0.17.0",
     "breakpoint-sass": "^2.7.1",
+    "coveralls": "^2.11.15",
+    "eslint": "^3.12.2",
     "leftpad": "0.0.0",
     "map-stream": "0.0.6",
     "nyc": "^10.0.0",
+    "reparo": "^1.1.1-0",
     "vinyl-string": "^1.0.2"
+  },
+  "nyc": {
+    "include": [
+      "lib/**/*.js",
+      "config/**/*.js"
+    ],
+    "all": true
   },
   "ava": {
     "files": [
