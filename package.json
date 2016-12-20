@@ -43,6 +43,7 @@
     "gulp-sourcemaps": "^1.9.1",
     "gulp-util": "^3.0.7",
     "lazypipe": "^1.0.1",
+    "lodash": "^4.17.2",
     "pump": "^1.0.1",
     "rollup-plugin-commonjs": "^6.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
