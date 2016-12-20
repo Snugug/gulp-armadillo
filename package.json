@@ -4,7 +4,7 @@
   "description": "Statis site generator put together with Gulp plugins",
   "main": "index.js",
   "scripts": {
-    "test": "ava tests",
+    "test": "ava",
     "gulp": "gulp"
   },
   "repository": {
@@ -63,5 +63,10 @@
     "map-stream": "0.0.6",
     "nyc": "^10.0.0",
     "vinyl-string": "^1.0.2"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.js"
+    ]
   }
 }
