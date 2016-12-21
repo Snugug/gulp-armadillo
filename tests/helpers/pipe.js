@@ -18,7 +18,7 @@ const fromString = (input, path, func) => {
         rej(e);
       })
       .pipe(map((file, cb) => {
-        contents = file.contents.toString();
+        contents = file;
         cb(null, file);
       }))
       .on('end', () => {
@@ -43,7 +43,7 @@ const fromNull = func => {
         rej(e);
       })
       .pipe(map((file, cb) => {
-        contents = file.contents.toString();
+        contents = file;
         cb(null, file);
       }))
       .on('end', () => {
@@ -68,7 +68,7 @@ const fromStream = func => {
         rej(e);
       })
       .pipe(map((file, cb) => {
-        contents = file.contents.toString();
+        contents = file;
         cb(null, file);
       }))
       .on('end', () => {
@@ -87,7 +87,7 @@ const fromPath = (input, func) => {
         rej(e);
       })
       .pipe(map((file, cb) => {
-        contents = file.contents.toString();
+        contents = file;
         cb(null, file);
       }))
       .on('end', () => {
