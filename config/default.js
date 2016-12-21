@@ -4,6 +4,7 @@ const rollupNode = require('rollup-plugin-node-resolve');
 const rollupCommon = require('rollup-plugin-commonjs');
 
 module.exports = {
+  // Individual Functions
   rollup: {
     entry: 'js/main.js',
     sourceMap: true,
@@ -22,6 +23,33 @@ module.exports = {
     compact: true,
   },
   eslint: {},
+  sass: {
+    outputStyle: 'compressed',
+  },
+  imagemin: {
+    progressive: true,
+    svgoPlugins: [
+      { removeViewbox: false },
+      { removeUselessDefs: false },
+      { convertTransform: false },
+    ],
+  }
+  // Compiled Goodness
+  dest: {
+    server: '.www',
+    dist: '.dist',
+    sass: 'css',
+    js: 'js',
+    pages: 'pages',
+    templates: [
+      'templates'
+    ],
+    images: 'images',
+    videos: 'videos',
+    audio: 'audio',
+    fonts: 'fonts',
+    documents: 'docs',
+  },
   sourcemaps: {
     enable: true,
     directory: '../maps',
@@ -29,15 +57,6 @@ module.exports = {
   watch: {
     sass: 'sass/**/*.scss',
     js: 'js/**/*.js',
-  },
-  sass: {
-    outputStyle: 'compressed',
-  },
-  dest: {
-    server: '.www',
-    dist: '.dist',
-    sass: 'css',
-    js: 'js',
   },
   tasks: {
     watch: [
