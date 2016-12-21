@@ -1,14 +1,64 @@
 import test from 'ava';
-import {fromString, fromNull, fromStream} from '../helpers/pipe';
+import {fromString} from '../helpers/pipe';
+import plugin from '../helpers/plugin';
 import fm from '../../lib/plugins/front-matter';
 
-test('No Compile - null', t => {
-  return fromNull(fm)
+test('Extracts Front Matter', t => {
+  const input = `---
+foo: bar
+baz:
+  - qux
+  - where
+  - waldo
+more:
+  good:
+    stuff:
+      - lives: here
+      - and: here
+---
+# Hello World`;
+  const expectedMeta = {
+    foo: 'bar',
+    baz: [
+      'qux',
+      'where',
+      'waldo',
+    ],
+    more: {
+      good: {
+        stuff: [
+          {
+            lives: 'here',
+          },
+          {
+            and: 'here',
+          },
+        ],
+      },
+    },
+  };
+
+  const expectedBody = '# Hello World';
+
+  return fromString(input, 'markdown/hello.md', fm)
     .then(output => {
-      t.is(output, '', 'No output');
+      expectedMeta.today = output.meta.today;
+
+      t.true(output.meta.hasOwnProperty('today'), 'Contains the time');
+      t.deepEqual(output.meta, expectedMeta, 'Front matter transformed in to usable object');
+      t.is(output.contents.toString(), expectedBody);
     });
 });
 
-test('Error - is stream', t => {
-  t.throws(fromStream(fm));
+test('No Front Matter', t => {
+  const input = `# Hello World`;
+  const expected = '# Hello World';
+
+  return fromString(input, 'markdown/hello.md', fm)
+    .then(output => {
+      t.true(output.meta.hasOwnProperty('today'), 'Contains the time');
+      t.is(output.contents.toString(), expected);
+    });
 });
+
+plugin(fm, test);
