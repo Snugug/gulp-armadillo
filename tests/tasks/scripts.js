@@ -1,7 +1,7 @@
 import test from 'ava';
 import map from 'map-stream';
 import scripts from '../../lib/tasks/scripts';
-import {fromString, fromPath} from '../helpers/pipe';
+import {fromPath} from '../helpers/pipe';
 
 
 test.cb('Compiles with Node Resolve', t => {
@@ -10,14 +10,14 @@ test.cb('Compiles with Node Resolve', t => {
   let contents = '';
 
   scripts.compile(input)
-    .pipe(map((file, cb) => {
-      contents = file.contents.toString();
-      cb(null, file);
-    }))
     .on('error', e => {
       t.fail(e);
       t.end();
     })
+    .pipe(map((file, cb) => {
+      contents = file.contents.toString();
+      cb(null, file);
+    }))
     .on('end', () => {
       t.is(contents, expected, 'Compiled and minified');
       t.end();

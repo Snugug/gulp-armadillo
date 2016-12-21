@@ -10,7 +10,7 @@ test('Compiles', t => {
 
   return fromString(input, 'sass/style.scss', sass.compile)
     .then(output => {
-      t.is(output, expected, 'Sass compiled as expected');
+      t.is(output.contents.toString(), expected, 'Sass compiled as expected');
     });
 });
 
@@ -20,7 +20,7 @@ test('Prefixes', t => {
 
   return fromString(input, 'sass/style.scss', sass.compile)
     .then(output => {
-      t.is(output, expected, 'Sass compiled as expected');
+      t.is(output.contents.toString(), expected, 'Sass compiled as expected');
     });
 });
 
@@ -30,7 +30,7 @@ test('Eyeglass Modules', t => {
 
   return fromString(input, 'sass/style.scss', sass.compile)
     .then(output => {
-      t.is(output, expected, 'Eyeglass module ');
+      t.is(output.contents.toString(), expected, 'Eyeglass module ');
     });
 });
 
@@ -40,6 +40,6 @@ test('Import Once', t => {
 
   return fromPath(input, sass.compile)
     .then(output => {
-      t.is(output, expected, 'Sass compiled as expected');
+      t.is(output.contents.toString(), expected, 'Sass compiled as expected');
     });
 });
