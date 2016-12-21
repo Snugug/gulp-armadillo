@@ -1,5 +1,5 @@
 import test from 'ava';
-import md from '../lib/helpers/markdown';
+import md from '../../lib/helpers/markdown';
 
 // Prism Rendering
 test('Prism - Renders Known Language', t => {

@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import failure from '../lib/helpers/failure';
+import failure from '../../lib/helpers/failure';
 
 const CI = process.env.CI;
 const FOE = process.env.FAIL_ON_ERROR;

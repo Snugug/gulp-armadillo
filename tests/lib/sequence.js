@@ -1,5 +1,5 @@
 import test from 'ava';
-import {build} from '../lib/helpers/sequence';
+import {build} from '../../lib/helpers/sequence';
 
 test('Build from Array', t => {
   const cb = (error) => error;

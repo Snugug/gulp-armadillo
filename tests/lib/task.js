@@ -1,5 +1,5 @@
 import test from 'ava';
-import {dest} from '../lib/helpers/task';
+import {dest} from '../../lib/helpers/task';
 
 const DEST = process.env.DEST;
 

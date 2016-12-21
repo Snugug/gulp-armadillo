@@ -1,5 +1,5 @@
 import test from 'ava';
-import armadillo from '../lib/helpers/armadillo';
+import armadillo from '../../lib/helpers/armadillo';
 
 
 test.serial('First armadillo', t => {
