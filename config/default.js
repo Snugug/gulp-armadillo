@@ -33,7 +33,7 @@ module.exports = {
       { removeUselessDefs: false },
       { convertTransform: false },
     ],
-  }
+  },
   // Compiled Goodness
   dest: {
     server: '.www',
