@@ -7,6 +7,7 @@ const scripts = require('./tasks/scripts');
 
 const watch = require('./tasks/watch');
 const server = require('./tasks/server');
+const pages = require('./tasks/pages');
 
 module.exports = (gulp, options) => {
   config.util.extendDeep(defaultConfig, options);
@@ -14,9 +15,9 @@ module.exports = (gulp, options) => {
 
   server(gulp);
 
-
   sass(gulp);
   scripts(gulp);
+  pages(gulp);
 
   watch(gulp);
 };

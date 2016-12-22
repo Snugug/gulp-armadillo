@@ -53,6 +53,11 @@ module.exports = {
     directory: '../maps',
   },
   watch: {
+    pages: [
+      'pages/**/*.html',
+      'pages/**/*.md',
+      'pages/**/*.markdown',
+    ],
     sass: 'sass/**/*.scss',
     js: 'js/**/*.js',
   },
