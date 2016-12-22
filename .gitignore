@@ -34,3 +34,5 @@ tests/.dist
 .www/
 sass/
 js/
+pages/
+templates/
