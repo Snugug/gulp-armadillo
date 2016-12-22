@@ -42,9 +42,6 @@ more:
 
   return fromString(input, 'markdown/hello.md', fm)
     .then(output => {
-      expectedMeta.today = output.meta.today;
-
-      t.true(output.meta.hasOwnProperty('today'), 'Contains the time');
       t.deepEqual(output.meta, expectedMeta, 'Front matter transformed in to usable object');
       t.is(output.contents.toString(), expectedBody);
     });
@@ -56,7 +53,7 @@ test('No Front Matter', t => {
 
   return fromString(input, 'markdown/hello.md', fm)
     .then(output => {
-      t.true(output.meta.hasOwnProperty('today'), 'Contains the time');
+      t.deepEqual(output.meta, {}, 'Empty object');
       t.is(output.contents.toString(), expected);
     });
 });
