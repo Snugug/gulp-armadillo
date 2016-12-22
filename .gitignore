@@ -28,11 +28,11 @@ build/Release
 node_modules
 bower_components
 
-tests/.www
-tests/.dist
+/tests/.www
+/tests/.dist
 
-.www/
-sass/
-js/
-pages/
-templates/
+/.www
+/sass
+/js
+/pages
+/templates
