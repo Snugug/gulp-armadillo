@@ -17,7 +17,7 @@ module.exports = gulp => {
   gulp.task('js', () => {
     return scripts.compile()
         .on('error', failure('js'))
-      .pipe(gulp.dest(task.dest(config.dest.js)))
+      .pipe(gulp.dest(task.dest(config.folders.js)))
       .pipe(sync.stream({
         match: '**/*.js'
       }))

@@ -35,15 +35,13 @@ module.exports = {
     ],
   },
   // Compiled Goodness
-  dest: {
+  folders: {
     server: '.www',
     dist: '.dist',
-    sass: 'css',
+    css: 'css',
     js: 'js',
     pages: 'pages',
-    templates: [
-      'templates'
-    ],
+    templates: 'templates',
     images: 'images',
     videos: 'videos',
     audio: 'audio',

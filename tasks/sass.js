@@ -25,7 +25,7 @@ module.exports = gulp => {
     return gulp.src(config.watch.sass)
       .pipe(sass.compile())
         .on('error', failure('sass'))
-      .pipe(gulp.dest(task.dest(config.dest.sass)))
+      .pipe(gulp.dest(task.dest(config.folders.css)))
       .pipe(sync.stream({
         match: '**/*.css'
       }))
