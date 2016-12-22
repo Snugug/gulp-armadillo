@@ -23,4 +23,9 @@ test('Compiles Nunjucks - extend', t => {
     });
 });
 
+test('Throws on bad compile', t => {
+  const input = `tests/fixtures/pages/throws.html`;
+  t.throws(fromPath(input, nunjucks));
+})
+
 plugin(nunjucks, test);
