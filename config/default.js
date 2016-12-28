@@ -96,7 +96,8 @@ module.exports = {
         'js',
         'pages',
         'sass',
-      ]
+      ],
+      'optimize',
     ],
     serve: [
       'clean:server',
