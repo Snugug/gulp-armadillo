@@ -29,6 +29,25 @@ content: Hello World
     });
 });
 
+test('Compiles - HTML with listing', t => {
+  const input = `---
+listing:
+  folders:
+    - ../tests/fixtures/listing
+---
+{% for key, items in listing %}
+{% for item in items %}
+{{item.path}}
+{% endfor %}
+{% endfor %}`;
+  const expected = '\n\nbar/index.html\n\nbaz/waldo/index.html\n\nbaz/where/index.html\n\nfoo/index.html\n\nqux/batman/index.html\n\nqux/robin/index.html\n\n';
+
+  return fromString(input, 'pages/listing.html', pages.compile)
+    .then(output => {
+      t.is(output.contents.toString(), expected, 'HTML Pages compiled with listing as expected');
+    });
+});
+
 test('Compiles - template in front matter', t => {
   const input = 'tests/fixtures/pages/pages.html';
   const expected = '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>TEST FIXTURE</title>\n</head>\n<body>\n  <h1>Hello World! I&#39;ve got front matter!</h1>\n\n</body>\n</html>\n';
