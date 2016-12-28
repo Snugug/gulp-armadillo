@@ -34,6 +34,13 @@ module.exports = {
       { convertTransform: false },
     ],
   },
+  critical: {
+    inline: true,
+    minify: true,
+  },
+  htmlmin: {
+    collapseWhitespace: true,
+  },
   // Compiled Goodness
   folders: {
     server: '.www',
@@ -47,6 +54,7 @@ module.exports = {
     audio: 'audio',
     fonts: 'fonts',
     documents: 'docs',
+    fixtures: 'tests/fixtures/critical',
   },
   sourcemaps: {
     enable: true,
