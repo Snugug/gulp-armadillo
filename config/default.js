@@ -84,7 +84,7 @@ module.exports = {
       'clean:build',
       [
         'copy',
-        'images'
+        'images',
         'js',
         'pages',
         'sass',
