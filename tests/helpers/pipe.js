@@ -27,6 +27,33 @@ const fromString = (input, path, func) => {
   });
 }
 
+const fromStringWithMeta = (input, path, func, meta) => {
+  return new Promise((res, rej) => {
+    let contents = '';
+
+    const vFile = vs(input, {
+      path,
+    });
+
+    vFile
+      .pipe(map((file, cb) => {
+        file.meta = meta;
+        cb(null, file);
+      }))
+      .pipe(func())
+      .on('error', e => {
+        rej(e);
+      })
+      .pipe(map((file, cb) => {
+        contents = file;
+        cb(null, file);
+      }))
+      .on('end', () => {
+        res(contents);
+      });
+  });
+}
+
 const fromNull = func => {
   return new Promise((res, rej) => {
     let contents = '';
@@ -99,6 +126,7 @@ const fromPath = (input, func) => {
 
 module.exports = {
   fromString,
+  fromStringWithMeta,
   fromNull,
   fromPath,
   fromStream,
