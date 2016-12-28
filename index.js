@@ -2,14 +2,16 @@ process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 const config = require('config');
 const defaultConfig = require('./config/default');
 
+const clean = require('./tasks/clean');
 const sass = require('./tasks/sass');
 const scripts = require('./tasks/scripts');
+const pages = require('./tasks/pages');
+const images = require('./tasks/images');
 
 const watch = require('./tasks/watch');
 const server = require('./tasks/server');
 const build = require('./tasks/build');
-const clean = require('./tasks/clean');
-const pages = require('./tasks/pages');
+
 const help = require('gulp-help');
 
 module.exports = (glp, options) => {
@@ -25,6 +27,7 @@ module.exports = (glp, options) => {
   sass(gulp);
   scripts(gulp);
   pages(gulp);
+  images(gulp);
 
   watch(gulp);
   build(gulp);

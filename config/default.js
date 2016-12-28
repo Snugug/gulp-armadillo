@@ -60,6 +60,7 @@ module.exports = {
     ],
     sass: 'sass/**/*.scss',
     js: 'js/**/*.js',
+    images: 'images/**/*',
   },
   tasks: {
     watch: [
