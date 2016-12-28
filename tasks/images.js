@@ -11,7 +11,7 @@ module.exports = gulp => {
   gulp.task('images', 'Optimizes images', () => {
     return gulp.src(config.watch.images)
       .pipe(cache('images'))
-      .pipe(optimize())
+      .pipe(optimize(config.imagemin))
         .on('error', failure('images'))
       .pipe(gulp.dest(task.dest(config.folders.images)))
       .pipe(sync.stream())
