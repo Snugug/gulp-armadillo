@@ -1,10 +1,10 @@
 import test from 'ava';
-import {fromString, fromPath} from '../helpers/pipe';
+import { fromString, fromPath } from '../helpers/pipe';
 import plugin from '../helpers/plugin';
 import nunjucks from '../../lib/plugins/nunjucks';
 
 test('Compiles Nunjucks - basic string', t => {
-  const input = `<h1>Hello World</h1>`;
+  const input = '<h1>Hello World</h1>';
   const expected = '<h1>Hello World</h1>';
 
   return fromString(input, 'pages/hello.html', nunjucks)
@@ -14,8 +14,8 @@ test('Compiles Nunjucks - basic string', t => {
 });
 
 test('Compiles Nunjucks - extend', t => {
-  const input = `tests/fixtures/pages/nunjucks.html`;
-  const expected = '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>TEST FIXTURE</title>\n</head>\n<body>\n  \n<h1>Hello World! Compiling from Nunjucks</h1>\n\n</body>\n</html>\n';
+  const input = 'tests/fixtures/pages/nunjucks.html';
+  const expected = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>TEST FIXTURE</title>\n</head>\n<body>\n  \n<h1>Hello World! Compiling from Nunjucks</h1>\n\n</body>\n</html>\n';
 
   return fromPath(input, nunjucks)
     .then(output => {
@@ -24,8 +24,8 @@ test('Compiles Nunjucks - extend', t => {
 });
 
 test('Throws on bad compile', t => {
-  const input = `tests/fixtures/pages/throws.html`;
+  const input = 'tests/fixtures/pages/throws.html';
   t.throws(fromPath(input, nunjucks));
-})
+});
 
 plugin(nunjucks, test);

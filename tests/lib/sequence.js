@@ -1,11 +1,13 @@
 import test from 'ava';
-import {build} from '../../lib/helpers/sequence';
+import { build } from '../../lib/helpers/sequence';
 
 test('Build from Array', t => {
-  const cb = (error) => error;
+  const cb = error => {
+    return error;
+  };
   const input = [
     'sass',
-    'js'
+    'js',
   ];
 
   const expected = input;
@@ -17,7 +19,9 @@ test('Build from Array', t => {
 });
 
 test('Build from Object', t => {
-  const cb = (error) => error;
+  const cb = error => {
+    return error;
+  };
   const input = {
     clean: [
       'clean',
@@ -27,7 +31,7 @@ test('Build from Object', t => {
       'sass',
       'js',
     ],
-  }
+  };
 
   const expected = [
     [

@@ -1,5 +1,5 @@
 import test from 'ava';
-import {fromString} from '../helpers/pipe';
+import { fromString } from '../helpers/pipe';
 import plugin from '../helpers/plugin';
 import fm from '../../lib/plugins/front-matter';
 
@@ -48,7 +48,7 @@ more:
 });
 
 test('No Front Matter', t => {
-  const input = `# Hello World`;
+  const input = '# Hello World';
   const expected = '# Hello World';
 
   return fromString(input, 'markdown/hello.md', fm)

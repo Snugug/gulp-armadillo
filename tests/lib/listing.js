@@ -15,6 +15,7 @@ const files = [
 test('Default - String', t => {
   const folder = '../tests/fixtures/listing';
   const expected = clone(files);
+
   return listing(folder)
     .then(lookup => {
       t.true(lookup.hasOwnProperty(folder), 'Lookup is an object, contains the folder');
@@ -39,6 +40,7 @@ test('Default - String', t => {
 test('Default - Array', t => {
   const folder = ['../tests/fixtures/listing'];
   const expected = clone(files);
+
   return listing(folder)
     .then(lookup => {
       t.true(lookup.hasOwnProperty(folder), 'Lookup is an object, contains the folder');
@@ -87,7 +89,8 @@ test('Sort - published', t => {
 test('Reverse', t => {
   const folder = '../tests/fixtures/listing';
   const expected = clone(files).reverse();
-  return listing(folder, {reverse: true})
+
+  return listing(folder, { reverse: true })
     .then(lookup => {
       const lookupFiles = lookup[folder].map(file => {
         return file.file;
@@ -136,7 +139,6 @@ test('Ignore - missing', t => {
       t.deepEqual(lookupFiles, expected, 'Ignore all files without `number` meta');
     });
 });
-
 
 test('Ignore - is', t => {
   const folder = '../tests/fixtures/listing';
@@ -274,5 +276,4 @@ test('Ignore - less than equal to', t => {
       t.deepEqual(lookupFiles, expected, 'Ignore all files that where `number <= 100`');
     });
 });
-
 

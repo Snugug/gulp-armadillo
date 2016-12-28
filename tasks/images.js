@@ -14,8 +14,8 @@ module.exports = gulp => {
       .pipe(optimize(config.imagemin))
         .on('error', failure('images'))
       .pipe(gulp.dest(task.dest(config.folders.images)))
-      .pipe(sync.stream())
+      .pipe(sync.stream());
   });
 
   task.watch('images', config.watch.images, 'images', gulp);
-}
+};

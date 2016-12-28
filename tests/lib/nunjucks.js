@@ -27,7 +27,7 @@ test('Attribute filter - none', nunjucksTest, '{% set obj = "tests/fixtures/page
 
 // Body Filter
 test('Attribute filter - markdown', nunjucksTest, '{{ "tests/fixtures/pages/hello.md" | body }}', '# {{title}}\n\nThis is sample Markdown\n\n* Written by {{author}}\n');
-test('Attribute filter - markdown', nunjucksTest, '{{ "tests/fixtures/pages/world.html" | body }}', '<h2>The world, beautiful</h2>\n');
+test('Attribute filter - html', nunjucksTest, '{{ "tests/fixtures/pages/world.html" | body }}', '<h2>The world, beautiful</h2>\n');
 
 // Date Filter
 test('Date filter - value', nunjucksTest, `{{ ${today} | date("mm-dd-yyyy") }}`, todayFormatted);

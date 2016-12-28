@@ -1,5 +1,5 @@
 import test from 'ava';
-import {fromString, fromPath} from '../helpers/pipe';
+import { fromString, fromPath } from '../helpers/pipe';
 
 import pages from '../../lib/tasks/pages';
 
@@ -50,7 +50,7 @@ listing:
 
 test('Compiles - template in front matter', t => {
   const input = 'tests/fixtures/pages/pages.html';
-  const expected = '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>TEST FIXTURE</title>\n</head>\n<body>\n  <h1>Hello World! I&#39;ve got front matter!</h1>\n\n</body>\n</html>\n';
+  const expected = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>TEST FIXTURE</title>\n</head>\n<body>\n  <h1>Hello World! I&#39;ve got front matter!</h1>\n\n</body>\n</html>\n';
 
   return fromPath(input, pages.compile)
     .then(output => {

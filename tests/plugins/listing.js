@@ -1,7 +1,7 @@
 import test from 'ava';
 import path from 'path';
 import clone from 'lodash/cloneDeep';
-import {fromString, fromStringWithMeta} from '../helpers/pipe';
+import { fromString, fromStringWithMeta } from '../helpers/pipe';
 import plugin from '../helpers/plugin';
 import listing from '../../lib/plugins/listing';
 

@@ -8,6 +8,7 @@ module.exports = gulp => {
   gulp.task('build', 'Builds all files', cb => {
     process.env.DEST = 'dist';
     armadillo('Building');
+
     return sequence(config.tasks.build, cb);
   });
-}
+};

@@ -13,4 +13,4 @@ module.exports = (plugin, test) => {
   test('Error - is stream', t => {
     t.throws(pipe.fromStream(plugin));
   });
-}
+};

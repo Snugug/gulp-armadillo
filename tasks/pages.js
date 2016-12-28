@@ -9,9 +9,9 @@ const pages = require('../lib/tasks/pages');
 const sync = require('browser-sync');
 
 module.exports = gulp => {
-  //////////////////////////////
+  // ////////////////////////////
   // Compile all Pages
-  //////////////////////////////
+  // ////////////////////////////
   gulp.task('pages', 'Compiles markdown and HTML files using Nunjucks, making front matter available at compile time', () => {
     return gulp.src(config.watch.pages)
       .pipe(cache('pages'))
@@ -19,13 +19,12 @@ module.exports = gulp => {
         .on('error', failure('pages'))
       .pipe(gulp.dest(task.dest('')))
       .pipe(sync.stream({
-        match: '**/*.html'
-      }))
+        match: '**/*.html',
+      }));
   });
 
-
-  //////////////////////////////
+  // ////////////////////////////
   // Watch for changes in all Pages and recompile them
-  //////////////////////////////
+  // ////////////////////////////
   task.watch('pages', config.watch.pages, 'pages', gulp);
 };

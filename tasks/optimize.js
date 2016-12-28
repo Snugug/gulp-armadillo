@@ -10,6 +10,6 @@ module.exports = gulp => {
     return gulp.src(`${config.folders.dist}/**/*.html`)
       .pipe(critical.compile())
         .on('error', failure('optimize'))
-      .pipe(gulp.dest(task.dest('')))
+      .pipe(gulp.dest(task.dest('')));
   });
-}
+};

@@ -53,4 +53,4 @@ module.exports = gulp => {
       `${config.folders.fonts}/**/*`,
     ], ['copy']);
   });
-}
+};

@@ -1,8 +1,7 @@
 import test from 'ava';
-import {fromString, fromPath} from '../helpers/pipe';
+import { fromString, fromPath } from '../helpers/pipe';
 
 import sass from '../../lib/tasks/sass';
-
 
 test('Compiles', t => {
   const input = '$foo: red; body { background: $foo; }';

@@ -12,8 +12,8 @@ test.serial.cb('Logs out error', t => {
     emit: input => {
       t.is(input, 'end', 'End emitted');
       t.end();
-    }
-  }
+    },
+  };
 
   failure('test').call(context, 'Test Failure Log');
 });
@@ -34,15 +34,15 @@ test.serial('Fails on error, CI', t => {
   });
 });
 
-test.afterEach.always('Reset Env Vars', t => {
-  if (CI === undefined)  {
+test.afterEach.always('Reset Env Vars', () => {
+  if (CI === undefined) {
     delete process.env.CI;
   }
   else {
     process.env.CI = CI;
   }
 
-  if (FOE === undefined)  {
+  if (FOE === undefined) {
     delete process.env.FAIL_ON_ERROR;
   }
   else {

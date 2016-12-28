@@ -17,6 +17,7 @@ module.exports = gulp => {
 
   gulp.task('serve', 'Compiles and serves the static site, watching for changes, and recompiling the site on change', cb => {
     armadillo('Serving');
+
     return sequence(config.tasks.serve, cb);
   });
-}
+};

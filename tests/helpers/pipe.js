@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const vs = require('vinyl-string');
 const vfs = require('vinyl-fs');
@@ -25,7 +25,7 @@ const fromString = (input, path, func) => {
         res(contents);
       });
   });
-}
+};
 
 const fromStringWithMeta = (input, path, func, meta) => {
   return new Promise((res, rej) => {
@@ -37,8 +37,9 @@ const fromStringWithMeta = (input, path, func, meta) => {
 
     vFile
       .pipe(map((file, cb) => {
-        file.meta = meta;
-        cb(null, file);
+        const f = file;
+        f.meta = meta;
+        cb(null, f);
       }))
       .pipe(func())
       .on('error', e => {
@@ -52,18 +53,19 @@ const fromStringWithMeta = (input, path, func, meta) => {
         res(contents);
       });
   });
-}
+};
 
 const fromNull = func => {
   return new Promise((res, rej) => {
     let contents = '';
 
-    const vFile = vs('null', {path: 'this/is/null'});
+    const vFile = vs('null', { path: 'this/is/null' });
 
     vFile
       .pipe(map((file, cb) => {
-        file.contents = null;
-        cb(null, file);
+        const f = file;
+        f.contents = null;
+        cb(null, f);
       }))
       .pipe(func())
       .on('error', e => {
@@ -77,18 +79,19 @@ const fromNull = func => {
         res(contents);
       });
   });
-}
+};
 
 const fromStream = func => {
   return new Promise((res, rej) => {
     let contents = '';
 
-    const vFile = vs('stream', {path: 'this/is/a/stream'});
+    const vFile = vs('stream', { path: 'this/is/a/stream' });
 
     vFile
       .pipe(map((file, cb) => {
-        file.contents = vs('stream', {path: 'this/is/a/stream'});
-        cb(null, file);
+        const f = file;
+        f.contents = vs('stream', { path: 'this/is/a/stream' });
+        cb(null, f);
       }))
       .pipe(func())
       .on('error', e => {
@@ -102,7 +105,7 @@ const fromStream = func => {
         res(contents);
       });
   });
-}
+};
 
 const fromPath = (input, func) => {
   return new Promise((res, rej) => {
@@ -121,8 +124,7 @@ const fromPath = (input, func) => {
         res(contents);
       });
   });
-}
-
+};
 
 module.exports = {
   fromString,
@@ -130,4 +132,4 @@ module.exports = {
   fromNull,
   fromPath,
   fromStream,
-}
+};

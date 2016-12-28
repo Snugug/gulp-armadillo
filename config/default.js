@@ -41,6 +41,7 @@ module.exports = {
   htmlmin: {
     collapseWhitespace: true,
   },
+
   // Compiled Goodness
   folders: {
     server: '.www',
@@ -105,7 +106,7 @@ module.exports = {
       [
         'server',
         'watch',
-      ]
+      ],
     ],
-  }
+  },
 };

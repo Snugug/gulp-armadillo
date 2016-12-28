@@ -1,5 +1,5 @@
 import test from 'ava';
-import {fromString} from '../helpers/pipe';
+import { fromString } from '../helpers/pipe';
 import plugin from '../helpers/plugin';
 import path from '../../lib/plugins/path-transform';
 

@@ -1,3 +1,5 @@
+'use strict';
+
 process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 const config = require('config');
 const defaultConfig = require('./config/default');

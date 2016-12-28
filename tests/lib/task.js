@@ -1,5 +1,5 @@
 import test from 'ava';
-import {dest} from '../../lib/helpers/task';
+import { dest } from '../../lib/helpers/task';
 
 const DEST = process.env.DEST;
 
@@ -12,7 +12,7 @@ test.serial('Default Destination', t => {
 });
 
 test.serial('Specified Destination', t => {
-  process.env.DEST = 'dist'
+  process.env.DEST = 'dist';
   const input = '/foo/bar';
   const output = dest(input);
   const expected = '.dist/foo/bar';
@@ -20,8 +20,8 @@ test.serial('Specified Destination', t => {
   t.is(output, expected);
 });
 
-test.afterEach.always('Reset Env Vars', t => {
-  if (DEST === undefined)  {
+test.afterEach.always('Reset Env Vars', () => {
+  if (DEST === undefined) {
     delete process.env.DEST;
   }
   else {
