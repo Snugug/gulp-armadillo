@@ -8,8 +8,11 @@ const scripts = require('./tasks/scripts');
 const watch = require('./tasks/watch');
 const server = require('./tasks/server');
 const pages = require('./tasks/pages');
+const help = require('gulp-help');
 
-module.exports = (gulp, options) => {
+module.exports = (glp, options) => {
+  const gulp = help(glp);
+
   config.util.extendDeep(defaultConfig, options);
   config.util.setModuleDefaults('armadillo', defaultConfig);
 

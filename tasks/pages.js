@@ -12,7 +12,7 @@ module.exports = gulp => {
   //////////////////////////////
   // Compile all Pages
   //////////////////////////////
-  gulp.task('pages', () => {
+  gulp.task('pages', 'Compiles markdown and HTML files using Nunjucks, making front matter available at compile time', () => {
     return gulp.src(config.watch.pages)
       .pipe(cache('pages'))
       .pipe(pages.compile())
@@ -27,5 +27,5 @@ module.exports = gulp => {
   //////////////////////////////
   // Watch for changes in all Pages and recompile them
   //////////////////////////////
-  task.watch('pages:watch', config.watch.pages, 'pages', gulp);
+  task.watch('pages', config.watch.pages, 'pages', gulp);
 };

@@ -55,6 +55,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.1",
     "gulp-eslint": "^3.0.1",
+    "gulp-help": "^1.6.1",
     "gulp-if": "^2.0.2",
     "gulp-plumber": "^1.1.0",
     "gulp-rollup-stream": "^0.1.3",
