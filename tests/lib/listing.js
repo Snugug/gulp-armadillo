@@ -117,6 +117,26 @@ test('Ignore - has', t => {
     });
 });
 
+test('Ignore - missing', t => {
+  const folder = '../tests/fixtures/listing';
+  const expected = clone(files).splice(0, 1);
+  const opts = {
+    ignore: [{
+      attribute: 'number',
+      operator: 'missing',
+    }],
+  };
+
+  return listing(folder, opts)
+    .then(lookup => {
+      const lookupFiles = lookup[folder].map(file => {
+        return file.file;
+      });
+
+      t.deepEqual(lookupFiles, expected, 'Ignore all files without `number` meta');
+    });
+});
+
 
 test('Ignore - is', t => {
   const folder = '../tests/fixtures/listing';
