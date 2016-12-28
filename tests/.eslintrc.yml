@@ -1,0 +1,6 @@
+plugins:
+  - ava
+extends: plugin:ava/recommended
+rules:
+  ava/prefer-async-await: 0
+  no-prototype-builtins: 0
