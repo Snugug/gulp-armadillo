@@ -70,6 +70,14 @@ module.exports = {
         'js:watch',
       ],
     ],
+    copy: [
+      [
+        'copy:videos',
+        'copy:audio',
+        'copy:documents',
+        'copy:fonts',
+      ],
+    ],
     build: [
       'clean:build',
       [
