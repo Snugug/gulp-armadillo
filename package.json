@@ -49,6 +49,7 @@
     "config": "^1.24.0",
     "dateformat": "^2.0.0",
     "eyeglass": "^1.2.1",
+    "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-babel": "^6.1.2",
