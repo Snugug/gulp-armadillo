@@ -86,6 +86,7 @@ module.exports = {
         'copy:audio',
         'copy:documents',
         'copy:fonts',
+        'copy:cname',
       ],
     ],
     build: [

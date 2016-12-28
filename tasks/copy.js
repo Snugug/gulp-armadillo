@@ -11,6 +11,12 @@ module.exports = gulp => {
     return sequence(config.tasks.copy, cb);
   });
 
+  gulp.task('copy:cname', 'Copies CNAME file', () => {
+    return gulp.src('CNAME')
+      .pipe(gulp.dest(task.dest('')))
+      .pipe(sync.stream());
+  });
+
   gulp.task('copy:videos', 'Copies video files', () => {
     return gulp.src(`${config.folders.videos}/**/*`)
       .pipe(cache('videos'))
