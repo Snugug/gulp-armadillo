@@ -1,66 +1,37 @@
 'use strict';
 
-//////////////////////////////
-// Requires
-//////////////////////////////
-var gutil = require('gulp-util'),
-    sass = require('gulp-sass'),
-    ifElse = require('gulp-if-else'),
-    autoprefixer = require('gulp-autoprefixer'),
-    browserSync = require('browser-sync');
+const config = require('config');
 
-//////////////////////////////
-// Export
-//////////////////////////////
-module.exports = function (gulp, config) {
-  // Set value of paths to either the default or user entered
-  var SassPaths = [
-    config.folders.sass + '/**/*.sass',
-    config.folders.sass + '/**/*.scss'
-  ];
-  var sassSettings = config.options.sass;
+const failure = require('../lib/helpers/failure');
+const task = require('../lib/helpers/task');
+const sass = require('../lib/tasks/sass');
+const sync = require('browser-sync');
 
-  //////////////////////////////
-  // Encapsulate task in function to choose path to work on
-  //////////////////////////////
-  var SassTask = function (path, fail) {
-    return gulp.src(SassPaths)
-      .pipe(ifElse(fail === true, function () {
-        return sass(sassSettings);
-      }, function () {
-        return sass(sassSettings).on('error', sass.logError);
-      }))
-      .pipe(autoprefixer({
-        cascade: false
-      }))
-      .pipe(gulp.dest(config.folders.server + '/' + config.folders.css + '/'))
-      .pipe(browserSync.stream());
-  }
-
-  //////////////////////////////
-  // Core Task
-  //////////////////////////////
-  gulp.task('sass', function () {
-    return SassTask(SassPaths, true);
+module.exports = gulp => {
+  // ////////////////////////////
+  // Lint all Sass files
+  // ////////////////////////////
+  gulp.task('sass:lint', 'Lints Sass files', () => {
+    return gulp.src(config.watch.sass)
+      .pipe(sass.lint())
+        .on('error', failure('sass-lint'));
   });
 
-  //////////////////////////////
-  // Watch Task
-  //////////////////////////////
-  gulp.task('sass:watch', function () {
-    return gulp.watch(SassPaths)
-      .on('change', function (event) {
-        // Add absolute and relative (to Gulpfile) paths
-        event.path = {
-          absolute: event.path,
-          relative: event.path.replace(__dirname.replace('/tasks', '') + '/', '')
-        }
-
-        // Notify user of the change
-        gutil.log('File ' + gutil.colors.magenta(event.path.relative) + ' was ' + event.type);
-
-        // Call the task
-        return SassTask(event.path.absolute, false);
-      });
+  // ////////////////////////////
+  // Compile all Sass files
+  // ////////////////////////////
+  gulp.task('sass', 'Compiles Sass files using Eyeglass and adds needed vendor prefixes', ['sass:lint'], () => {
+    return gulp.src(config.watch.sass)
+      .pipe(sass.compile())
+        .on('error', failure('sass'))
+      .pipe(gulp.dest(task.dest(config.folders.css)))
+      .pipe(sync.stream({
+        match: '**/*.css',
+      }));
   });
-}
+
+  // ////////////////////////////
+  // Watch for changes in all Sass files and recompile them
+  // ////////////////////////////
+  task.watch('sass', config.watch.sass, 'sass', gulp);
+};

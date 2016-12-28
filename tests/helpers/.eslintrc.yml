@@ -1,0 +1,9 @@
+extends:
+  - punchcard
+rules:
+  func-style:
+    - 2
+    - declaration
+    -
+      allowArrowFunctions: true
+  no-prototype-builtins: 0

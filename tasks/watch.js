@@ -1,12 +1,13 @@
 'use strict';
 
-//////////////////////////////
-// Export
-//////////////////////////////
-module.exports = function (gulp, config) {
+const config = require('config');
+const sequence = require('../lib/helpers/sequence');
+const armadillo = require('../lib/helpers/armadillo');
 
-  //////////////////////////////
-  // Core Task
-  //////////////////////////////
-  gulp.task('watch', config.tasks.watch);
-}
+module.exports = gulp => {
+  gulp.task('watch', 'Runs all watch tasks', cb => {
+    armadillo('Watching');
+
+    return sequence(config.tasks.watch, cb);
+  });
+};

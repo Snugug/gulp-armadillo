@@ -1,85 +1,40 @@
 'use strict';
 
-module.exports = function (gulp, options) {
-  var config = require('./helpers/config')(options);
+process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
+const config = require('config');
+const defaultConfig = require('./config/default');
 
-  //////////////////////////////
-  // Sass Tasks
-  //////////////////////////////
-  require('./tasks/sass')(gulp, config);
+const clean = require('./tasks/clean');
+const sass = require('./tasks/sass');
+const scripts = require('./tasks/scripts');
+const pages = require('./tasks/pages');
+const images = require('./tasks/images');
+const copy = require('./tasks/copy');
+const optimize = require('./tasks/optimize');
 
-  //////////////////////////////
-  // Deploy Tasks
-  //////////////////////////////
-  require('./tasks/deploy')(gulp, config);
+const watch = require('./tasks/watch');
+const server = require('./tasks/server');
+const build = require('./tasks/build');
 
-  //////////////////////////////
-  // ESLint Tasks
-  //////////////////////////////
-  require('./tasks/eslint')(gulp, config);
+const help = require('gulp-help');
 
-  //////////////////////////////
-  // Browser Sync Tasks
-  //////////////////////////////
-  require('./tasks/browser-sync')(gulp, config);
+module.exports = (glp, options) => {
+  const gulp = help(glp);
 
-  //////////////////////////////
-  // Imagemin Tasks
-  //////////////////////////////
-  require('./tasks/imagemin')(gulp, config);
+  config.util.extendDeep(defaultConfig, options);
+  config.util.setModuleDefaults('armadillo', defaultConfig);
 
-  //////////////////////////////
-  // Copy Tasks
-  //////////////////////////////
-  require('./tasks/copy')(gulp, config);
+  server(gulp);
 
-  //////////////////////////////
-  // Clean Tasks
-  //////////////////////////////
-  require('./tasks/clean')(gulp, config);
+  clean(gulp);
 
-  //////////////////////////////
-  // Build Tasks
-  //////////////////////////////
-  require('./tasks/build')(gulp, config);
+  sass(gulp);
+  scripts(gulp);
+  pages(gulp);
+  images(gulp);
+  copy(gulp);
+  optimize(gulp);
 
-  //////////////////////////////
-  // Watch Tasks
-  //////////////////////////////
-  require('./tasks/watch')(gulp, config);
-
-  //////////////////////////////
-  // Serve Tasks
-  //////////////////////////////
-  require('./tasks/serve')(gulp, config);
-
-  //////////////////////////////
-  // Default Task
-  //////////////////////////////
-  gulp.task('default', ['serve']);
-
-  //////////////////////////////
-  // Usemin Tasks
-  //////////////////////////////
-  require('./tasks/usemin')(gulp, config);
-
-  //////////////////////////////
-  // Pages Tasks
-  //////////////////////////////
-  require('./tasks/pages')(gulp, config);
-
-  //////////////////////////////
-  // Critical Tasks
-  //////////////////////////////
-  require('./tasks/critical')(gulp, config);
-
-  //////////////////////////////
-  // Dist Tasks
-  //////////////////////////////
-  require('./tasks/dist')(gulp, config);
-
-  //////////////////////////////
-  // Create Config Tasks
-  //////////////////////////////
-  require('./tasks/create-config')(gulp, config);
-}
+  watch(gulp);
+  build(gulp);
+};

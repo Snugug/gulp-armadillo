@@ -1,24 +1,44 @@
 {
   "name": "gulp-armadillo",
-  "version": "2.6.4",
   "description": "Statis site generator put together with Gulp plugins",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "config",
+    "lib",
+    "tasks",
+    "Readme.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm run lint",
+    "test": "nyc ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "reparo": "reparo -b master",
+    "gulp": "gulp",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint --fix '**/*.js'",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Snugug/gulp-armadillo.git"
+    "url": "https://github.com/Snugug/gulp-armadillo.git"
   },
   "keywords": [
     "gulp",
     "armadillo",
     "static-site",
+    "markdown",
+    "frontmatter",
+    "jekyll",
     "rwd"
   ],
   "author": {
     "name": "Sam Richard",
     "email": "sam@snug.ug"
+  },
+  "engines": {
+    "node": "^6"
   },
   "license": "MIT",
   "bugs": {
@@ -26,43 +46,85 @@
   },
   "homepage": "https://github.com/Snugug/gulp-armadillo#readme",
   "dependencies": {
-    "bluebird": "^3.3.1",
-    "browser-sync": "^2.11.1",
-    "chalk": "^1.1.1",
-    "critical": "^0.7.0",
-    "dateformat": "^1.0.12",
-    "del": "^2.1.0",
-    "eslint-plugin-nodeca": "^1.0.3",
-    "front-matter": "^2.0.6",
-    "fs-extra": "^0.26.5",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-clean-css": "^2.0.4",
-    "gulp-eslint": "^1.1.1",
-    "gulp-gh-pages": "^0.5.4",
-    "gulp-if": "^2.0.0",
-    "gulp-if-else": "^1.0.3",
-    "gulp-imagemin": "^2.4.0",
-    "gulp-minify-html": "^1.0.4",
-    "gulp-minify-inline": "^0.2.0",
-    "gulp-open": "^1.0.0",
+    "babel-preset-babili": "0.0.9",
+    "browser-sync": "^2.18.5",
+    "chalk": "^1.1.3",
+    "config": "^1.24.0",
+    "critical": "^0.8.1",
+    "dateformat": "^2.0.0",
+    "del": "^2.2.2",
+    "eyeglass": "^1.2.1",
+    "glob": "^7.1.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cached": "^1.1.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-help": "^1.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.1.1",
     "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-rev": "^7.0.0",
-    "gulp-sass": "^2.2.0",
-    "gulp-uglify": "^1.5.2",
-    "gulp-useref": "^3.0.5",
+    "gulp-rollup-stream": "^0.1.3",
+    "gulp-sass": "^3.0.0",
+    "gulp-sass-lint": "^1.3.2",
+    "gulp-sourcemaps": "^1.9.1",
     "gulp-util": "^3.0.7",
-    "imagemin-pngquant": "^4.2.0",
-    "marked": "^0.3.5",
-    "merge": "^1.2.0",
-    "node-sass-import-once": "^1.2.0",
-    "nunjucks": "^2.3.0",
-    "run-sequence": "^1.1.4",
-    "through2": "^2.0.1",
-    "urijs": "^1.17.0",
-    "yargs": "^3.32.0"
+    "lazypipe": "^1.0.1",
+    "lodash": "^4.17.2",
+    "nunjucks": "^3.0.0",
+    "prismjs": "^1.6.0",
+    "pump": "^1.0.1",
+    "remarkable": "^1.7.1",
+    "rollup-plugin-commonjs": "^6.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-stream": "^1.14.0",
+    "run-sequence": "^1.2.2",
+    "stream-combiner": "^0.2.2",
+    "through2": "^2.0.3",
+    "twig": "^0.10.3",
+    "url": "^0.11.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "ava": "^0.17.0",
+    "breakpoint-sass": "^2.7.1",
+    "coveralls": "^2.11.15",
+    "eslint": "^3.12.2",
+    "eslint-config-punchcard": "^1.1.1",
+    "eslint-config-xo-space": "^0.15.0",
+    "eslint-plugin-ava": "^4.0.0",
+    "ghooks": "^2.0.0",
+    "leftpad": "0.0.0",
+    "map-stream": "0.0.6",
+    "nyc": "^10.0.0",
+    "punchcard-commit-msg": "^1.0.1",
+    "punchcard-semantic-release": "^2.0.4",
+    "reparo": "^1.1.1-0",
+    "semantic-release": "^6.3.2",
+    "vinyl-fs": "^2.4.4",
+    "vinyl-string": "^1.0.2"
+  },
+  "nyc": {
+    "include": [
+      "lib/**/*.js",
+      "config/**/*.js"
+    ],
+    "all": true
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.js"
+    ]
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "punchcard-commit-msg"
+    }
+  },
+  "release": {
+    "analyzeCommits": "punchcard-semantic-release/analyze",
+    "generateNotes": "punchcard-semantic-release/notes"
   }
 }

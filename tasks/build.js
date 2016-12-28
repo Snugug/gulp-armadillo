@@ -1,21 +1,14 @@
 'use strict';
 
-//////////////////////////////
-// Requires
-//////////////////////////////
-var armadillo = require('../helpers/armadillo'),
-    sequence = require('../helpers/sequence');
+const config = require('config');
+const sequence = require('../lib/helpers/sequence');
+const armadillo = require('../lib/helpers/armadillo');
 
-//////////////////////////////
-// Export
-//////////////////////////////
-module.exports = function (gulp, config) {
-
-  //////////////////////////////
-  // Core Task
-  //////////////////////////////
-  gulp.task('build', function (cb) {
+module.exports = gulp => {
+  gulp.task('build', 'Builds all files', cb => {
+    process.env.DEST = 'dist';
     armadillo('Building');
+
     return sequence(config.tasks.build, cb);
   });
-}
+};
