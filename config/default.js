@@ -63,12 +63,26 @@ module.exports = {
   },
   tasks: {
     watch: [
-      'sass:watch',
-      'js:watch',
+      [
+        'pages:watch',
+        'sass:watch',
+        'js:watch',
+      ],
+    ],
+    build: [
+      'clean:build',
+      [
+        'pages',
+        'sass',
+        'js',
+      ]
     ],
     serve: [
-      'server',
-      'watch',
+      'clean:server',
+      [
+        'server',
+        'watch',
+      ]
     ],
   }
 };

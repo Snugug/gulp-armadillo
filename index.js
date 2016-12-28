@@ -7,6 +7,8 @@ const scripts = require('./tasks/scripts');
 
 const watch = require('./tasks/watch');
 const server = require('./tasks/server');
+const build = require('./tasks/build');
+const clean = require('./tasks/clean');
 const pages = require('./tasks/pages');
 const help = require('gulp-help');
 
@@ -18,9 +20,12 @@ module.exports = (glp, options) => {
 
   server(gulp);
 
+  clean(gulp);
+
   sass(gulp);
   scripts(gulp);
   pages(gulp);
 
   watch(gulp);
+  build(gulp);
 };
