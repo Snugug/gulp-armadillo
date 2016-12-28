@@ -1,6 +1,5 @@
 {
   "name": "gulp-armadillo",
-  "version": "2.6.4",
   "description": "Statis site generator put together with Gulp plugins",
   "main": "index.js",
   "files": [
@@ -18,11 +17,12 @@
     "reparo": "reparo -b master",
     "gulp": "gulp",
     "lint": "eslint '**/*.js'",
-    "lint:fix": "eslint --fix '**/*.js'"
+    "lint:fix": "eslint --fix '**/*.js'",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Snugug/gulp-armadillo.git"
+    "url": "https://github.com/Snugug/gulp-armadillo.git"
   },
   "keywords": [
     "gulp",
@@ -95,10 +95,14 @@
     "eslint-config-punchcard": "^1.1.1",
     "eslint-config-xo-space": "^0.15.0",
     "eslint-plugin-ava": "^4.0.0",
+    "ghooks": "^2.0.0",
     "leftpad": "0.0.0",
     "map-stream": "0.0.6",
     "nyc": "^10.0.0",
+    "punchcard-commit-msg": "^1.0.1",
+    "punchcard-semantic-release": "^2.0.4",
     "reparo": "^1.1.1-0",
+    "semantic-release": "^6.3.2",
     "vinyl-fs": "^2.4.4",
     "vinyl-string": "^1.0.2"
   },
@@ -113,5 +117,14 @@
     "files": [
       "tests/**/*.js"
     ]
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "punchcard-commit-msg"
+    }
+  },
+  "release": {
+    "analyzeCommits": "punchcard-semantic-release/analyze",
+    "generateNotes": "punchcard-semantic-release/notes"
   }
 }
