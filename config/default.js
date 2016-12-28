@@ -65,9 +65,11 @@ module.exports = {
   tasks: {
     watch: [
       [
+        'copy:watch',
+        'images:watch',
+        'js:watch',
         'pages:watch',
         'sass:watch',
-        'js:watch',
       ],
     ],
     copy: [
@@ -81,9 +83,11 @@ module.exports = {
     build: [
       'clean:build',
       [
+        'copy',
+        'images'
+        'js',
         'pages',
         'sass',
-        'js',
       ]
     ],
     serve: [
