@@ -11,7 +11,7 @@ module.exports = gulp => {
       .pipe(publish(config.pubish));
   });
 
-  gulp.task('deploy', 'Builds and deploys site', cb => {
+  gulp.task('deploy', 'Builds and publishes site', cb => {
     armadillo('Deploying');
 
     return sequence(config.tasks.deploy, cb);
