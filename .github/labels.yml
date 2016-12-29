@@ -7,6 +7,11 @@ section:
     - html
     - markdown
     - server
+    - images
+    - copy
+    - optimization
+    - build
+    - watch
 problem:
   description: 'Issues that make Armadillo feel broken or prevent us from doing further work, but otherwise work as designed. High priority.'
   color: '#ff5050'
@@ -24,6 +29,7 @@ experience:
     - user experience
     - developer experience
     - performance
+    - documentation
 environment:
   description: 'Environment that the issue is present in, either Armadillo core or its use as a module'
   color: '#e9e0e0'
