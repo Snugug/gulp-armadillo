@@ -2,6 +2,6 @@
 
 module.exports = {
   folders: {
-    fixtures: 'tests/fixtures/critical',
+    critical: 'tests/fixtures/critical',
   },
 };
