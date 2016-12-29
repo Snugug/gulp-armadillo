@@ -40,7 +40,7 @@ listing:
 {{item.path}}
 {% endfor %}
 {% endfor %}`;
-  const expected = '\n\nbar/index.html\n\nbaz/waldo/index.html\n\nbaz/where/index.html\n\nfoo/index.html\n\nqux/batman/index.html\n\nqux/robin/index.html\n\n';
+  const expected = '\n\nests/fixtures/listing/bar/index.html\n\nests/fixtures/listing/baz/waldo/index.html\n\nests/fixtures/listing/baz/where/index.html\n\nests/fixtures/listing/foo/index.html\n\nests/fixtures/listing/qux/batman/index.html\n\nests/fixtures/listing/qux/robin/index.html\n\n';
 
   return fromString(input, 'pages/listing.html', pages.compile)
     .then(output => {
