@@ -38,20 +38,20 @@ test('Video Plugin - Not Video Object', t => {
 test('Video Plugin - Broken Parens', t => {
   const sample = '@[/videos/foo.webm]( foo [hello](https://snugug.com)';
   const output = md.render(sample);
-  const expected = '<p>@[/videos/foo.webm]( foo @[/videos/foo.webm]( foo </p>\n';
+  const expected = '<p><video src="/videos/foo.webm" type="video/webm" controls><a href="/videos/foo.webm">/videos/foo.webm</a></video>( foo <a href="https://snugug.com">hello</a></p>\n';
 
   t.is(output, expected, 'Video-like object not converted');
 });
 
-test('Video Plugin - Empty href', t => {
+test('Video Plugin - Trailing Parens', t => {
   const sample = '@[/videos/foo.webm]()';
   const output = md.render(sample);
-  const expected = '<p><video src="/videos/foo.webm" type="video/webm" controls><a href="/videos/foo.webm">/videos/foo.webm</a></video></p>\n';
+  const expected = '<p><video src="/videos/foo.webm" type="video/webm" controls><a href="/videos/foo.webm">/videos/foo.webm</a></video>()</p>\n';
 
   t.is(output, expected, 'Video-like object not converted');
 });
 
-test('Video Plugin - Missing href', t => {
+test('Video Plugin - Renders inline', t => {
   const sample = '@[/videos/foo.webm]';
   const output = md.render(sample);
   const expected = '<p><video src="/videos/foo.webm" type="video/webm" controls><a href="/videos/foo.webm">/videos/foo.webm</a></video></p>\n';
@@ -59,23 +59,7 @@ test('Video Plugin - Missing href', t => {
   t.is(output, expected, 'Video-like object not converted');
 });
 
-test('Video Plugin - Renders inline', t => {
-  const sample = '@[Hello World](/videos/foo.webm)';
-  const output = md.render(sample);
-  const expected = '<p><video src="/videos/foo.webm" type="video/webm" controls><a href="/videos/foo.webm">Hello World</a></video></p>\n';
-
-  t.is(output, expected, 'HTML5 Video');
-});
-
 test('Video Plugin - Renders YouTube', t => {
-  const sample = '@[Taylor Swift - Shake it Off](https://www.youtube.com/watch?v=nfWlot6h_JM)';
-  const output = md.render(sample);
-  const expected = '<p><div class="flexible-video"><iframe  src="https://www.youtube.com/embed/nfWlot6h_JM" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
-
-  t.is(output, expected, 'YouTube Embed');
-});
-
-test('Video Plugin - Renders YouTube, no label', t => {
   const sample = '@[https://www.youtube.com/watch?v=nfWlot6h_JM]';
   const output = md.render(sample);
   const expected = '<p><div class="flexible-video"><iframe  src="https://www.youtube.com/embed/nfWlot6h_JM" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
@@ -84,7 +68,7 @@ test('Video Plugin - Renders YouTube, no label', t => {
 });
 
 test('Video Plugin - Renders Vimeo', t => {
-  const sample = '@[Metropolis - A New York City Timelapse](https://vimeo.com/30316012)';
+  const sample = '@[https://vimeo.com/30316012]';
   const output = md.render(sample);
   const expected = '<p><div class="flexible-video"><iframe  src="//player.vimeo.com/video/30316012" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
 

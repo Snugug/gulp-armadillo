@@ -24,7 +24,7 @@ test('Compiles Markdown - .markdown', t => {
 });
 
 test('Compiles Markdown with Custom Plugin', t => {
-  const input = '@[Taylor Swift - Shake it Off](https://www.youtube.com/watch?v=nfWlot6h_JM)';
+  const input = '@[https://www.youtube.com/watch?v=nfWlot6h_JM]';
   const expected = '<p><div class="flexible-video"><iframe  src="https://www.youtube.com/embed/nfWlot6h_JM" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
 
   return fromString(input, 'shake/it/off.md', markdown)
