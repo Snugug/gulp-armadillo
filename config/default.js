@@ -60,7 +60,6 @@ module.exports = {
     audio: 'audio',
     fonts: 'fonts',
     documents: 'docs',
-    fixtures: 'tests/fixtures/critical',
   },
   sourcemaps: {
     enable: true,

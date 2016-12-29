@@ -13,7 +13,7 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "npm run ava",
-    "ava": "nyc ava",
+    "ava": "NODE_ENV=test nyc ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "reparo": "reparo -b master",
     "gulp": "gulp",
