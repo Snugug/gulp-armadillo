@@ -8,11 +8,14 @@ const sass = require('../lib/tasks/sass');
 const sync = require('browser-sync');
 
 module.exports = gulp => {
+  const build = `${config.folders.sass}/**/*.s+(a|c)ss`;
+  const watch = build;
+
   // ////////////////////////////
   // Lint all Sass files
   // ////////////////////////////
   gulp.task('sass:lint', 'Lints Sass files', () => {
-    return gulp.src(config.watch.sass)
+    return gulp.src(build)
       .pipe(sass.lint())
         .on('error', failure('sass-lint'));
   });
@@ -21,7 +24,7 @@ module.exports = gulp => {
   // Compile all Sass files
   // ////////////////////////////
   gulp.task('sass', 'Compiles Sass files using Eyeglass and adds needed vendor prefixes', ['sass:lint'], () => {
-    return gulp.src(config.watch.sass)
+    return gulp.src(build)
       .pipe(sass.compile())
         .on('error', failure('sass'))
       .pipe(gulp.dest(task.dest(config.folders.css)))
@@ -33,5 +36,5 @@ module.exports = gulp => {
   // ////////////////////////////
   // Watch for changes in all Sass files and recompile them
   // ////////////////////////////
-  task.watch('sass', config.watch.sass, 'sass', gulp);
+  task.watch('sass', watch, 'sass', gulp);
 };
