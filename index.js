@@ -15,6 +15,7 @@ const optimize = require('./tasks/optimize');
 const watch = require('./tasks/watch');
 const server = require('./tasks/server');
 const build = require('./tasks/build');
+const deploy = require('./tasks/deploy');
 const dflt = require('./tasks/default');
 
 const help = require('gulp-help');
@@ -38,5 +39,6 @@ module.exports = (glp, options) => {
 
   watch(gulp);
   build(gulp);
+  deploy(gulp);
   dflt(gulp);
 };

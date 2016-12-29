@@ -41,7 +41,10 @@ module.exports = {
   htmlmin: {
     collapseWhitespace: true,
   },
-
+  deploy: {
+    force: true,
+    message: ':shipit: Update [timestamp]',
+  },
   // Compiled Goodness
   folders: {
     server: '.www',
@@ -107,6 +110,10 @@ module.exports = {
         'server',
         'watch',
       ],
+    ],
+    deploy: [
+      'build',
+      'gh-pages',
     ],
   },
 };
