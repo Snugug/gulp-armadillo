@@ -45,6 +45,7 @@ module.exports = {
     force: true,
     message: ':shipit: Update [timestamp]',
   },
+
   // Compiled Goodness
   folders: {
     server: '.www',
