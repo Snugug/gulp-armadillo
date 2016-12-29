@@ -5,7 +5,7 @@ const sequence = require('../lib/helpers/sequence');
 const armadillo = require('../lib/helpers/armadillo');
 
 module.exports = gulp => {
-  gulp.task('build', 'Builds all files', cb => {
+  gulp.task('build', 'Runs production build of all pages and assets', cb => {
     process.env.DEST = 'dist';
     armadillo('Building');
 
