@@ -8,8 +8,11 @@ const task = require('../lib/helpers/task');
 const sync = require('browser-sync');
 
 module.exports = gulp => {
+  const build = `${config.folders.images}/**/*`;
+  const watch = build;
+
   gulp.task('images', 'Optimizes images', () => {
-    return gulp.src(config.watch.images)
+    return gulp.src(build)
       .pipe(cache('images'))
       .pipe(optimize(config.imagemin))
         .on('error', failure('images'))
@@ -17,5 +20,5 @@ module.exports = gulp => {
       .pipe(sync.stream());
   });
 
-  task.watch('images', config.watch.images, 'images', gulp);
+  task.watch('images', watch, 'images', gulp);
 };

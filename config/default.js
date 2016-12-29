@@ -50,6 +50,7 @@ module.exports = {
   folders: {
     server: '.www',
     dist: '.dist',
+    sass: 'sass',
     css: 'css',
     js: 'js',
     pages: 'pages',
@@ -64,16 +65,6 @@ module.exports = {
   sourcemaps: {
     enable: true,
     directory: '../maps',
-  },
-  watch: {
-    pages: [
-      'pages/**/*.html',
-      'pages/**/*.md',
-      'pages/**/*.markdown',
-    ],
-    sass: 'sass/**/*.scss',
-    js: 'js/**/*.js',
-    images: 'images/**/*',
   },
   tasks: {
     watch: [

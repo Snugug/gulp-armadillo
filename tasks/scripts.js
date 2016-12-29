@@ -8,8 +8,11 @@ const scripts = require('../lib/tasks/scripts');
 const sync = require('browser-sync');
 
 module.exports = gulp => {
+  const build = `${config.folders.js}/**/*.js`;
+  const watch = build;
+
   gulp.task('js:lint', 'Lints user JavaScript files with ESLint', () => {
-    return gulp.src(config.watch.js)
+    return gulp.src(build)
       .pipe(scripts.lint())
         .on('error', failure('js-lint'));
   });
@@ -23,5 +26,5 @@ module.exports = gulp => {
       }));
   });
 
-  task.watch('js', config.watch.js, 'js', gulp);
+  task.watch('js', watch, 'js', gulp);
 };
