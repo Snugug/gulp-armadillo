@@ -1,17 +1,17 @@
 'use strict';
 
-const deploy = require('gulp-gh-pages');
+const publish = require('gulp-gh-pages');
 const config = require('config');
 const sequence = require('../lib/helpers/sequence');
 const armadillo = require('../lib/helpers/armadillo');
 
 module.exports = gulp => {
-  gulp.task('gh-pages', 'Deploys site to GitHub Pages', () => {
+  gulp.task('publish', 'Publishes site to GitHub Pages', () => {
     return gulp.src(`${config.folders.dist}/**/*`)
-      .pipe(deploy(config.deploy));
+      .pipe(publish(config.pubish));
   });
 
-  gulp.task('deploy', 'Builds and deploys site', cb => {
+  gulp.task('deploy', 'Builds and publishes site', cb => {
     armadillo('Deploying');
 
     return sequence(config.tasks.deploy, cb);

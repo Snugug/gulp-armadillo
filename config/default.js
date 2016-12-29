@@ -41,7 +41,7 @@ module.exports = {
   htmlmin: {
     collapseWhitespace: true,
   },
-  deploy: {
+  publish: {
     force: true,
     message: ':shipit: Update [timestamp]',
   },
@@ -114,7 +114,7 @@ module.exports = {
     ],
     deploy: [
       'build',
-      'gh-pages',
+      'publish',
     ],
   },
 };
