@@ -18,16 +18,15 @@ Follow our [Developing with the Armadillo](https://github.com/Snugug/gulp-armadi
 
 Armadillo also provides some [additions to standard rendering](https://github.com/Snugug/gulp-armadillo/wiki/Armadillo-Additions) you may be use to to make your life a little happier when using it.
 
+Be sure to [configure your Armadillo](https://github.com/Snugug/gulp-armadillo/wiki/Configuring-Your-Armadillo) before you get started!
+
 ## Basic Armadillo Commands
 
 There are four basic commands that your armadillo knows that you're likely to run:
 
 * `gulp`
-* `gulp build`
 * `gulp deploy`
 
-`gulp` is your armadillo's development command. It will run a [BrowserSync](https://www.browsersync.io/) server, watch for changes to all of your files, compile, recompile, and reload everything as you go. By default, everything is compiled and served from the `.www` folder.
+`gulp` is your armadillo's development command. It will run a [BrowserSync](https://www.browsersync.io/) server, watch for changes to all of your files, compile, recompile, and reload everything as you go.
 
-`gulp build` is your armadillo's build command. It will compile production ready versions of all of your files and inline your [critical](https://www.npmjs.com/package/critical) CSS for you. By default, everything is compiled in to the `.dist` folder
-
-`gulp deploy` is your armadillo's deployment command. By default, it will run `gulp build` then deploy the resulting compiled files to [GitHub Pages](https://pages.github.com/). Your armadillo will then clean up after itself, removing the `.dist` folder. If you want to deploy somewhere else, the armadillo recommends running `gulp build` then doing what you'd like with the resulting files.
+`gulp deploy` is your armadillo's deployment command. It will compile production ready versions of all of your files and inline your [critical](https://www.npmjs.com/package/critical) CSS for you, then deploy the resulting compiled files to [GitHub Pages](https://pages.github.com/). You can run `gulp deploy:dry` to compile production ready versions of your filed without deploying them.
