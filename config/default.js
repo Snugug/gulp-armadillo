@@ -94,6 +94,7 @@ module.exports = {
         'js:watch',
         'pages:watch',
         'sass:watch',
+        'sw:watch',
       ],
     ],
     copy: [
