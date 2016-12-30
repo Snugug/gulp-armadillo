@@ -3,17 +3,15 @@
 const config = require('config');
 const sw = require('../lib/tasks/sw');
 const task = require('../lib/helpers/task');
-const sync = require('browser-sync');
 
 module.exports = gulp => {
-  const watch = `${config.folders.output}/**/*`;
+  const watch = [
+    `${config.folders.output}/**/*`,
+    `!${config.folders.output}/${config.sw.file}`,
+  ];
 
   gulp.task('sw', 'Generates a dynamic Service Worker', cb => {
-    sw((err) => {
-      sync.reload();
-
-      cb(err);
-    });
+    sw(cb);
   });
 
   task.watch('sw', watch, 'sw', gulp);
