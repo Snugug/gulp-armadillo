@@ -12,10 +12,10 @@ test.serial('Default Destination', t => {
 });
 
 test.serial('Specified Destination', t => {
-  process.env.DEST = 'dist';
+  process.env.DEST = 'fixtures';
   const input = '/foo/bar';
   const output = dest(input);
-  const expected = '.dist/foo/bar';
+  const expected = 'tests/fixtures/foo/bar';
 
   t.is(output, expected);
 });
