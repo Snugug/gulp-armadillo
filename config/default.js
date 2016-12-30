@@ -48,8 +48,7 @@ module.exports = {
 
   // Compiled Goodness
   folders: {
-    server: '.www',
-    dist: '.dist',
+    output: '.www',
     sass: 'sass',
     css: 'css',
     js: 'js',
