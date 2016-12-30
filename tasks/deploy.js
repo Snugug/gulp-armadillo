@@ -11,6 +11,10 @@ module.exports = gulp => {
       .pipe(publish(config.pubish));
   });
 
+  gulp.task('deploy:dry', 'Dry-run of deploy', cb => {
+    return sequence(config.tasks.deploy, cb);
+  });
+
   gulp.task('deploy', 'Builds and publishes site', cb => {
     armadillo('Deploying');
 

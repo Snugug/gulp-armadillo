@@ -123,8 +123,12 @@ module.exports = {
         'watch',
       ],
     ],
-    deploy: [
+    dry: [
       'build',
+      'critical',
+    ],
+    deploy: [
+      'dry',
       'publish',
     ],
   },
