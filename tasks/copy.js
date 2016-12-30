@@ -11,8 +11,8 @@ module.exports = gulp => {
     return sequence(config.tasks.copy, cb);
   });
 
-  gulp.task('copy:cname', 'Copies CNAME file', () => {
-    return gulp.src('CNAME')
+  gulp.task('copy:meta', 'Copies CNAME and manifest.json file', () => {
+    return gulp.src(['CNAME', 'manifest.json'])
       .pipe(gulp.dest(task.dest('')))
       .pipe(sync.stream());
   });
