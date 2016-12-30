@@ -13,6 +13,7 @@ module.exports = gulp => {
 
   gulp.task('deploy:dry', 'Dry-run of deploy', cb => {
     armadillo('Trying it out');
+
     return sequence(config.tasks.dry, cb);
   });
 
