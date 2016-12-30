@@ -1,5 +1,6 @@
 'use strict';
 
+const config = require('config');
 const sw = require('../lib/tasks/sw');
 const task = require('../lib/helpers/task');
 const sync = require('browser-sync');
@@ -9,7 +10,7 @@ module.exports = gulp => {
 
   gulp.task('sw', 'Generates a dynamic Service Worker', cb => {
     sw((err) => {
-      browserSync.reload();
+      sync.reload();
 
       cb(err);
     });
