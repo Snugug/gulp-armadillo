@@ -65,6 +65,22 @@ module.exports = {
     enable: true,
     directory: '../maps',
   },
+  sw: {
+    file: 'sw.js',
+    extensions: [
+      'html',
+      'css',
+      'js',
+      'woff',
+      'woff2',
+      'svg',
+      'png',
+      'jpg',
+      'jpeg',
+      'gif',
+      'webm',
+    ],
+  },
   tasks: {
     watch: [
       [
@@ -94,6 +110,7 @@ module.exports = {
         'sass',
       ],
       'optimize',
+      'sw',
     ],
     serve: [
       'clean:server',
