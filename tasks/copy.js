@@ -45,7 +45,7 @@ module.exports = gulp => {
       .pipe(sync.stream());
   });
 
-  gulp.task('copy:watch', 'Watches static assets and copies them on change', ['copy'], () => {
+  gulp.task('copy:watch', 'Watches static assets and copies them on change', () => {
     return gulp.watch([
       `${config.folders.videos}/**/*`,
       `${config.folders.audio}/**/*`,

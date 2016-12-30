@@ -106,7 +106,7 @@ module.exports = {
       ],
     ],
     build: [
-      'clean:build',
+      'clean',
       [
         'copy',
         'images',
@@ -114,11 +114,10 @@ module.exports = {
         'pages',
         'sass',
       ],
-      'optimize',
       'sw',
     ],
     serve: [
-      'clean:server',
+      'build',
       [
         'server',
         'watch',
