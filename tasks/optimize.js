@@ -7,7 +7,7 @@ const critical = require('../lib/tasks/critical');
 
 module.exports = gulp => {
   gulp.task('optimize', 'Optimizes rendered HTML', () => {
-    return gulp.src(`${config.folders.dist}/**/*.html`)
+    return gulp.src(`${config.folders.output}/**/*.html`)
       .pipe(critical.compile())
         .on('error', failure('optimize'))
       .pipe(gulp.dest(task.dest('')));

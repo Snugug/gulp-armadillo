@@ -7,7 +7,7 @@ const armadillo = require('../lib/helpers/armadillo');
 
 module.exports = gulp => {
   gulp.task('publish', 'Publishes site to GitHub Pages', () => {
-    return gulp.src(`${config.folders.dist}/**/*`)
+    return gulp.src(`${config.folders.output}/**/*`)
       .pipe(publish(config.pubish));
   });
 
