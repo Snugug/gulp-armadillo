@@ -126,10 +126,10 @@ module.exports = {
     ],
     dry: [
       'build',
-      'critical',
+      'optimize',
     ],
     deploy: [
-      'dry',
+      'deploy:dry',
       'publish',
     ],
   },
