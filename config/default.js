@@ -66,6 +66,12 @@ module.exports = {
     directory: '../maps',
   },
   sw: {
+    browser: {
+      include: true,
+      notify: true,
+      updated: 'Content has been added or updated, refresh to get it!',
+      offline: 'Content is now available offline!',
+    },
     file: 'sw.js',
     extensions: [
       'html',
