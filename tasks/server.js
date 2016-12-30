@@ -10,7 +10,7 @@ module.exports = gulp => {
   gulp.task('server', 'Starts BrowserSync server', () => {
     browserSync.init({
       server: {
-        baseDir: config.folders.server,
+        baseDir: config.folders.output,
       },
     });
   });

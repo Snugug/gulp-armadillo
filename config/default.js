@@ -48,8 +48,7 @@ module.exports = {
 
   // Compiled Goodness
   folders: {
-    server: '.www',
-    dist: '.dist',
+    output: '.www',
     sass: 'sass',
     css: 'css',
     js: 'js',
@@ -95,6 +94,7 @@ module.exports = {
         'js:watch',
         'pages:watch',
         'sass:watch',
+        'sw:watch',
       ],
     ],
     copy: [
@@ -107,7 +107,7 @@ module.exports = {
       ],
     ],
     build: [
-      'clean:build',
+      'clean',
       [
         'copy',
         'images',
@@ -115,18 +115,21 @@ module.exports = {
         'pages',
         'sass',
       ],
-      'optimize',
       'sw',
     ],
     serve: [
-      'clean:server',
+      'build',
       [
         'server',
         'watch',
       ],
     ],
-    deploy: [
+    dry: [
       'build',
+      'optimize',
+    ],
+    deploy: [
+      'deploy:dry',
       'publish',
     ],
   },

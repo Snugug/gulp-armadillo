@@ -14,19 +14,11 @@ module.exports = gulp => {
   // ////////////////////////////
   // Clean Server
   // ////////////////////////////
-  gulp.task('clean:server', 'Cleans server folder', cb => {
-    armadillo('Cleaning server');
+  gulp.task('clean', 'Cleans output folder', cb => {
+    armadillo('Cleaning');
 
     return clean([
-      `${config.folders.server}/**/*`,
-    ], cb);
-  });
-
-  gulp.task('clean:build', 'Cleans build folder', cb => {
-    armadillo('Cleaning build');
-
-    return clean([
-      `${config.folders.dist}/**/*`,
+      `${config.folders.output}/**/*`,
     ], cb);
   });
 };
