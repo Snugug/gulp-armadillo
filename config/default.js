@@ -65,6 +65,28 @@ module.exports = {
     enable: true,
     directory: '../maps',
   },
+  sw: {
+    browser: {
+      include: true,
+      notify: true,
+      updated: 'Content has been added or updated, refresh to get it!',
+      offline: 'Content is now available offline!',
+    },
+    file: 'sw.js',
+    extensions: [
+      'html',
+      'css',
+      'js',
+      'woff',
+      'woff2',
+      'svg',
+      'png',
+      'jpg',
+      'jpeg',
+      'gif',
+      'webm',
+    ],
+  },
   tasks: {
     watch: [
       [
@@ -81,7 +103,7 @@ module.exports = {
         'copy:audio',
         'copy:documents',
         'copy:fonts',
-        'copy:cname',
+        'copy:meta',
       ],
     ],
     build: [
@@ -94,6 +116,7 @@ module.exports = {
         'sass',
       ],
       'optimize',
+      'sw',
     ],
     serve: [
       'clean:server',
