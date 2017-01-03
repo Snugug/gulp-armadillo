@@ -58,7 +58,7 @@ module.exports = {
     videos: 'videos',
     audio: 'audio',
     fonts: 'fonts',
-    documents: 'documents',
+    documents: 'docs',
   },
   sourcemaps: {
     enable: true,
