@@ -94,7 +94,6 @@ module.exports = {
         'js:watch',
         'pages:watch',
         'sass:watch',
-        'sw:watch',
       ],
     ],
     copy: [
@@ -115,7 +114,6 @@ module.exports = {
         'pages',
         'sass',
       ],
-      'sw',
     ],
     serve: [
       'build',
@@ -127,6 +125,7 @@ module.exports = {
     dry: [
       'build',
       'optimize',
+      'sw',
     ],
     deploy: [
       'deploy:dry',
