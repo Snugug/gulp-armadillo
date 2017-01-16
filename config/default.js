@@ -14,14 +14,6 @@ module.exports = {
       rollupCommon(),
     ],
   },
-  babel: {
-    presets: [
-      'babili',
-    ],
-    comments: false,
-    minified: true,
-    compact: true,
-  },
   eslint: {},
   sass: {
     outputStyle: 'compressed',
