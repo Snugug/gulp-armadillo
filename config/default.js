@@ -14,14 +14,6 @@ module.exports = {
       rollupCommon(),
     ],
   },
-  babel: {
-    presets: [
-      'babili',
-    ],
-    comments: false,
-    minified: true,
-    compact: true,
-  },
   eslint: {},
   sass: {
     outputStyle: 'compressed',
@@ -94,7 +86,6 @@ module.exports = {
         'js:watch',
         'pages:watch',
         'sass:watch',
-        'sw:watch',
       ],
     ],
     copy: [
@@ -115,7 +106,6 @@ module.exports = {
         'pages',
         'sass',
       ],
-      'sw',
     ],
     serve: [
       'build',
@@ -127,6 +117,7 @@ module.exports = {
     dry: [
       'build',
       'optimize',
+      'sw',
     ],
     deploy: [
       'deploy:dry',
