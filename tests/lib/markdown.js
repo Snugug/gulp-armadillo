@@ -75,10 +75,18 @@ test('Video Plugin - Renders Vimeo', t => {
   t.is(output, expected, 'Vimeo Embed');
 });
 
-test('Video Plugin - Renders Ustream', t => {
-  const sample = '@[http://www.ustream.tv/embed/22046713?html5ui]';
+test('Video Plugin - Renders Ustream (channel)', t => {
+  const sample = '@[https://www.ustream.tv/channel/22046713]';
   const output = md.render(sample);
-  const expected = '<p><div class="flexible-video"><iframe  src="http://www.ustream.tv/embed/recorded/22046713?html5ui" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
+  const expected = '<p><div class="flexible-video"><iframe  src="https://www.ustream.tv/embed/22046713?html5ui" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
+
+  t.is(output, expected, 'Ustream Embed');
+});
+
+test('Video Plugin - Renders Ustream (recorded)', t => {
+  const sample = '@[https://www.ustream.tv/recorded/92458394]';
+  const output = md.render(sample);
+  const expected = '<p><div class="flexible-video"><iframe  src="https://www.ustream.tv/embed/recorded/92458394?html5ui" width="560" height="315" frameborder="0" allowfullscreen></iframe></div></p>\n';
 
   t.is(output, expected, 'Ustream Embed');
 });
