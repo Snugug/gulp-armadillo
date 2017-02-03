@@ -92,7 +92,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
+    "ava": "^0.18.0",
     "breakpoint-sass": "^2.7.1",
     "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
