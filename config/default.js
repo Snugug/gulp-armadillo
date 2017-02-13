@@ -117,11 +117,18 @@ module.exports = {
     dry: [
       'build',
       'optimize',
+      'replace:base',
       'sw',
     ],
     deploy: [
       'deploy:dry',
       'publish',
     ],
+  },
+  replace: {
+    base: {
+      find: '/',
+      replace: '/',
+    },
   },
 };
