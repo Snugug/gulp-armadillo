@@ -87,7 +87,7 @@
     "stream-combiner": "^0.2.2",
     "sw-precache": "^4.2.3",
     "through2": "^2.0.3",
-    "twig": "^0.10.3",
+    "twig": "^1.10.4",
     "url": "^0.11.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
