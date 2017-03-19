@@ -102,7 +102,7 @@
     "eslint-plugin-ava": "^4.0.0",
     "ghooks": "^2.0.0",
     "leftpad": "0.0.0",
-    "map-stream": "0.0.6",
+    "map-stream": "0.0.7",
     "nyc": "^10.0.0",
     "punchcard-commit-msg": "^1.0.1",
     "punchcard-semantic-release": "^2.0.4",
