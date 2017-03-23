@@ -12,6 +12,7 @@ const images = require('./tasks/images');
 const copy = require('./tasks/copy');
 const optimize = require('./tasks/optimize');
 const sw = require('./tasks/sw');
+const replace = require('./tasks/replace');
 
 const watch = require('./tasks/watch');
 const server = require('./tasks/server');
@@ -38,6 +39,7 @@ module.exports = (glp, options) => {
   copy(gulp);
   optimize(gulp);
   sw(gulp);
+  replace(gulp);
 
   watch(gulp);
   build(gulp);
