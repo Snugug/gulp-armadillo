@@ -29,4 +29,4 @@ There are four basic commands that your armadillo knows that you're likely to ru
 
 `gulp` is your armadillo's development command. It will run a [BrowserSync](https://www.browsersync.io/) server, watch for changes to all of your files, compile, recompile, and reload everything as you go.
 
-`gulp deploy` is your armadillo's deployment command. It will compile production ready versions of all of your files and inline your [critical](https://www.npmjs.com/package/critical) CSS for you, then deploy the resulting compiled files to [GitHub Pages](https://pages.github.com/). You can run `gulp deploy:dry` to compile production ready versions of your filed without deploying them.
+`gulp deploy` is your armadillo's deployment command. It will compile production ready versions of all of your files and inline your [critical](https://www.npmjs.com/package/critical) CSS for you, then deploy the resulting compiled files to [GitHub Pages](https://pages.github.com/). You can run `gulp deploy:dry` to compile production ready versions of your files without deploying them.
