@@ -20,7 +20,9 @@
     "gulp": "gulp",
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint --fix '**/*.js'",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -89,7 +91,8 @@
     "through2": "^2.0.3",
     "url": "^0.11.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "snyk": "^1.25.2"
   },
   "devDependencies": {
     "ava": "^0.18.0",
@@ -130,5 +133,6 @@
   "release": {
     "analyzeCommits": "punchcard-semantic-release/analyze",
     "generateNotes": "punchcard-semantic-release/notes"
-  }
+  },
+  "snyk": true
 }
