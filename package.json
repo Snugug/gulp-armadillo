@@ -60,7 +60,7 @@
     "eyeglass": "^1.2.1",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.1",
     "gulp-eslint": "^3.0.1",
