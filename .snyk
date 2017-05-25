@@ -1,8 +1,49 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.0
+version: v1.7.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:qs:20170213':
     - browser-sync > qs:
         patched: '2017-03-20T09:14:00.217Z'
+  'npm:ms:20170412':
+    - browser-sync > socket.io > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > connect > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > serve-index > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - critical > finalhandler > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > localtunnel > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > socket.io-parser > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > serve-static > send > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > connect > finalhandler > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > engine.io > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > socket.io-adapter > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io-client > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > socket.io-client > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io-client > engine.io-client > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > socket.io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - critical > postcss-image-inliner > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - critical > postcss-image-inliner > asset-resolver > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
+    - browser-sync > serve-static > send > debug > ms:
+        patched: '2017-05-25T07:24:18.265Z'
