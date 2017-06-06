@@ -42,3 +42,17 @@ test('Import Once', t => {
       t.is(output.contents.toString(), expected, 'Sass compiled as expected');
     });
 });
+
+test('Sass-lint triggers error', t => {
+  const input = './tests/fixtures/sass/_partial.scss';
+  const expected = {
+    message: '1 errors detected in _partial.scss',
+    plugin: 'sass-lint',
+  };
+
+  return fromPath(input, sass.lint)
+    .catch(error => {
+      t.is(error.message, expected.message, 'sass linting returns error message');
+      t.is(error.plugin, expected.plugin, 'error knows plugin');
+    });
+});
