@@ -101,7 +101,7 @@
     "eslint": "^3.17.0",
     "eslint-config-punchcard": "^1.1.1",
     "eslint-config-xo-space": "^0.16.0",
-    "eslint-plugin-ava": "^4.0.0",
+    "eslint-plugin-ava": "^4.2.1",
     "ghooks": "^2.0.0",
     "leftpad": "0.0.0",
     "map-stream": "0.0.7",
