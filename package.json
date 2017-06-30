@@ -85,7 +85,7 @@
     "rollup-plugin-commonjs": "^8.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-stream": "^1.14.0",
-    "run-sequence": "^1.2.2",
+    "run-sequence": "^2.0.0",
     "stream-combiner": "^0.2.2",
     "sw-precache": "^5.0.0",
     "through2": "^2.0.3",
