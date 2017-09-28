@@ -97,7 +97,7 @@
   "devDependencies": {
     "ava": "^0.18.0",
     "breakpoint-sass": "^2.7.1",
-    "coveralls": "^2.11.15",
+    "coveralls": "^2.13.3",
     "eslint": "^3.17.0",
     "eslint-config-punchcard": "^1.1.1",
     "eslint-config-xo-space": "^0.16.0",
