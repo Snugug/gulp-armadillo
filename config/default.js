@@ -6,8 +6,9 @@ const rollupCommon = require('rollup-plugin-commonjs');
 module.exports = {
   // Individual Functions
   rollup: {
-    entry: 'js/main.js',
-    sourceMap: true,
+    input: 'js/main.js',
+    sourcemap: true,
+    format: 'cjs',
     preferConst: true,
     plugins: [
       rollupNode(),
