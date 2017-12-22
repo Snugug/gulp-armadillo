@@ -51,7 +51,7 @@
   "homepage": "https://github.com/Snugug/gulp-armadillo#readme",
   "dependencies": {
     "babel-preset-babili": "0.0.12",
-    "browser-sync": "^2.18.5",
+    "browser-sync": "^2.21.0",
     "chalk": "^1.1.3",
     "config": "^1.24.0",
     "critical": "^0.8.4",
