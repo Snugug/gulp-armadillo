@@ -91,7 +91,7 @@
     "through2": "^2.0.3",
     "url": "^0.11.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
+    "vinyl-source-stream": "^1.1.1",
     "snyk": "^1.25.2"
   },
   "devDependencies": {
