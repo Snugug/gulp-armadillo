@@ -36,7 +36,13 @@ module.exports = {
   },
   publish: {
     force: true,
-    message: ':shipit: Update [timestamp]',
+    message: `:shipit: Update ${new Date().toLocaleDateString('en', { year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZoneName: 'short' })}`,
   },
 
   // Compiled Goodness
