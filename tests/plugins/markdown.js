@@ -33,6 +33,26 @@ test('Compiles Markdown with Custom Plugin', t => {
     });
 });
 
+test('Compiles Markdown with Prism', t => {
+  const input = `\`\`\`scss
+.body {
+  $color: red;
+  background: $color
+}
+\`\`\``;
+  const expected = `<pre class="language-scss"><code class="language-scss"><span class="token selector">.body </span><span class="token punctuation">{</span>
+  <span class="token property"><span class="token variable">$color</span></span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token variable">$color</span>
+<span class="token punctuation">}</span>
+</code></pre>
+`;
+
+  return fromString(input, 'does/it/prism.md', markdown)
+    .then(output => {
+      t.is(output.contents.toString(), expected, 'Markdown compiles as expected');
+    });
+});
+
 test('No Compile - .html', t => {
   const input = '# Hello World';
   const expected = '# Hello World';
