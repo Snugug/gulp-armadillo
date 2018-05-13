@@ -110,7 +110,7 @@
     "punchcard-semantic-release": "^2.0.4",
     "reparo": "^1.1.1-0",
     "semantic-release": "^6.3.2",
-    "vinyl-fs": "^2.4.4",
+    "vinyl-fs": "^3.0.3",
     "vinyl-string": "^1.0.2"
   },
   "nyc": {
