@@ -42,7 +42,7 @@
     "email": "sam@snug.ug"
   },
   "engines": {
-    "node": "^6"
+    "node": "10"
   },
   "license": "MIT",
   "bugs": {
