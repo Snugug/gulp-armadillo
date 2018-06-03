@@ -105,7 +105,7 @@
     "ghooks": "^2.0.0",
     "leftpad": "0.0.0",
     "map-stream": "0.0.7",
-    "nyc": "^10.0.0",
+    "nyc": "^12.0.2",
     "punchcard-commit-msg": "^1.1.0",
     "punchcard-semantic-release": "^2.0.4",
     "reparo": "^1.1.1-0",
