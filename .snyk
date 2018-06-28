@@ -1,8 +1,28 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.0
+version: v1.12.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:qs:20170213':
     - browser-sync > qs:
         patched: '2017-03-20T09:14:00.217Z'
+  'npm:mime:20170907':
+    - critical > imageinliner > mime:
+        patched: '2018-06-28T09:21:58.731Z'
+  'npm:tunnel-agent:20170305':
+    - eyeglass > node-sass > request > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-sass > node-sass > request > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-imagemin > imagemin-gifsicle > gifsicle > bin-build > download > caw > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-imagemin > imagemin-gifsicle > gifsicle > bin-wrapper > download > caw > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-imagemin > imagemin-jpegtran > jpegtran-bin > bin-build > download > caw > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-imagemin > imagemin-jpegtran > jpegtran-bin > bin-wrapper > download > caw > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-imagemin > imagemin-optipng > optipng-bin > bin-build > download > caw > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
+    - gulp-imagemin > imagemin-optipng > optipng-bin > bin-wrapper > download > caw > tunnel-agent:
+        patched: '2018-06-28T09:21:58.731Z'
