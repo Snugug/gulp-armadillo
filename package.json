@@ -66,7 +66,7 @@
     "gulp-eslint": "^3.0.1",
     "gulp-gh-pages": "^0.5.4",
     "gulp-help": "^1.6.1",
-    "gulp-htmlmin": "^3.0.0",
+    "gulp-htmlmin": "^5.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.1.1",
     "gulp-plumber": "^1.1.0",
