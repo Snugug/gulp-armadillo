@@ -1,8 +1,123 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.0
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:qs:20170213':
     - browser-sync > qs:
         patched: '2017-03-20T09:14:00.217Z'
+  SNYK-JS-LODASH-450202:
+    - gulp-sass > node-sass > sass-graph > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - critical > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - critical > filter-css > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-sass > node-sass > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-mvn-plugin > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - eyeglass > node-sass > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-eslint > eslint > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - browser-sync > easy-extender > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-sass-lint > sass-lint > globule > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-sass-lint > sass-lint > eslint > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-generator > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - eyeglass > node-sass > sass-graph > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-php-plugin > @snyk/composer-lockfile-parser > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-eslint > eslint > table > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-traverse > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-eslint > eslint > inquirer > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-template > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - eyeglass > node-sass > gaze > globule > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-generator > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-sass-lint > sass-lint > eslint > inquirer > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-helpers > babel-template > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-template > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-sass-lint > sass-lint > eslint > table > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-template > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-traverse > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-generator > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-helpers > babel-template > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-generator > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-template > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
+    - gulp-babel > babel-core > babel-register > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T00:37:41.024Z'
