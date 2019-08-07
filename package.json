@@ -81,7 +81,7 @@
     "nunjucks": "^3.0.0",
     "prismjs": "^1.14.0",
     "pump": "^1.0.1",
-    "remarkable": "^1.7.1",
+    "remarkable": "^2.0.0",
     "rollup-plugin-commonjs": "^8.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-stream": "^1.24.1",
