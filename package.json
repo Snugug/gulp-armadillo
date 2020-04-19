@@ -95,7 +95,7 @@
     "snyk": "^1.25.2"
   },
   "devDependencies": {
-    "ava": "^0.24.0",
+    "ava": "^3.7.1",
     "breakpoint-sass": "^2.7.1",
     "coveralls": "^2.11.15",
     "eslint": "^3.17.0",
